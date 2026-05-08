@@ -9,6 +9,12 @@ Thumbs.db
 *.swo
 llave-ss-hacienda.json
 credenciales.json
+.Rhistory
+.RData
+.Rproj.user/
+input/facturas_temp/
+output/.posit/
+output/rsconnect/
 
 # Build artifacts
 *.o
