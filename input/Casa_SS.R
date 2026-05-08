@@ -7,7 +7,6 @@
 #   de los servicios: La tabla de noviembre 2025 ya está salvada.
 # - Actualizar la información de los servicio en este archivo:
 #   "input/Casa_SS.R"
-# - Ajustar el valor del vector SS$Actual de acuerdo a la info disponible.
 # - Una vez actualizado este script, correr TODOS los chunks en el archivo
 #   "output/Dist_SS.Rmd" para evitar errores.
 
@@ -21,7 +20,7 @@ Casa <- list(Habitantes = list(
                             "Hab. 2" = c("Jorge"),
                             "Hab. 3" = c("Gary"), 
                             "Apt."   = c("Luis", "Andrés")),
-             Ocupa = c(1, 1/3, 1/3, 1)
+             Ocupa = c(1, 1/6, 1/6, 1)
 )
 Casa$Habitación <- names(Casa$Habitantes)
 Casa$`Integrante(s)` <- unlist(lapply(Casa$Habitantes, 
@@ -38,13 +37,13 @@ SS <- list()
 
 ## Gas ----
 SS$Gas <- list(
-               periodo = "11/2025",
-               cargo_del_mes = 85507,
+               periodo = "02/2026",
+               cargo_del_mes = 77284,
                saldo_anterior = 0,
-               fecha_lim = unlist(str_split("20/01/2026","/")),
-               cargo_fijo_mes    =  5147,
-               consumo_mes       = 26649 + 12000,
-               revision_periodica = 1636,
+               fecha_lim = unlist(str_split("18/03/2026","/")),
+               cargo_fijo_mes    =  5206,
+               consumo_mes       = 35916, # Consumo de Gas Natural
+               revision_periodica = 1798,
                No_contrato = 1020307
 )
 SS$Gas$fecha <- ymd(paste(SS$Gas$fecha_lim[3], SS$Gas$fecha_lim[2],
@@ -55,12 +54,12 @@ SS$Gas$cargo_andres <- SS$Gas$cargo_del_mes - SS$Gas$consumo_mes -
 
 
 ## AAA ----
-SS$AAA <- list(periodo = "Enero-2026",
-               # ¡Ojo! la abreviatura del mes debe ir en inglés:
-               fecha_lim = unlist(str_split("Jan 19-26","-")),
-               total_pago_aaa = 274020,
-               fecha_lect_act = dmy("29-12-2025"),
-               fecha_lect_ant = dmy("28-11-2025"),
+SS$AAA <- list(periodo = "Marzo-2026",
+               # ¡Ojo! el mes debe ir en formato de número mm:
+               fecha_lim = unlist(str_split("03 16-26","-")),
+               total_pago_aaa = 264804,
+               fecha_lect_act = dmy("28-02-2026"),
+               fecha_lect_ant = dmy("29-01-2026"),
                No_poliza = 121497
 )
 SS$AAA$fecha <- format(ymd(paste(paste0("20", SS$AAA$fecha_lim[2]),
@@ -73,28 +72,28 @@ SS$AAA$total_AAA <- SS$AAA$subtotal_AAA # + c(50000,0,0,0)
 
 ## EE ----
 ### Factura EE ----
-SS$EE <- list(periodoEE = "Dic. - 2025",
+SS$EE <- list(periodoEE = "Mar. - 2026",
               vr_fact = 183820,
-              f_venc = as.Date("2025-12-24"),
-              f_lect = as.Date("2025-12-18"),
-              f_ant = as.Date("2025-11-20"),
-              lect_actual = 5182,
-              lect_anterior = 4947,
+              f_venc = as.Date("2026-03-25"),
+              f_lect = as.Date("2026-03-18"),
+              f_ant = as.Date("2026-02-18"),
+              lect_actual = 5932,
+              lect_anterior = 5697,
               NIC = 2345873
 )
 SS$EE$kwh_f <- SS$EE$lect_actual - SS$EE$lect_anterior
 
 ### Contadores Internos ----
-SS$EE$ConsInt <- list(fecha_lect_anter = as.Date("2025-11-20"),
-                      fecha_lect_actual = as.Date("2025-12-19"),
-                      lect_ini = c(413.01, 164.73, 5.06, 335.04),
-                      lect_fin = c(523.04, 166.63, 5.37, 421.63),
+SS$EE$ConsInt <- list(fecha_lect_anter = as.Date("2026-02-19"),
+                      fecha_lect_actual = as.Date("2026-03-19"),
+                      lect_ini = c(751.60, 176.09, 6.59, 591.89),
+                      lect_fin = c(847.93, 181.14, 6.86, 679.85),
                       contador = c(24177828, 24178030, 24176587, 24178159)
 )
-SS$EE$ConsInt$consumo <- SS$EE$ConsInt$lect_fin - SS$EE$ConsInt$lect_ini
+SS$EE$ConsInt$consumo <- SS$EE$ConsInt$lect_fin - SS$EE$ConsInt$lect_ini # + c(0, 9.32, 0, 0)
 SS$EE$ConsInt$por_repartir <- SS$EE$kwh_f - sum(SS$EE$ConsInt$consumo)
 SS$EE$ConsInt$cons_per_hab <- SS$EE$ConsInt$por_repartir * 
-  SS$EE$ConsInt$consumo / (sum(SS$EE$ConsInt$lect_fin) - 
+  SS$EE$ConsInt$consumo / (sum(SS$EE$ConsInt$lect_fin) - # + 9.32 - 
                              sum(SS$EE$ConsInt$lect_ini))
 SS$EE$total_EE <- 100 * round(SS$EE$vr_fact *
                                 (SS$EE$ConsInt$consumo + 

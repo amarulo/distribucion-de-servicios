@@ -1,0 +1,29 @@
+Interaction stye:
+Please maintain the conversation concise and to the point. If you consider that explanations are needed I welcome those, since I am learning by doing. 
+Please, if I need to follow instructions to perform actions keep those step by step and let me tell you when I am ready for the next step. This last part helps me to be on track and don't get lost. Thank you!
+Right now, I need to keep things going! If you consider that there is a way to improve what we are already doing please let me know very briefly. Please don't become repetitive, unless it is something we need to takle immediately and if that is the case let me know the urgency (error, security concern, etc.).
+I want to download some files from google drive by using an .R script, I already have the script, but I have a doubt about this code:
+# List files in folder
+  files <- drive_ls(folder$id) 
+if (nrow(files) == 0) {
+    cat("  → No files found\n")
+    return(NULL)
+  }
+I know the folders exists (I created 4 folders to contain the info I need), but there is one that I know is going to remain empty (at least for some time), so my question is when the function returns the NULL value 
+
+
+
+
+; if it's something that may be done in the future, just mention it very briefly and I'll make a note about it to have the information saved, so we can revisit that idea later on. Please don't become repetitive, unless it is something we need to takle immediately and if that is the case let me know the urgency.
+
+Project overview:
+I live in a house with more people to whom I rent rooms, and I need to share the cost of the utilities among all of us. The idea is to organize the information in such a way that each one gets informed of their share of each utility and the total cost. There are 4 utilities we need to cover: natural gas (which I don't share with the rest of the tenants, since my apartment has its own gas instalation and I get my own receipt apart from theirs), the Internet (provided by Movistar), the water (provided by AAA - Triple A) and electricity (provided by Air-e). I publish the results of these utilities division online, so they can check the information. The page I use is in Rpubs: https://rpubs.com/amarulo/1341684 
+I have been doing this for quite some time, but I have already changed the way I do it several times, because I find that there must be a better, quicker and easier way for me to do it. Right now, I am producing the Dist_SS.nb.html document every month and then I update the document I have published to the new version, which is the utilities' distribution for the corresponding month. What I have noticed in this actual case is that, even though is quite easy for me to have the new document ready: I just change the values in the Casa_SS.R file, run the script in Dist_SS.Rmd and click on preview and that's it! I don't keep a historic record of the changes. Which now is my main concern (that and to be able to reconstruct, if possible, the records that I didn't keep) to rethink this project.
+
+Steps taken:
+I already created an independent Google account to keep all the records for this project and I am thinking of changing the email address where my utilities receipts are sent to this new account. Ideally I will create a script to read the info directly from there, so I don't have to feed most of it manually. One constraint I have is the storage space: only 5 GB (for now at least). I started using google sheets, then I used to do everything in RStudio, but now I am using Positron, everytime I have changed the app I have also changed the approach to how to process the info and deliver the info. 
+
+If possible, I would like for the project to reside in that same google Drive account and to read it through Positron IDE. This, even though I haven't found a reliable way to update the Rpub document directly from Positron; usually, once I have the document ready, I open RStudio and update from there. Since I have the space constraint I would like to have a very condensed way to store the info that's going to be growing month by month. I would like to keep the copies of the receipts, the images with the readings from the internal electricity meters, the notes I make (these can be kept in R format for example) and the history of how many and who were the people living in the house (with dates of movings: in and out). Plus the historic records I process so I can build graphs to check for trends or problems with the utilities (e.g. a high flow of water due to a faucet dripping or something similar).
+
+
+

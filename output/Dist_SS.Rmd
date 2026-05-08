@@ -11,6 +11,9 @@ Convertí a proyecto este documento el 2025-07-04, en el directorio:
     "C:/Users/Mono/Documents/Hacienda +/Dist_SS/"
 En este directorio creé 3 carpetas: input, output y scripts.
 Este documento está en la carpeta: "output"
+2026-01-15 
+  Migré el proyecto a Ubuntu, 
+  Estoy utilizando Git para el control de versiones y Positron como IDE.
 
 SIEMPRE RECUERDE:
 - SALVAR EL DOCUMENTO HTML en el folder de output/Histórico antes de cambiarlo.
@@ -20,17 +23,31 @@ SIEMPRE RECUERDE:
 -->
 
 ```{r inicio_doc, include=FALSE}
+library(knitr)
+
 # Opciones generales de los chunks:
 knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_chunk$set(comment = " ")
 
 # Función para cargar las librerías:
-source("../scripts/load_libs.R")
+# Revise el directorio de trabajo:
+current_wd <- getwd()
+
+# Defina el camino hacia load_libs basado en el directorio de trabajo actual
+if (current_wd == "/home/mono/Documents/Dist_SS") {
+  source("./scripts/load_libs.R")
+} else {
+  source("../scripts/load_libs.R")
+}
 ```
 
 ```{r vectores, include=FALSE}
 # listas Casa y SS:
-source("../input/Casa_SS.R")
+if (current_wd == "/home/mono/Documents/Dist_SS") {
+source("./input/Casa_SS.R")
+} else {
+  source("../input/Casa_SS.R")
+}
 ```
 
 <div id="Tabla">
@@ -67,9 +84,7 @@ source("../input/Casa_SS.R")
 ## Notas Preliminares
 </div>
 
-<p>Para el cálculo de los servicios de la Habitación 2 se tendrá en cuenta que esta fue desocupada el 15 de noviembre de 2025, por lo que no se incluirá en los servicios a partir de esa fecha.</p>
-
-
+<p>Para el cálculo de los consumos de agua de las Habitaciones 2 y 3 se tendrán en cuenta 10 días (dado el trabajo que implicaría hacer el seguimiento, no estoy llevando cuenta de los días en que las personas se encuentran o no en la casa, es simplemente un estimado).</p>
 
 ***
 
@@ -351,9 +366,17 @@ data.table(Habitación = Casa$Habitación,
 La siguiente tabla corresponde a los valores del mes pasado:
 
 ```{r}
-tabla_anterior <- paste0("../input/Cons_ant/2025_", month(hoy - 30), 
-                         "_Dist_SS.png")
-imagen_actual <- htmltools::img(src = tabla_anterior)
+# getwd()
+tabla_anterior <- paste0(if (current_wd == "/home/mono/Documents/Dist_SS"){
+                            "./input/Cons_ant/"
+                          } else {
+                            "../input/Cons_ant/"
+                          },
+                         lubridate::year(hoy), 
+                         if (month(hoy)<10){"_0"} else {"_"}, 
+                         month(hoy - 30), "_Dist_SS.png")
+texto_alt <- paste0("La imagen ", tabla_anterior, " no carga")
+imagen_actual <- htmltools::img(src = tabla_anterior, alt = as.character(texto_alt))
 imagen_actual
 ```
 

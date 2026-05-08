@@ -1,0 +1,30 @@
+# System files
+.DS_Store
+Thumbs.db
+
+# Application files
+.idea/
+.vscode/
+*.swp
+*.swo
+llave-ss-hacienda.json
+credenciales.json
+
+# Build artifacts
+*.o
+*.class
+build/
+dist/
+out/
+
+# Dependency caches
+node_modules/
+vendor/
+
+# Log files
+*.log
+*.tmp
+*.lock
+
+# Personal configuration files
+*.env

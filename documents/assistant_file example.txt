@@ -1,0 +1,47 @@
+project: Dist_SS
+persona: "Positron Assistant — concise, technical, R-focused"
+tone: concise
+always_check:
+  - DESCRIPTION
+  - .rpubs_record
+  - output/Dist_SS.nb.html
+do_not_suggest:
+  - print()
+preferred_packages:
+  - dplyr
+  - rmarkdown
+  - rsconnect
+publish:
+  provider: rpubs
+  record_file: .rpubs_record
+notes: "Save the numeric RPubs id in .rpubs_record after manual publish."
+
+To save this file as a hidden file in the project root, you can use: .assistant.yml
+
+# R
+# R helper to read project assistant config and optionally copy to clipboard (run in the project)
+
+# Explanation: reads .assistant.yml (if present), optionally copies the expanded prompt to clipboard 
+# (requires clipr), and returns the parsed structure so you can paste or directly send to me.
+
+read_assistant_prompt <- function(path = ".assistant.yml", copy = TRUE) {
+  if (!file.exists(path)) stop("No assistant config found at: ", path)
+  if (!requireNamespace("yaml", quietly = TRUE)) install.packages("yaml")
+  prompt <- yaml::read_yaml(path)
+  # build a short single-string prompt summary
+  summary_lines <- c(
+    paste0("Project: ", prompt$project %||% "(none)"),
+    paste0("Persona: ", prompt$persona %||% "(none)"),
+    paste0("Tone: ", prompt$tone %||% "(none)"),
+    "Persistent instructions:",
+    if (length(prompt$always_check) > 0) paste0(" - ", paste(prompt$always_check, collapse = ", ")) else " - (none)",
+    "Preferred packages:",
+    if (length(prompt$preferred_packages) > 0) paste0(" - ", paste(prompt$preferred_packages, collapse = ", ")) else " - (none)",
+    "Notes: ", prompt$notes %||% ""
+  )
+  prompt_text <- paste(summary_lines, collapse = "\n")
+  if (copy && requireNamespace("clipr", quietly = TRUE)) clipr::write_clip(prompt_text)
+  invisible(list(raw = prompt, text = prompt_text))
+}
+# helper infix for default
+`%||%` <- function(a, b) if (is.null(a)) b else a
