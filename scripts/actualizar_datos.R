@@ -11,11 +11,11 @@ source("scripts/cargar_librerias.R")
 # ==============================================================================
 
 # 2. Revisar y descargar nuevas facturas en caso que existan:
-source("scripts/descargar_facturas.R")
+# source("scripts/descargar_facturas.R")
 
 # ==============================================================================
 
 # 3. Analizar las facturas y agregar la información requerida a la tabla de SS:
-source("scripts/")
+source("scripts/analizar_facturas.R")
 
 # ==============================================================================
