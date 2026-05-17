@@ -18,9 +18,10 @@ parse_aaa <- function(pdf_path) {
   per_y_fecha <- lines[which(str_detect(lines, p_per_y_fecha))]
   match_pyf <- str_match(per_y_fecha, "(\\S+-\\d{4})\\s+(\\w{3}\\s+\\d{1,2}-\\d{2})$")
   periodo <- match_pyf[2]
-  fecha_lim <- match_pyf[3]
+  edit_felim <- unlist(str_split(match_pyf[3], "-"))
+  fecha_lim <- gsub(" ", "-", paste(edit_felim[2], edit_felim[1]))
   p_cargo <- regex("^\\s+\\$\\d{1,3}(?:,\\d{3})$")
-  l_cargo <- sort(parse_number(str_squish(lines[which(str_detect(lines, pattern))])))
+  l_cargo <- sort(parse_number(str_squish(lines[which(str_detect(lines, p_cargo))])))
   cargo_del_mes <- l_cargo[length(l_cargo)]
   saldo_anterior <- total_a_pagar - cargo_del_mes
   p_f_lect <- regex("^MES\\s+FECHA\\s?DE\\s?LECTURA\\s+LECTURA\\s?\\(m3\\)\\s+PROMEDIO\\s?\\(m3\\)")
@@ -36,8 +37,8 @@ parse_aaa <- function(pdf_path) {
     periodo = periodo,                # Texto en español
     cargo_del_mes = cargo_del_mes,
     saldo_anterior = saldo_anterior,
-    fecha_lim = fecha_lim,
-    No_contrato = 121497,
+    fecha_lim = ymd(fecha_lim),
+    No_contrato = "121497",
     f_lect_ant = f_lect_ant,
     lect_ant = parse_number(lect_ant),
     f_lect_act = f_lect_act,

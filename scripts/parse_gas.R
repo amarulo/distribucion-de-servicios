@@ -27,11 +27,15 @@ parse_gas <- function(pdf_path) {
   total_a_pagar <- parse_number(str_squish(lines[9 + add1]))
   periodo <- str_squish(lines[18 + add1])
 
+  # --- Establezca la fecha límite de pago ---
+  lin_fecha <- lines[which(stringr::str_detect(lines, "^\\s+\\d{2}/\\d{2}/\\d{4}\\s+\\$\\s+\\d{1,3}(?:,\\d{1,3})\\s*$"))]
+  fecha_lim <- as.Date(dmy(str_extract(str_squish(lin_fecha), "^\\d{2}/\\d{2}/\\d{4}")))
+
   # --- Localice el identificador del contador ---
   ind <- which(str_detect(lines, "^\\s+U-570346-X"))
   fechas <- str_split(str_squish(lines[which(str_detect(lines, "^\\s+U-570346-X"))+1]), " ")[[1]]
-  f_lect_ant <- fechas[1]
-  f_lect_act <- fechas[3]
+  f_lect_ant <- paste0(fechas[1], "/", year(fecha_lim - 30))
+  f_lect_act <- paste0(fechas[3], "/", year(fecha_lim - 30))
   lecturas <- str_split(str_squish(lines[which(str_detect(lines, "^\\s+U-570346-X"))+2]), " ")[[1]]
   lect_ant <- lecturas[4]
   lect_act <- lecturas[3]
@@ -48,9 +52,6 @@ parse_gas <- function(pdf_path) {
       parse_number(Financ_mayo[2]), parse_number(MODIF_mayo[10]), parse_number(MODIF_mayo[11]), 
       parse_number(Financ_agos[8]), parse_number(Financ_agos[9]), 
       parse_number(INTERESES[10]), parse_number(INTERESES[11]))
-
-  lin_fecha <- lines[which(stringr::str_detect(lines, "^\\s+\\d{2}/\\d{2}/\\d{4}\\s+\\$\\s+\\d{1,3}(?:,\\d{1,3})\\s*$"))]
-  fecha_lim <- as.Date(dmy(str_extract(str_squish(lin_fecha), "^\\d{2}/\\d{2}/\\d{4}")))
 
   pattern <- regex("
       ^\\s+.+?\\s+\\$\\s?
@@ -76,10 +77,10 @@ parse_gas <- function(pdf_path) {
     cargo_del_mes = cargo_del_mes,
     saldo_anterior = saldo_anterior,
     fecha_lim = fecha_lim,
-    No_contrato = 1020307,
-    f_lect_ant = f_lect_ant,
+    No_contrato = "1020307",
+    f_lect_ant = dmy(f_lect_ant),
     lect_ant = parse_number(lect_ant),
-    f_lect_act = f_lect_act,
+    f_lect_act = dmy(f_lect_act),
     lect_act = parse_number(lect_act),
     cargo_AMP = cargo_AMP
   )

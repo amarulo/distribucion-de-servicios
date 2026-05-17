@@ -44,7 +44,7 @@ if (!dir.exists(download_dir)) {
 # Antes de mayo de 2026 => baje todas las facturas disponibles;
 # de mayo 2026 en adelante => baje solamente las facturas del último mes
 current_date <- Sys.Date()
-cutoff_date <- ymd("2026-05-29")
+cutoff_date <- ymd("2026-05-15")
 
 if (current_date < cutoff_date) {
   # Baje todas las facturas de enero 2025 en adelante
@@ -52,7 +52,7 @@ if (current_date < cutoff_date) {
   cat("Modo: DESCARGA INICIAL (facturas desde enero de 2025 en adelante)\n")
 } else {
   # Baje solamente las del último mes
-  start_date <- floor_date(current_date - months(1), "month")
+  start_date <- fecha_ini
   cat("Modo: DESCARGA MENSUAL (", format(start_date, "%B %Y"), ")\n")
 }
 

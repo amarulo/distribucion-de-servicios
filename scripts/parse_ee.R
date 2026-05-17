@@ -1,20 +1,4 @@
-# carpeta_facts <- "input/facturas_temp/"
-# facturas_ee <- list.files(path = carpeta_facts, pattern = "NIC2345873")
-# purrr::map(
-#   paste0(carpeta_facts, facturas_ee),
-#   \(ee_pdf) pdf_convert(
-#     ee_pdf,
-#     dpi = 300,
-#     pages = 1,
-#     filenames = paste0(
-#       "input/facturas_temp/ee_imgs/",
-#       tools::file_path_sans_ext(basename(ee_pdf)),
-#       "_1.png"
-#     )
-#   )
-# )
 # carpeta_imgs <- "input/facturas_temp/ee_imgs/"
-# ee_pdf <- paste0(carpeta_facts,facturas_ee[6])
 # imgs_ee <- list.files(path = carpeta_imgs, pattern = "NIC2345873")
 # ee_img <- paste0(carpeta_imgs, imgs_ee[4])
 # fact_ee <- parse_ee(ee_img)
@@ -31,11 +15,11 @@ parse_ee <- function(pdf_path) {
   lines <- lines[lines != ""]
   # print(lines)
   
-  ind1 <- which(str_detect(lines, "[Ii]mpuesto\\s*[so]?\\s+(?![Asd])"))
+  ind1 <- which(str_detect(lines, "[Ii]?m?(?:Pu)?puesto\\s*[so]?\\s+(?![Asd])"))
   total_a_pagar <- parse_number(gsub("\\.", "", str_extract(lines[ind1], "\\d{1,3}(?:\\.\\d{3})+")))
   fecha_lim <- dmy(str_extract(lines[which(str_detect(lines, "pago\\s+\\d{2}/\\d{2}/\\d{4}"))], "\\d{2}/\\d{2}/\\d{4}"))
   periodo <- sub("-", ".-", str_to_title(format(as.Date(fecha_lim), "%b-%y")))
-  if (fecha_lim < as.Date("2025-08-01")) {
+  if (fecha_lim < as.Date("2025-05-01")) {
     pat_consm <- regex("
       (\\d{4})\\s+                # Lectura Actual
       (\\d{3,4})\\s+              # Lectura Anterior
@@ -54,23 +38,25 @@ parse_ee <- function(pdf_path) {
     consumes <- parse_number(lect_cons[4])
   } else {
     pat_TotMes <- regex("
-      ^(\\$\\d{1,3}(?:\\.\\d{3})?)\\s?    # Tasa de seguridad
+      ^(\\$\\d{1,3}(?:\\.\\d{3})?)?\\s?    # Tasa de seguridad
       (\\$\\d{1,3}(?:\\.\\d{3})?)\\s?     # Cargo del mes
       (\\$\\d{1,3}(?:\\.\\d{3})?)\\s?     # Total mes sin tasa
       ", comments = TRUE)
     pat_consm <- regex("
-      (\\d{4})\\s+.{1,3}\\s+          # Lectura Actual
-      (\\d{3,4})\\s+.{1,2}\\s+        # Lectura Anterior
-      \\d{1}\\s+.{2,3}\\s+            # Factor Multiplicador
-      (\\d{3}),00$                    # Consumo Mes
+      (\\d{4})(?:\\s*.{1,3})?\\s+          # Lectura Actual
+      (\\d{4}|\\d{3})(?:\\s?.{1,3})?\\s+   # Lectura Anterior
+      \\d{1}(?:\\s?.{2,3})?\\s+            # Factor Multiplicador
+      (\\d{3}),00(?:\\s?.{2,3})?$          # Consumo Mes
       ", comments = TRUE)
     ind2 <- which(str_detect(lines, pat_TotMes))
     ind4 <- which(str_detect(lines, "FIU\\s?es\\s?la\\s?cantidad\\s?de\\s?veces\\s?sin\\s?energ"))
+    ind5 <- which(str_detect(lines, pat_consm))
+    indx <- if (length(ind5) > 0) ind5 else ind4
     vlrs <- str_match(lines[ind2], pat_TotMes)
     t_de_seg <- gsub("\\.", "", vlrs[2])
     c_del_mes <- gsub("\\.", "", vlrs[3])
     cargo_del_mes <- parse_number(c_del_mes)
-    lect_cons <- str_match(lines[ind4], pat_consm)
+    lect_cons <- str_match(lines[indx], pat_consm)
     lect_act <- parse_number(lect_cons[2])
     lect_ant <- parse_number(lect_cons[3])
     consumes <- parse_number(lect_cons[4])
@@ -81,9 +67,11 @@ parse_ee <- function(pdf_path) {
   f_lect_act <- dmy(str_extract(lines[ind7], "\\d{2}/\\d{2}/\\d{4}"))
 
   # --- Corrige errores de la imagen que afectan valores ---
-  if (nchar(c_del_mes) < 7) {
+  if (nchar(c_del_mes) < 7 | is.na(c_del_mes)) {
     check <- total_a_pagar - parse_number(t_de_seg)
-    if (adist(paste0("$", check), as.character(c_del_mes)) <= 1) {
+    if (is.na(c_del_mes)) {
+      cargo_del_mes <- NA_real_
+    } else if (adist(paste0("$", check), as.character(c_del_mes)) <= 1) {
       c_del_mes <- check 
       cargo_del_mes <- c_del_mes + parse_number(t_de_seg)
     } else if (adist(paste0("$",total_a_pagar), as.character(c_del_mes)) <= 1) {
@@ -107,7 +95,7 @@ parse_ee <- function(pdf_path) {
     cargo_del_mes = cargo_del_mes,
     saldo_anterior = saldo_anterior,
     fecha_lim = fecha_lim,
-    No_contrato = 2345873,
+    No_contrato = "2345873",
     f_lect_ant = f_lect_ant,
     lect_ant = lect_ant,
     f_lect_act = f_lect_act,
