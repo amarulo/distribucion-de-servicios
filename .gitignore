@@ -1,36 +1,84 @@
-# System files
-.DS_Store
-Thumbs.db
-
-# Application files
-.idea/
-.vscode/
-*.swp
-*.swo
-llave-ss-hacienda.json
-credenciales.json
-.Rhistory
-.RData
-.Rproj.user/
-input/facturas_temp/
-output/.posit/
-output/rsconnect/
-
+# =========================
 # Build artifacts
+# =========================
 *.o
 *.class
 build/
 dist/
 out/
+Dist_SS_files/
+*_files/
 
+
+
+# =========================
+# Credentials
+# =========================
+.entradas/
+
+# Extra protection for common credential names
+llave-ss-hacienda.json
+credenciales.json
+
+
+# =========================
 # Dependency caches
+# =========================
 node_modules/
 vendor/
 
+
+# =========================
+# IDE / editor files
+# =========================
+.idea/
+.vscode/
+.Rproj.user/
+
+*.swp
+*.swo
+
+
+# =========================
 # Log files
+# =========================
 *.log
 *.tmp
-*.lock
+# *.lock
 
+
+# =========================
 # Personal configuration files
+# =========================
+.Renviron
+.env
 *.env
+
+# =========================
+# R session files
+# =========================
+.Rhistory
+.RData
+
+
+# =========================
+# Render / deployment output
+# =========================
+output/.posit/
+output/rsconnect/
+
+
+# =========================
+# System files (Apple, MicroSoft)
+# =========================
+.DS_Store
+Thumbs.db
+
+
+# =========================
+# Temporary / generated data
+# =========================
+input/facturas_temp/
+
+/.quarto/
+**/*.quarto_ipynb

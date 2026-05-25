@@ -1,3 +1,66 @@
+# Estructura para el proyecto:
+Data tables
+    ↓
+R functions/calculations
+    ↓
+Parameterized Rmd template
+    ↓
+Monthly HTML reports
+
+Inputs
+utility bills,
+occupancy,
+events/notes.
+↓
+Calculations
+allocations,
+weighted shares,
+adjustments.
+↓
+Outputs
+monthly reports,
+searchable history,
+interactive inspection.
+
+Current Architecture:
+Data layer
+  utilities
+  occupancy
+  notes/events
+↓
+Rendering layer
+  HTML placeholders
+  dynamic insertion
+  monthly reports
+↓
+Historical archive
+  generated documents
+  source tracking
+
+
+# Your best path right now: ----
+Step 1
+  Build a clean single-report workflow.
+
+Step 2
+  Publish via GitHub Pages.
+
+Step 3
+  Once stable, evolve into:
+    multi-page site,
+    monthly archives,
+    automatic indexes,
+    blog-style structure.
+
+At that point, migrating to a Quarto Website project becomes trivial because:
+your infrastructure,
+rendering,
+CSS,
+deployment,
+GitHub Pages
+
+
+==============================================================================
 # Corte para la automatización de la lectura de las facturas ----
 Fecha: 2026-05-15
 Inicio la utilización de las funciones para automatizar la lectura de las facturas. Creé la tabla inicial de "Cons_SS" (consumo de servicios), con las facturas que  pude encontrar desde 2025-01-01 hasta la fecha (2026-05-15).

@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Distribución del pago de los servicios</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="Dist_SS_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Dist_SS_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="Dist_SS_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="Dist_SS_files/libs/quarto-html/popper.min.js"></script>
+<script src="Dist_SS_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Dist_SS_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Dist_SS_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Dist_SS_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Dist_SS_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Dist_SS_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Dist_SS_files/libs/bootstrap/bootstrap-a2c04661ad37781b98fd93489f24cff7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+<link rel="stylesheet" href="scripts/styleEE.css">
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#Notas" id="toc-Notas" class="nav-link active" data-scroll-target="#Notas">Notas Preliminares</a></li>
+  <li><a href="#Gas" id="toc-Gas" class="nav-link" data-scroll-target="#Gas">Gases del Caribe</a></li>
+  <li><a href="#AAA" id="toc-AAA" class="nav-link" data-scroll-target="#AAA">AAA</a>
+  <ul>
+  <li><a href="#factAgua" id="toc-factAgua" class="nav-link" data-scroll-target="#factAgua">Datos de la factura</a></li>
+  <li><a href="#totHabA" id="toc-totHabA" class="nav-link" data-scroll-target="#totHabA">Total pago por habitación</a></li>
+  </ul></li>
+  <li><a href="#EE" id="toc-EE" class="nav-link" data-scroll-target="#EE">Air-e</a>
+  <ul>
+  <li><a href="#FactEE" id="toc-FactEE" class="nav-link" data-scroll-target="#FactEE">Datos de la factura:</a></li>
+  <li><a href="#EEnCuenta" id="toc-EEnCuenta" class="nav-link" data-scroll-target="#EEnCuenta">Datos para tener en cuenta</a>
+  <ul class="collapse">
+  <li><a href="#diferencias-sobre-datos-de-consumo" id="toc-diferencias-sobre-datos-de-consumo" class="nav-link" data-scroll-target="#diferencias-sobre-datos-de-consumo">Diferencias sobre datos de consumo</a></li>
+  <li><a href="#ValEE" id="toc-ValEE" class="nav-link" data-scroll-target="#ValEE">Valor de corte</a></li>
+  <li><a href="#LectConts" id="toc-LectConts" class="nav-link" data-scroll-target="#LectConts">Lectura de contadores internos</a></li>
+  <li><a href="#ConsArCom" id="toc-ConsArCom" class="nav-link" data-scroll-target="#ConsArCom">Consumo area común</a></li>
+  </ul></li>
+  <li><a href="#TotalEE" id="toc-TotalEE" class="nav-link" data-scroll-target="#TotalEE">Total a pagar por habitación</a></li>
+  </ul></li>
+  <li><a href="#Movis" id="toc-Movis" class="nav-link" data-scroll-target="#Movis">Movistar</a></li>
+  <li><a href="#latoTotal" id="toc-latoTotal" class="nav-link" data-scroll-target="#latoTotal">Total Servicios</a></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Distribución del pago de los servicios</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- 
+El original de este documento se encuentra en "output/Histórico/Dist_SS_inicial.Rmd"
+En este documento quedó la presentación solamente, los cálculos se realizan en los scripts al respecto y aquí solamente se presenten los resultados con el formato deseado.
+-->
+<p><a id="Tabla" href=""></a></p>
+<!--
+Código para producir el .html de afán (no es recomendado):
+rmarkdown::render("output/Dist_SS.Rmd", envir = globalenv())
+-->
+<hr>
+<section id="Notas" class="level2">
+<h2 class="anchored" data-anchor-id="Notas">Notas Preliminares</h2>
+<p>El 20 de marzo de 2026 Jorge se llevó sus cosas de la habitación, fue a pasar un tiempo a casa de su mamá.</p>
+<p>El 25 de marzo de 2026 Gary entregó su habitación.</p>
+<p>El 27 de abril de 2026 Jorge trajo su computador nuevamente y está trabajando acá desde la casa.</p>
+<hr>
+</section>
+<section id="Gas" class="level2">
+<h2 class="anchored" data-anchor-id="Gas">Gases del Caribe</h2>
+<p>Datos de la factura del gas:</p>
+<p>La factura de la casa grande (contrato No.1020307), por un valor total de $86.299 correspondiente al período MARZO 2026, está para pagar antes del 17 de abril de 2026.</p>
+<p>NOTA: Del valor total de este mes me corresponde pagar: $35.200.</p>
+<hr>
+</section>
+<section id="AAA" class="level2">
+<h2 class="anchored" data-anchor-id="AAA">AAA</h2>
+<section id="factAgua" class="level3">
+<h3 class="anchored" data-anchor-id="factAgua">Datos de la factura</h3>
+<p>Los siguientes son los datos tomados de la factura de este mes:</p>
+<p>La factura del agua (póliza No.121497), por un valor total de $286.492, correspondiente al período: Abril-2026, está para pagar antes del 17 de abril de 2026.</p>
+<p>Según la factura, la fecha de la lectura anterior fue el 28 de febrero de 2026 y la fecha de la lectura actual el 29 de marzo de 2026 (consumo: 20 m³).</p>
+</section>
+<section id="totHabA" class="level3">
+<h3 class="anchored" data-anchor-id="totHabA">Total pago por habitación</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>     Habitación     Integrante(s) Ocupación Total AAA
+         &lt;char&gt;            &lt;char&gt;    &lt;char&gt;    &lt;char&gt;
+  1:       Apt.     Luis y Andrés    40.18%  $115.100
+  2:     Hab. 1 Andresito y Kevin    40.18%  $115.100
+  3:     Hab. 2             Jorge    13.86%   $39.700
+  4:     Hab. 3              Gary     5.77%   $16.500</code></pre>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="EE" class="level2">
+<h2 class="anchored" data-anchor-id="EE">Air-e</h2>
+<section id="FactEE" class="level3">
+<h3 class="anchored" data-anchor-id="FactEE">Datos de la factura:</h3>
+<p>Para el período Abr.-26, el valor total a pagar por la factura de energía eléctrica del NIC: 2345873 es de $208.650. Este valor corresponde a un consumo de 268 Kws en 31 días desde el 19 de marzo hasta el 18 de abril de 2026.</p>
+<p>La factura tiene fecha de vencimiento para pagar hasta el 24 de abril de 2026.</p>
+</section>
+<section id="EEnCuenta" class="level3">
+<h3 class="anchored" data-anchor-id="EEnCuenta">Datos para tener en cuenta</h3>
+<section id="diferencias-sobre-datos-de-consumo" class="level4">
+<h4 class="anchored" data-anchor-id="diferencias-sobre-datos-de-consumo">Diferencias sobre datos de consumo</h4>
+<p>Entre los datos que reporta air-e en sus lecturas y los recolectados de la información que suministran los contadores aparecen diferencias tanto en el consumo, como en las fechas de los reportes. La diferencia en el consumo no debe ser muy alta y se debe principalmente a la sección de la casa en la cual no se recolectan los datos, por esta razón los datos de air-e van a estar mas altos que los reportados en el consumo interno.</p>
+<p>La suma total de los consumos internos para este período es de 218.66 Kw.</p>
+<p>La diferencia entre las fechas (u horas) en que se realizan las lecturas de los contadores internos y la del contador externo por parte de air-e, afecta este total a repartir de manera directa: mientras mayor sea la diferencia entre el tiempo de las lecturas, mayor será la diferencia en el consumo a repartir.</p>
+<p>La última lectura de los contadores internos se realizó el 20 de abril de 2026 y la lectura anterior se hizo el 19 de marzo de 2026. En cuanto a Air-e, la lectura actual la realizó el 18 de abril de 2026 y la lectura anterior el 18 de marzo de 2026.</p>
+<p>La diferencia de los consumos (columna “Diferencia”) se repartirá proporcionalmente al consumo de cada habitación. La siguiente tabla muestra estas diferencias para este mes:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>     Factura air-e Lectura contadores Diferencia Número de días factura
+            &lt;char&gt;             &lt;char&gt;     &lt;char&gt;                 &lt;char&gt;
+  1:        268 Kw          218.66 Kw   49.34 Kw                31 días
+     Número de días interno
+                     &lt;char&gt;
+  1:                32 días</code></pre>
+</div>
+</div>
+</section>
+<section id="ValEE" class="level4">
+<h4 class="anchored" data-anchor-id="ValEE">Valor de corte</h4>
+<p>El valor de corte para control se estableció en 10 Kw por día. Este valor se estableció basado en el primer reporte de consumo (septiembre) después del cambio del cableado realizado en agosto de 2025. Este valor permite observar las tendencias generales en el consumo mes a mes: aumentos o disminuciones en el promedio de consumo diario.</p>
+<p>Este mes hemos disminuido el promedio de consumo diario en 1.355 Kw con respecto al corte.</p>
+</section>
+<section id="LectConts" class="level4">
+<h4 class="anchored" data-anchor-id="LectConts">Lectura de contadores internos</h4>
+<p>El area común, desde la cocina hasta la lavandería, no ha quedado cobijada bajo ningún contador por lo que la sumatoria de los valores de consumo de los contadores internos normalmente será menor al consumo total reportado por air-e, haciéndose necesaria la repartición de esta diferencia. Esta repartición se hará de manera proporcional al consumo obtenido a través de los contadores.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>     Habitación    Contador Lectura final Lectura inicial Consumo Kw
+         &lt;char&gt;      &lt;char&gt;         &lt;num&gt;           &lt;num&gt;      &lt;num&gt;
+  1:       Apt. No.24178159        790.55          679.85     110.70
+  2:     Hab. 1 No.24177828        955.72          847.93     107.79
+  3:     Hab. 2 No.24178030        181.22          181.14       0.08
+  4:     Hab. 3 No.24176587          6.95            6.86       0.09</code></pre>
+</div>
+</div>
+</section>
+<section id="ConsArCom" class="level4">
+<h4 class="anchored" data-anchor-id="ConsArCom">Consumo area común</h4>
+<p>Este consumo será repartido de manera proporcional al consumo reportado por los contadores internos de acuerdo a la siguiente tabla (todos los valores en Kw):</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>     Habitación Consumo Contador Asignado Area Común Consumo Total por Hab.
+         &lt;char&gt;            &lt;num&gt;               &lt;num&gt;                  &lt;num&gt;
+  1:       Apt.           110.70               24.98                 135.68
+  2:     Hab. 1           107.79               24.32                 132.11
+  3:     Hab. 2             0.08                0.02                   0.10
+  4:     Hab. 3             0.09                0.02                   0.11</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="TotalEE" class="level3">
+<h3 class="anchored" data-anchor-id="TotalEE">Total a pagar por habitación</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>     Habitación     Integrante(s) Costo Energía
+         &lt;char&gt;            &lt;char&gt;        &lt;char&gt;
+  1:       Apt.     Luis y Andrés      $105.600
+  2:     Hab. 1 Andresito y Kevin      $102.900
+  3:     Hab. 2             Jorge          $100
+  4:     Hab. 3              Gary          $100</code></pre>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="Movis" class="level2">
+<h2 class="anchored" data-anchor-id="Movis">Movistar</h2>
+<p>Los siguientes son los datos de la factura de Movistar por concepto del internet:</p>
+<p>El valor total de la factura del Internet por $94.990, con referencia de pago 60512751061, está para pagar antes del 10 de abril de 2026.</p>
+<p>La distribución del pago del internet queda de la siguiente manera:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>     Habitación     Integrante(s) Costo Internet
+         &lt;char&gt;            &lt;char&gt;         &lt;char&gt;
+  1:       Apt.     Luis y Andrés        $46.000
+  2:     Hab. 1 Andresito y Kevin        $46.000
+  3:     Hab. 2             Jorge         $3.100
+  4:     Hab. 3              Gary             $0</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="latoTotal" class="level2">
+<h2 class="anchored" data-anchor-id="latoTotal">Total Servicios</h2>
+<p>El total de los servicios por habitación para este mes se discrimina en la siguiente tabla:</p>
+<p>may 2026</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>     Habitación      AAA    Air-e Movistar Total Servicios
+         &lt;char&gt;   &lt;char&gt;   &lt;char&gt;   &lt;char&gt;          &lt;char&gt;
+  1:       Apt. $115.100 $105.600  $48.000        $268.700
+  2:     Hab. 1 $115.100 $102.900  $48.000        $266.000
+  3:     Hab. 2  $39.700     $100   $3.200         $43.000
+  4:     Hab. 3  $16.500     $100       $0         $16.600</code></pre>
+</div>
+</div>
+<!--
+
+***
+
+La siguiente tabla corresponde a los valores del mes pasado:
+
+{r tablaAnter}
+# getwd()
+# tabla_anterior <- paste0(if (current_wd == "/home/mono/Documents/Dist_SS"){
+#                             "./input/Cons_ant/"
+#                           } else {
+#                             "../input/Cons_ant/"
+#                           },
+#                          lubridate::year(hoy), 
+#                          if (month(hoy)<10){"_0"} else {"_"}, 
+#                          month(hoy - 30), "_Dist_SS.png")
+# texto_alt <- paste0("La imagen ", tabla_anterior, " no carga")
+# imagen_actual <- htmltools::img(src = tabla_anterior, alt = as.character(texto_alt))
+# imagen_actual
+-->
+<hr>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

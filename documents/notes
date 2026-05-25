@@ -14,5 +14,16 @@ I already created an independent Google account to keep all the records for this
 If possible, I would like for the project to reside in that same google Drive account and to read it through Positron IDE. This, even though I haven't found a reliable way to update the Rpub document directly from Positron; usually, once I have the document ready, I open RStudio and update from there. Since I have the space constraint I would like to have a very condensed way to store the info that's going to be growing month by month. I would like to keep the copies of the receipts, the images with the readings from the internal electricity meters, the notes I make (these can be kept in R format for example) and the history of how many and who were the people living in the house (with dates of movings: in and out). Plus the historic records I process so I can build graphs to check for trends or problems with the utilities (e.g. a high flow of water due to a faucet dripping or something similar).
 
 
-Mensaje git:
-Finished the script to update the utilities consumption table, added a notes file ("anotaciones_proyecto.md") to keep a verbose record of the changes previous to the use of git.
+
+| Tool     | Role                   |
+| -------- | ---------------------- |
+| R        | logic/data             |
+| Markdown | writing/structure      |
+| HTML     | precise structure      |
+| CSS      | appearance             |
+| YAML     | document configuration |
+| Pandoc   | conversion engine      |
+
+
+NOTA PARA RECORDAR:
+¡¡¡Moví las autorizaciones de la carpeta de scripts/ a su propia carpeta .entradas/!!!
