@@ -78,8 +78,8 @@ notes
 # =========================
 # Render / deployment output
 # =========================
-output/.posit/
-output/rsconnect/
+docs/.posit/
+docs/rsconnect/
 
 
 # =========================
