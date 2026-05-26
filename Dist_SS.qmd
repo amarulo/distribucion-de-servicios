@@ -49,6 +49,9 @@ notas_docu <- datos$tabla_notas |>
 # Listas para los cálculos:
 SS <- mes_actual$SS
 Casa <- mes_actual$Casa
+if (mes_actual$fIni_per == ymd("2026-04-01")) {
+  Casa$Pers_Dia_Web <- c(60, 60, 20.8, 0)
+}
 ```
 
 <a id="Tabla"></a>
