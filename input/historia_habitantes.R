@@ -1,8 +1,8 @@
 # Casa: ----
 
 ## Lista de integrantes por habitación tomada de googlesheets:
-gs4_auth(path = "scripts/llave-ss-hacienda.json")
-url_ss <- "https://docs.google.com/spreadsheets/d/1duuIfdB2F50626T8v9UL5Nrrk_-K-XyDhNHln24H3_0/edit?usp=sharing"
+  googlesheets4::gs4_auth(path = here::here(".entradas", "llave-ss-hacienda.json"))
+url_ss <- Sys.getenv("URL_TABLAS_HACIENDA")
 habitantes_casa_gsh4 <- googlesheets4::read_sheet(
     ss = url_ss,
     sheet = "habitantes"
