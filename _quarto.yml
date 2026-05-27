@@ -1,6 +1,14 @@
 ---
 project:
-  type: default
+  type: website
   output-dir: docs
 
+  render:
+    - index.qmd
+    - Dist_SS.qmd
 
+  resources:
+    - scripts/
+
+exclude:
+  - documents/

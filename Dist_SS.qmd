@@ -1,6 +1,10 @@
 ---
 title: "Distribución del pago de los servicios"
 
+params:
+  year: 2026
+  month: 4
+
 format:
   html:
     css: "scripts/styleEE.css"
@@ -39,8 +43,9 @@ datos <- cargar_info()
 
 mes_actual <- preparar_mes(
   datos,
-  yyyy = 2026,
-  mm = 4)
+  yyyy = params$year,
+  mm = params$month
+)
 
 notas_docu <- datos$tabla_notas |> 
   filter(fecha > mes_actual$fIni_per - 20 & 
