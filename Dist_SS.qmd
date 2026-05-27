@@ -14,7 +14,7 @@ format:
     toc-location: left
 ---
 
-<!-- 
+<!--
 El original de este documento se encuentra en "output/Histórico/Dist_SS_inicial.Rmd"
 En este documento quedó la presentación solamente, los cálculos se realizan en los scripts al respecto y aquí solamente se presenten los resultados con el formato deseado.
 -->
