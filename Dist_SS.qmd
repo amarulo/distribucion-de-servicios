@@ -7,6 +7,7 @@ params:
 
 format:
   html:
+    self-contained: true
     css: "scripts/styleEE.css"
     toc: true
     toc-depth: 4
