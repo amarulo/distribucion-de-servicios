@@ -3985,6 +3985,230 @@ vertical-align: -.125em;
     "search-label": "Search"
   }
 }</script>
+<script>$(document).ready(function(){
+    if (typeof $('[data-toggle="tooltip"]').tooltip === 'function') {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    if ($('[data-toggle="popover"]').popover === 'function') {
+        $('[data-toggle="popover"]').popover();
+    }
+});
+</script>
+<style type="text/css">
+.lightable-minimal {
+border-collapse: separate;
+border-spacing: 16px 1px;
+width: 100%;
+margin-bottom: 10px;
+}
+.lightable-minimal td {
+margin-left: 5px;
+margin-right: 5px;
+}
+.lightable-minimal th {
+margin-left: 5px;
+margin-right: 5px;
+}
+.lightable-minimal thead tr:last-child th {
+border-bottom: 2px solid #00000050;
+empty-cells: hide;
+}
+.lightable-minimal tbody tr:first-child td {
+padding-top: 0.5em;
+}
+.lightable-minimal.lightable-hover tbody tr:hover {
+background-color: #f5f5f5;
+}
+.lightable-minimal.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-classic {
+border-top: 0.16em solid #111111;
+border-bottom: 0.16em solid #111111;
+width: 100%;
+margin-bottom: 10px;
+margin: 10px 5px;
+}
+.lightable-classic tfoot tr td {
+border: 0;
+}
+.lightable-classic tfoot tr:first-child td {
+border-top: 0.14em solid #111111;
+}
+.lightable-classic caption {
+color: #222222;
+}
+.lightable-classic td {
+padding-left: 5px;
+padding-right: 5px;
+color: #222222;
+}
+.lightable-classic th {
+padding-left: 5px;
+padding-right: 5px;
+font-weight: normal;
+color: #222222;
+}
+.lightable-classic thead tr:last-child th {
+border-bottom: 0.10em solid #111111;
+}
+.lightable-classic.lightable-hover tbody tr:hover {
+background-color: #F9EEC1;
+}
+.lightable-classic.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-classic-2 {
+border-top: 3px double #111111;
+border-bottom: 3px double #111111;
+width: 100%;
+margin-bottom: 10px;
+}
+.lightable-classic-2 tfoot tr td {
+border: 0;
+}
+.lightable-classic-2 tfoot tr:first-child td {
+border-top: 3px double #111111;
+}
+.lightable-classic-2 caption {
+color: #222222;
+}
+.lightable-classic-2 td {
+padding-left: 5px;
+padding-right: 5px;
+color: #222222;
+}
+.lightable-classic-2 th {
+padding-left: 5px;
+padding-right: 5px;
+font-weight: normal;
+color: #222222;
+}
+.lightable-classic-2 tbody tr:last-child td {
+border-bottom: 3px double #111111;
+}
+.lightable-classic-2 thead tr:last-child th {
+border-bottom: 1px solid #111111;
+}
+.lightable-classic-2.lightable-hover tbody tr:hover {
+background-color: #F9EEC1;
+}
+.lightable-classic-2.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-material {
+min-width: 100%;
+white-space: nowrap;
+table-layout: fixed;
+font-family: Roboto, sans-serif;
+border: 1px solid #EEE;
+border-collapse: collapse;
+margin-bottom: 10px;
+}
+.lightable-material tfoot tr td {
+border: 0;
+}
+.lightable-material tfoot tr:first-child td {
+border-top: 1px solid #EEE;
+}
+.lightable-material th {
+height: 56px;
+padding-left: 16px;
+padding-right: 16px;
+}
+.lightable-material td {
+height: 52px;
+padding-left: 16px;
+padding-right: 16px;
+border-top: 1px solid #eeeeee;
+}
+.lightable-material.lightable-hover tbody tr:hover {
+background-color: #f5f5f5;
+}
+.lightable-material.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-material.lightable-striped tbody td {
+border: 0;
+}
+.lightable-material.lightable-striped thead tr:last-child th {
+border-bottom: 1px solid #ddd;
+}
+.lightable-material-dark {
+min-width: 100%;
+white-space: nowrap;
+table-layout: fixed;
+font-family: Roboto, sans-serif;
+border: 1px solid #FFFFFF12;
+border-collapse: collapse;
+margin-bottom: 10px;
+background-color: #363640;
+}
+.lightable-material-dark tfoot tr td {
+border: 0;
+}
+.lightable-material-dark tfoot tr:first-child td {
+border-top: 1px solid #FFFFFF12;
+}
+.lightable-material-dark th {
+height: 56px;
+padding-left: 16px;
+padding-right: 16px;
+color: #FFFFFF60;
+}
+.lightable-material-dark td {
+height: 52px;
+padding-left: 16px;
+padding-right: 16px;
+color: #FFFFFF;
+border-top: 1px solid #FFFFFF12;
+}
+.lightable-material-dark.lightable-hover tbody tr:hover {
+background-color: #FFFFFF12;
+}
+.lightable-material-dark.lightable-striped tbody tr:nth-child(even) {
+background-color: #FFFFFF12;
+}
+.lightable-material-dark.lightable-striped tbody td {
+border: 0;
+}
+.lightable-material-dark.lightable-striped thead tr:last-child th {
+border-bottom: 1px solid #FFFFFF12;
+}
+.lightable-paper {
+width: 100%;
+margin-bottom: 10px;
+color: #444;
+}
+.lightable-paper tfoot tr td {
+border: 0;
+}
+.lightable-paper tfoot tr:first-child td {
+border-top: 1px solid #00000020;
+}
+.lightable-paper thead tr:last-child th {
+color: #666;
+vertical-align: bottom;
+border-bottom: 1px solid #00000020;
+line-height: 1.15em;
+padding: 10px 5px;
+}
+.lightable-paper td {
+vertical-align: middle;
+border-bottom: 1px solid #00000010;
+line-height: 1.15em;
+padding: 7px 5px;
+}
+.lightable-paper.lightable-hover tbody tr:hover {
+background-color: #F9EEC1;
+}
+.lightable-paper.lightable-striped tbody tr:nth-child(even) {
+background-color: #00000008;
+}
+.lightable-paper.lightable-striped tbody td {
+border: 0;
+}
+</style>
 
 
 <style type="text/css">body {font-size: 14px;}h1,h2,h3,h6 {text-transform: capitalize;}h2 {padding-top: 2.2rem;}h3 {padding-left: 2rem;padding-top: 2rem;}h4 {padding-left: 3rem;padding-top: 1.5rem;}h6 {padding-left: 2rem;padding-top: 2rem;}p {font-size: 1.5rem;}.hljs {font-size: 1.5rem;}</style>
@@ -4085,16 +4309,42 @@ rmarkdown::render("output/Dist_SS.Rmd", envir = globalenv())
 </section>
 <section id="totHabA" class="level3">
 <h3 class="anchored" data-anchor-id="totHabA">Total pago por habitación</h3>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>     Habitación     Integrante(s) Ocupación Total AAA
-         &lt;char&gt;            &lt;char&gt;    &lt;char&gt;    &lt;char&gt;
-  1:       Apt.     Luis y Andrés    40.18%  $115.100
-  2:     Hab. 1 Andresito y Kevin    40.18%  $115.100
-  3:     Hab. 2             Jorge    13.86%   $39.700
-  4:     Hab. 3              Gary     5.77%   $16.500</code></pre>
-</div>
-</div>
+<table class="table table-hover table-condensed caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Habitación</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Integrante(s)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Ocupación</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Total AAA</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(235, 245, 251, 255) !important;">Apt.</td>
+<td style="text-align: left; background-color: rgba(235, 245, 251, 255) !important;">Luis y Andrés</td>
+<td style="text-align: right; background-color: rgba(235, 245, 251, 255) !important;">40.18%</td>
+<td style="text-align: right; background-color: rgba(235, 245, 251, 255) !important;">$115.100</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hab. 1</td>
+<td style="text-align: left;">Andresito y Kevin</td>
+<td style="text-align: right;">40.18%</td>
+<td style="text-align: right;">$115.100</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(235, 245, 251, 255) !important;">Hab. 2</td>
+<td style="text-align: left; background-color: rgba(235, 245, 251, 255) !important;">Jorge</td>
+<td style="text-align: right; background-color: rgba(235, 245, 251, 255) !important;">13.86%</td>
+<td style="text-align: right; background-color: rgba(235, 245, 251, 255) !important;">$39.700</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hab. 3</td>
+<td style="text-align: left;">Gary</td>
+<td style="text-align: right;">5.77%</td>
+<td style="text-align: right;">$16.500</td>
+</tr>
+</tbody>
+</table>
 <hr>
 </section>
 </section>
@@ -4114,16 +4364,26 @@ rmarkdown::render("output/Dist_SS.Rmd", envir = globalenv())
 <p>La diferencia entre las fechas (u horas) en que se realizan las lecturas de los contadores internos y la del contador externo por parte de air-e, afecta este total a repartir de manera directa: mientras mayor sea la diferencia entre el tiempo de las lecturas, mayor será la diferencia en el consumo a repartir.</p>
 <p>La última lectura de los contadores internos se realizó el 20 de abril de 2026 y la lectura anterior se hizo el 19 de marzo de 2026. En cuanto a Air-e, la lectura actual la realizó el 18 de abril de 2026 y la lectura anterior el 18 de marzo de 2026.</p>
 <p>La diferencia de los consumos (columna “Diferencia”) se repartirá proporcionalmente al consumo de cada habitación. La siguiente tabla muestra estas diferencias para este mes:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>     Factura air-e Lectura contadores Diferencia Número de días factura
-            &lt;char&gt;             &lt;char&gt;     &lt;char&gt;                 &lt;char&gt;
-  1:        268 Kw          218.66 Kw   49.34 Kw                31 días
-     Número de días interno
-                     &lt;char&gt;
-  1:                32 días</code></pre>
-</div>
-</div>
+<table class="table table-hover table-condensed caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Factura air-e</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Lectura contadores</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Diferencia</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Número de días factura</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Número de días interno</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">268 Kw</td>
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">218.66 Kw</td>
+<td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">49.34 Kw</td>
+<td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">31 días</td>
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">32 días</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="ValEE" class="level4">
 <h4 class="anchored" data-anchor-id="ValEE">Valor de corte</h4>
@@ -4133,44 +4393,122 @@ rmarkdown::render("output/Dist_SS.Rmd", envir = globalenv())
 <section id="LectConts" class="level4">
 <h4 class="anchored" data-anchor-id="LectConts">Lectura de contadores internos</h4>
 <p>El area común, desde la cocina hasta la lavandería, no ha quedado cobijada bajo ningún contador por lo que la sumatoria de los valores de consumo de los contadores internos normalmente será menor al consumo total reportado por air-e, haciéndose necesaria la repartición de esta diferencia. Esta repartición se hará de manera proporcional al consumo obtenido a través de los contadores.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>     Habitación    Contador Lectura final Lectura inicial Consumo Kw
-         &lt;char&gt;      &lt;char&gt;         &lt;num&gt;           &lt;num&gt;      &lt;num&gt;
-  1:       Apt. No.24178159        790.55          679.85     110.70
-  2:     Hab. 1 No.24177828        955.72          847.93     107.79
-  3:     Hab. 2 No.24178030        181.22          181.14       0.08
-  4:     Hab. 3 No.24176587          6.95            6.86       0.09</code></pre>
-</div>
-</div>
+<table class="table table-hover table-condensed caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Habitación</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Contador</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Lectura final</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Lectura inicial</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Consumo Kw</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">Apt.</td>
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">No.24178159</td>
+<td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">790.55</td>
+<td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">679.85</td>
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">110.70</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hab. 1</td>
+<td style="text-align: left;">No.24177828</td>
+<td style="text-align: right;">955.72</td>
+<td style="text-align: right;">847.93</td>
+<td style="text-align: left;">107.79</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">Hab. 2</td>
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">No.24178030</td>
+<td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">181.22</td>
+<td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">181.14</td>
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">0.08</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hab. 3</td>
+<td style="text-align: left;">No.24176587</td>
+<td style="text-align: right;">6.95</td>
+<td style="text-align: right;">6.86</td>
+<td style="text-align: left;">0.09</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="ConsArCom" class="level4">
 <h4 class="anchored" data-anchor-id="ConsArCom">Consumo area común</h4>
 <p>Este consumo será repartido de manera proporcional al consumo reportado por los contadores internos de acuerdo a la siguiente tabla (todos los valores en Kw):</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>     Habitación Consumo Contador Asignado Area Común Consumo Total por Hab.
-         &lt;char&gt;            &lt;num&gt;               &lt;num&gt;                  &lt;num&gt;
-  1:       Apt.           110.70               24.98                 135.68
-  2:     Hab. 1           107.79               24.32                 132.11
-  3:     Hab. 2             0.08                0.02                   0.10
-  4:     Hab. 3             0.09                0.02                   0.11</code></pre>
-</div>
-</div>
+<table class="table table-hover table-condensed caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Habitación</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Consumo Contador</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Asignado Area Común</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Consumo Total por Hab.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">Apt.</td>
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">110.70</td>
+<td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">24.98</td>
+<td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">135.68</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hab. 1</td>
+<td style="text-align: left;">107.79</td>
+<td style="text-align: right;">24.32</td>
+<td style="text-align: right;">132.11</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">Hab. 2</td>
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">0.08</td>
+<td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">0.02</td>
+<td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">0.10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hab. 3</td>
+<td style="text-align: left;">0.09</td>
+<td style="text-align: right;">0.02</td>
+<td style="text-align: right;">0.11</td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
 <section id="TotalEE" class="level3">
 <h3 class="anchored" data-anchor-id="TotalEE">Total a pagar por habitación</h3>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>     Habitación     Integrante(s) Costo Energía
-         &lt;char&gt;            &lt;char&gt;        &lt;char&gt;
-  1:       Apt.     Luis y Andrés      $105.600
-  2:     Hab. 1 Andresito y Kevin      $102.900
-  3:     Hab. 2             Jorge          $100
-  4:     Hab. 3              Gary          $100</code></pre>
-</div>
-</div>
+<table class="table table-hover table-condensed caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Habitación</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Integrante(s)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Costo Energía</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">Apt.</td>
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">Luis y Andrés</td>
+<td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">$105.600</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hab. 1</td>
+<td style="text-align: left;">Andresito y Kevin</td>
+<td style="text-align: right;">$102.900</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">Hab. 2</td>
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">Jorge</td>
+<td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">$100</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hab. 3</td>
+<td style="text-align: left;">Gary</td>
+<td style="text-align: right;">$100</td>
+</tr>
+</tbody>
+</table>
 <hr>
 </section>
 </section>
@@ -4179,32 +4517,84 @@ rmarkdown::render("output/Dist_SS.Rmd", envir = globalenv())
 <p>Los siguientes son los datos de la factura de Movistar por concepto del internet:</p>
 <p>El valor total de la factura del Internet por $94.990, con referencia de pago 60512751061, está para pagar antes del 10 de abril de 2026.</p>
 <p>La distribución del pago del internet queda de la siguiente manera:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>     Habitación     Integrante(s) Costo Internet
-         &lt;char&gt;            &lt;char&gt;         &lt;char&gt;
-  1:       Apt.     Luis y Andrés        $40.500
-  2:     Hab. 1 Andresito y Kevin        $40.500
-  3:     Hab. 2             Jorge        $14.000
-  4:     Hab. 3              Gary             $0</code></pre>
-</div>
-</div>
+<table class="table table-hover table-condensed caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Habitación</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Integrante(s)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Costo Internet</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(249, 250, 251, 255) !important;">Apt.</td>
+<td style="text-align: left; background-color: rgba(249, 250, 251, 255) !important;">Luis y Andrés</td>
+<td style="text-align: right; background-color: rgba(249, 250, 251, 255) !important;">$40.500</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hab. 1</td>
+<td style="text-align: left;">Andresito y Kevin</td>
+<td style="text-align: right;">$40.500</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(249, 250, 251, 255) !important;">Hab. 2</td>
+<td style="text-align: left; background-color: rgba(249, 250, 251, 255) !important;">Jorge</td>
+<td style="text-align: right; background-color: rgba(249, 250, 251, 255) !important;">$14.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hab. 3</td>
+<td style="text-align: left;">Gary</td>
+<td style="text-align: right;">$0</td>
+</tr>
+</tbody>
+</table>
 <hr>
 </section>
 <section id="latoTotal" class="level2">
 <h2 class="anchored" data-anchor-id="latoTotal">Total Servicios</h2>
 <p>El total de los servicios por habitación para este mes se discrimina en la siguiente tabla:</p>
 <p>may 2026</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>     Habitación      AAA    Air-e Movistar Total Servicios
-         &lt;char&gt;   &lt;char&gt;   &lt;char&gt;   &lt;char&gt;          &lt;char&gt;
-  1:       Apt. $115.100 $105.600  $48.000        $268.700
-  2:     Hab. 1 $115.100 $102.900  $48.000        $266.000
-  3:     Hab. 2  $39.700     $100   $3.200         $43.000
-  4:     Hab. 3  $16.500     $100       $0         $16.600</code></pre>
-</div>
-</div>
+<table class="table table-hover table-condensed caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Habitación</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">AAA</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Air-e</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Movistar</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Total Servicios</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(232, 248, 245, 255) !important;">Apt.</td>
+<td style="text-align: left; background-color: rgba(232, 248, 245, 255) !important;">$115.100</td>
+<td style="text-align: right; background-color: rgba(232, 248, 245, 255) !important;">$105.600</td>
+<td style="text-align: right; background-color: rgba(232, 248, 245, 255) !important;">$48.000</td>
+<td style="text-align: left; background-color: rgba(232, 248, 245, 255) !important;">$268.700</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hab. 1</td>
+<td style="text-align: left;">$115.100</td>
+<td style="text-align: right;">$102.900</td>
+<td style="text-align: right;">$48.000</td>
+<td style="text-align: left;">$266.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(232, 248, 245, 255) !important;">Hab. 2</td>
+<td style="text-align: left; background-color: rgba(232, 248, 245, 255) !important;">$39.700</td>
+<td style="text-align: right; background-color: rgba(232, 248, 245, 255) !important;">$100</td>
+<td style="text-align: right; background-color: rgba(232, 248, 245, 255) !important;">$3.200</td>
+<td style="text-align: left; background-color: rgba(232, 248, 245, 255) !important;">$43.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hab. 3</td>
+<td style="text-align: left;">$16.500</td>
+<td style="text-align: right;">$100</td>
+<td style="text-align: right;">$0</td>
+<td style="text-align: left;">$16.600</td>
+</tr>
+</tbody>
+</table>
 <!--
 
 ***

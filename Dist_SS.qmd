@@ -2,8 +2,8 @@
 title: "Distribución del pago de los servicios"
 
 params:
-  year: 2026
-  month: 4
+  year: !expr as.numeric(format(Sys.Date(), "%Y"))
+  month: !expr as.numeric(format(Sys.Date(), "%m"))
 
 format:
   html:
@@ -20,20 +20,15 @@ En este documento quedó la presentación solamente, los cálculos se realizan e
 -->
 
 ```{r inicio_doc, include=FALSE}
+# Cargar las librerías para este documento
 library(knitr)
+library(here)
+library(kableExtra)
 
 # Opciones generales de los chunks:
 knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_chunk$set(comment = " ")
 knitr::opts_chunk$set(results = "asis")
-
-getwd()
-knitr::current_input()
-#normalizePath(knitr::current_input())
-file.exists("scripts/styleEE.css")
-file.exists("../scripts/styleEE.css")
-normalizePath("scripts/styleEE.css")
-here::here()
 ```
 
 ```{r cargar_listas, include=FALSE}
@@ -136,14 +131,24 @@ writeLines(if (SS$Actual["AAA"]) {
 
 ### Total pago por habitación {#totHabA}
 
-```{r pagoAaa, results='markup'}
+```{r pagoAaa}
 if (SS$Actual["AAA"]) {
-  data.table(Habitación = Casa$Habitacion, `Integrante(s)` = Casa$Ocupantes,
-             Ocupación = label_percent(accuracy = 0.01)(Casa$Ocupa_aaa),
-             `Total AAA` = label_currency(prefix = "$", big.mark = ".",
+  tabla_aaa <- data.table(Habitación = Casa$Habitacion, `Integrante(s)` = Casa$Ocupantes,
+                          Ocupación = label_percent(accuracy = 0.01)(Casa$Ocupa_aaa),
+                          `Total AAA` = label_currency(prefix = "$", big.mark = ".",
                                           decimal.mark = ",")(SS$AAA$total_AAA))
+  filas_impares <- seq(1, nrow(tabla_aaa), by = 2)
+  tabla_aaa |>
+    kbl(align = c("l", "l", "r", "r")) |> 
+    kable_styling(
+      bootstrap_options = c("hover", "condensed"), 
+      full_width = FALSE,
+      # We use html_font to inject our custom styles safely into the table container
+      html_font = 'inherit; border: 1px solid #dcf1ff; border-radius: 8px; padding: 10px; background-color: white; display: inline-block;'
+    ) |>
+    row_spec(filas_impares, background = "#EBF5FB")
 } else {
-    writeLines("La factura de este período no está disponible todavía.")
+    cat("\nLa factura de este período no está disponible todavía.\n")
 }
 ```
 
@@ -215,15 +220,25 @@ writeLines(if (SS$Actual["CI"]) {
 
 La diferencia de los consumos (columna "Diferencia") se repartirá proporcionalmente al consumo de cada habitación. La siguiente tabla muestra estas diferencias para este mes:
 
-```{r DiferenciaLecturas, results='markup'}
+```{r DiferenciaLecturas}
 if (SS$Actual["EE"]) {
-  data.table(
+  tabla_ee1 <- data.table(
     `Factura air-e` = paste(SS$EE$kwh_f,"Kw"),
     `Lectura contadores` = paste(round(sum(SS$EE$ConsInt$lect_fin) - sum(SS$EE$ConsInt$lect_ini), digits=2),"Kw"),
     Diferencia = paste0(abs(round(SS$EE$kwh_f - (sum(SS$EE$ConsInt$lect_fin) - sum(SS$EE$ConsInt$lect_ini)), digits = 2))," Kw"),
     `Número de días factura` = paste0(SS$EE$f_lect_act - SS$EE$f_lect_ant," días"),
     `Número de días interno` = paste0(SS$EE$ConsInt$fecha_lect_actual - SS$EE$ConsInt$fecha_lect_anter," días")
   )
+  filas_impares <- seq(1, nrow(tabla_ee1), by = 2)
+  tabla_ee1 |>
+    kbl(align = c("l", "l", "r", "r")) |> 
+    kable_styling(
+      bootstrap_options = c("hover", "condensed"), 
+      full_width = FALSE,
+      # We use html_font to inject our custom styles safely into the table container
+      html_font = 'inherit; border: 1px solid #fef1f0; border-radius: 8px; padding: 10px; background-color: white; display: inline-block;'
+    ) |>
+    row_spec(filas_impares, background = "#fef1f0")
 } else {writeLines("Factura no disponible todavía.\n")}
 ```
 
@@ -242,13 +257,23 @@ if (SS$Actual["EE"]) {
 
 El area común, desde la cocina hasta la lavandería, no ha quedado cobijada bajo ningún contador por lo que la sumatoria de los valores de consumo de los contadores internos normalmente será menor al consumo total reportado por air-e, haciéndose necesaria la repartición de esta diferencia. Esta repartición se hará de manera proporcional al consumo obtenido a través de los contadores.
 
-```{r consumo_interno, results='markup'}
+```{r consumo_interno}
 if (SS$Actual["CI"]) {
-  data.table(Habitación = Casa$Habitacion,
+  tabla_ee2 <- data.table(Habitación = Casa$Habitacion,
            `Contador` = gsub("^.{3,4}_", "No.", str_to_title(SS$EE$ConsInt$contador)),
            `Lectura final` = SS$EE$ConsInt$lect_fin,
            `Lectura inicial` = SS$EE$ConsInt$lect_ini,
            `Consumo Kw` = SS$EE$ConsInt$consumo)
+  filas_impares <- seq(1, nrow(tabla_ee2), by = 2)
+  tabla_ee2 |>
+    kbl(align = c("l", "l", "r", "r")) |> 
+    kable_styling(
+      bootstrap_options = c("hover", "condensed"), 
+      full_width = FALSE,
+      # We use html_font to inject our custom styles safely into the table container
+      html_font = 'inherit; border: 1px solid #fef1f0; border-radius: 8px; padding: 10px; background-color: white; display: inline-block;'
+    ) |>
+    row_spec(filas_impares, background = "#fef1f0")
 } else {writeLines("Consumo no disponible todavía.\n")}
 ```
 
@@ -256,12 +281,22 @@ if (SS$Actual["CI"]) {
 
 Este consumo será repartido de manera proporcional al consumo reportado por los contadores internos de acuerdo a la siguiente tabla (todos los valores en Kw):
 
-```{r consAreaCom, results='markup'}
+```{r consAreaCom}
 if (SS$Actual["EE"]) {
-  data.table(`Habitación` = Casa$Habitacion,
+  tabla_ee3 <- data.table(`Habitación` = Casa$Habitacion,
            `Consumo Contador` = SS$EE$ConsInt$consumo,
-           `Asignado Area Común` = round(SS$EE$ConsInt$cons_per_hab,2)) %>%
+           `Asignado Area Común` = round(SS$EE$ConsInt$cons_per_hab,2)) |>
   mutate(`Consumo Total por Hab.` = `Consumo Contador` + `Asignado Area Común`)
+  filas_impares <- seq(1, nrow(tabla_ee3), by = 2)
+  tabla_ee3 |>
+    kbl(align = c("l", "l", "r", "r")) |> 
+    kable_styling(
+      bootstrap_options = c("hover", "condensed"), 
+      full_width = FALSE,
+      # We use html_font to inject our custom styles safely into the table container
+      html_font = 'inherit; border: 1px solid #fef1f0; border-radius: 8px; padding: 10px; background-color: white; display: inline-block;'
+    ) |>
+    row_spec(filas_impares, background = "#fef1f0")
 } else {
   writeLines("No hay datos de la factura todavía.\n")
 }
@@ -269,12 +304,22 @@ if (SS$Actual["EE"]) {
 
 ### Total a pagar por habitación {#TotalEE}
 
-```{r totalHabEe, results='markup'}
+```{r totalHabEe}
 if (SS$Actual["EE"]) {
-  data.table(Habitación = Casa$Habitacion,
+  tabla_ee4 <- data.table(Habitación = Casa$Habitacion,
            `Integrante(s)` = Casa$Ocupantes,
            `Costo Energía` = label_currency(prefix = "$", big.mark = ".",
                           decimal.mark = ",")(SS$EE$total_EE))
+  filas_impares <- seq(1, nrow(tabla_ee4), by = 2)
+  tabla_ee4 |>
+    kbl(align = c("l", "l", "r", "r")) |> 
+    kable_styling(
+      bootstrap_options = c("hover", "condensed"), 
+      full_width = FALSE,
+      # We use html_font to inject our custom styles safely into the table container
+      html_font = 'inherit; border: 1px solid #fef1f0; border-radius: 8px; padding: 10px; background-color: white; display: inline-block;'
+    ) |>
+    row_spec(filas_impares, background = "#fef1f0")
 } else {
   writeLines("Factura no disponible todavía.\n")
 }
@@ -295,10 +340,21 @@ writeLines(paste0("El valor total de la factura del Internet por $",
 
 La distribución del pago del internet queda de la siguiente manera:
 
-```{r disrInternet, results='markup'}
-data.table(Habitación = Casa$Habitacion,
+```{r disrInternet}
+tabla_web <- data.table(Habitación = Casa$Habitacion,
            `Integrante(s)` = Casa$Ocupantes,
            `Costo Internet` = label_currency(prefix = "$", big.mark = ".", decimal.mark = ",")(100 * round((Casa$Pers_Dia_Web * SS$Web$valor_pago / (100 * sum(Casa$Pers_Dia_Web))))))
+filas_impares <- seq(1, nrow(tabla_web), by = 2)
+tabla_web |>
+  kbl(align = c("l", "l", "r", "r")) |>
+  kable_styling(
+    bootstrap_options = c("hover", "condensed"), 
+    full_width = FALSE,
+    # Soft tech-gray border and a clean, neutral shadow
+    html_font = 'inherit; border: 1px solid #E5E7EB; border-radius: 8px; padding: 10px; background-color: white; display: inline-block;'
+  ) |>
+  # Alternating rows with a very soft, professional light gray
+  row_spec(filas_impares, background = "#F9FAFB")
 ```
 
 
@@ -310,8 +366,8 @@ El total de los servicios por habitación para este mes se discrimina en la sigu
 
 `r format(Sys.Date(), "%b %Y")`
 
-```{r latoTotal, results='markup'}
-data.table(Habitación = Casa$Habitacion,
+```{r latoTotal}
+tabla_fin <- data.table(Habitación = Casa$Habitacion,
            AAA = if (SS$Actual["AAA"]) {
              label_currency(prefix="$",big.mark=".",decimal.mark=",")(SS$AAA$total_AAA)
            },
@@ -329,6 +385,17 @@ data.table(Habitación = Casa$Habitacion,
                                                   (if (SS$Actual["Web"]) {
                                                     SS$Web$total_Web } else { 0 }))
 )
+filas_impares <- seq(1, nrow(tabla_fin), by = 2)
+tabla_fin |>
+  kbl(align = c("l", "l", "r", "r")) |>
+  kable_styling(
+    bootstrap_options = c("hover", "condensed"), 
+    full_width = FALSE,
+    # Soft green border and a clean, neutral shadow
+    html_font = 'inherit; border: 1px solid #E8F8F5; border-radius: 8px; padding: 10px; background-color: white; display: inline-block;'
+  ) |>
+  # Alternating rows with a very soft, professional light gray
+  row_spec(filas_impares, background = "#E8F8F5")
 ```
 
 <!--

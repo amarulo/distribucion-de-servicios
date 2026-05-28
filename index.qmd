@@ -6,4 +6,4 @@ title: "Hacienda +"
 
 ## Reportes mensuales
 
-- [Abril 2026](2026_04_Dist_SS.html)
+- [Abril 2026](reports/2026_04_Dist_SS.html)
