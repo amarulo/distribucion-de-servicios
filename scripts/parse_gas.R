@@ -1,3 +1,7 @@
+# ==============================================================================
+# Función para analizar el formato PDF de las facturas del gas.
+# ============================================================================== 
+
 # source("scripts/cargar_librerias.R")
 # gas_pdf <- paste0(carpeta_facts,facturas_gas[4])
 # fact_gas <- parse_gas(gas_pdf)

@@ -1,22 +1,26 @@
-# NOTAS PRELIMINARES: ----
+# ==============================================================================
+# Filtro de seguridad para comparar la tabla de Googlesheets y la tabla contenida 
+# en este repositorio: input/tabla_notas.rds
+# ============================================================================== 
 
-## Tabla de notas actualizada:
-googlesheets4::gs4_auth(path = here::here(".entradas", "llave-ss-hacienda.json"))
-url_ss <- Sys.getenv("URL_TABLAS_HACIENDA")
+## Tabla de notas de Googlesheets: ----
+googlesheets4::gs4_auth(path = here::here(Sys.getenv("SECRETO_HM")), Sys.getenv("SHA256_HM"))
+tbl_ss <- Sys.getenv("TABLAS_HM")
 tabla_notas_gsh4 <- googlesheets4::read_sheet(
-    ss = url_ss,
+    ss = tbl_ss,
     sheet = "notas"
   )
 tabla_notas_gsh4 <- tabla_notas_gsh4 |>
   mutate(fecha = as.Date(fecha))
 
 ## Notas Preliminares anteriores: ----
-tabla_notas_input <- readRDS("input/tabla_notas.rds")
+tabla_notas_input <- readRDS(here::here("input", "tabla_notas.rds"))
 
 if(identical(tabla_notas_gsh4, tabla_notas_input)) {
   cat("La tabla guardada en input sigue estando vigente.")
 } else {
-  cat("La tabla guardada en input es diferente de la de Googlesheets, revise y si es necesario guarde la nueva version.")
+  stop("La tabla guardada en input es diferente de la de Googlesheets, revise y si es necesario guarde la nueva version.")
+  # incluir código para ver las diferencias entre las dos tablas y aceptar y guardar cambios o rechazarlos.
 }
 
 ## Salvar la tabla, REVISE la información antes de guardar

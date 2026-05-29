@@ -1,3 +1,7 @@
+# ==============================================================================
+# Script para generar el reporte mensual sobre la distribución de los servicios
+# ==============================================================================
+
 # Ajuste el año (AAAA) y el mes (mm) para generar el reporte correspondiente
 # una vez lo tenga configurado salve este documento y copie y pegue el siguiente
 # comando en la consola inferior: source("scripts/generar_reporte_mensual.R")

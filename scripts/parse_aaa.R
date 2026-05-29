@@ -1,3 +1,7 @@
+# ==============================================================================
+# Función para analizar el formato PDF de las facturas del agua.
+# ============================================================================== 
+
 # carpeta_facts <- "input/facturas_temp/"
 # aaa_pdf <- paste0(carpeta_facts, facturas_aaa[1])
 # fact_aaa <- parse_aaa(aaa_pdf)
@@ -44,7 +48,6 @@ parse_aaa <- function(pdf_path) {
     f_lect_act = f_lect_act,
     lect_act = parse_number(lect_act),
     cargo_AMP = NA_real_
-  )
-  
+  )  
 }
 

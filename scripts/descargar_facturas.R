@@ -24,7 +24,7 @@ cat("Authenticating with Google Account:", google_email, "\n")
 
 # AUTENTICAR DRIVE (Permanente / Sin necesidad del navegador)
 # Esta vía usa la llave del robot:
-drive_auth(path = "scripts/llave-ss-hacienda.json")
+drive_auth(path = here::here(Sys.getenv("SECRETO_HM"), "llave-ss-hacienda.json"))
 
 cat("✓ Authentication successful\n\n")
 
@@ -33,7 +33,7 @@ cat("✓ Authentication successful\n\n")
 # ==============================================================================
 
 # Defina la carpeta de destino para descargar las facturas
-download_dir <- "input/facturas_temp"
+download_dir <- here::here("input", "facturas_temp")
 if (!dir.exists(download_dir)) {
   dir.create(download_dir, recursive = TRUE)
   cat("Carpeta creada:", download_dir, "\n")

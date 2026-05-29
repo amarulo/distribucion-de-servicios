@@ -1,3 +1,8 @@
+# ==============================================================================
+# Función para analizar la imagen generada a partir del PDF de las facturas
+# de energía eléctrica.
+# ============================================================================== 
+
 # carpeta_imgs <- "input/facturas_temp/ee_imgs/"
 # imgs_ee <- list.files(path = carpeta_imgs, pattern = "NIC2345873")
 # ee_img <- paste0(carpeta_imgs, imgs_ee[4])

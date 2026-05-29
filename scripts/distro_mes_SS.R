@@ -1,5 +1,7 @@
+# ==============================================================================
 # Función para producir las listas utilizadas en la preparación del informe mensual
 # sobre la distribución de los servicios
+# ==============================================================================
 
 preparar_mes <- function(datos = NULL, yyyy = NULL, mm = NULL) {
 

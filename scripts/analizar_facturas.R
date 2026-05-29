@@ -1,26 +1,26 @@
 # ==============================================================================
 # Función para chequear la tabla existente, revisar si hay nuevas facturas y, 
-# si las hay, agregar la nueva información a la tabla.
+# si las hay, agregar la nueva información a la tabla: input/cons_SS.rds
 # ============================================================================== 
 
  
 agregar_facturas <- function() {
 
   # --- Confirmación de los datos de la tabla de consumo de servicios ---
-  output_fls <- list.files("output/")
-  if ("cons_SS.rds" %in% output_fls) {
-    cons_SS <- readRDS("output/cons_SS.rds")
-    fecha_ini <- floor_date(max(cons_SS$fecha_lim) - 30, unit = "month")
+  input_fls <- list.files(here::here("input"))
+  if ("cons_SS.rds" %in% input_fls) {
+    cons_SS <- readRDS(here::here("input", "cons_SS.rds"))
+    fecha_ini <- floor_date(max(cons_SS$fecha_lim) - 15, unit = "month")
   } else {
     cons_SS <- tibble::tibble()
     fecha_ini <- as.Date("2025-01-01")
   }
-  fecha_fin <- ceiling_date(Sys.Date(), unit = "month") + 9
+  fecha_fin <- ceiling_date(Sys.Date(), unit = "month")
   mes_a_mes <- seq.Date(fecha_ini, fecha_fin, by = "month")
 
 
   # --- Revisar y descargar nuevas facturas en caso que existan ---
-  source("scripts/descargar_facturas.R")
+  source(here::here("scripts", "descargar_facturas.R"))
 
 
   # --- Use las nuevas facturas para agregar los datos a la tabla ---
@@ -48,13 +48,13 @@ agregar_facturas <- function() {
   cons_SS <- bind_rows(cons_SS, tabla_web)
 
   # --- Funciones para crear la tabla de consumo de servicios ---
-  source("scripts/parse_aaa.R")
-  source("scripts/parse_ee.R")
-  source("scripts/parse_gas.R")
+  source(here::here("scripts", "parse_aaa.R"))
+  source(here::here("scripts", "parse_ee.R"))
+  source(here::here("scripts", "parse_gas.R"))
 
   # --- Carpetas de archivos temporales ---
-  carpeta_facts <- "input/facturas_temp/"
-  carpeta_imgs <- "input/facturas_temp/ee_imgs/"
+  carpeta_facts <- here::here("input", "facturas_temp")
+  carpeta_imgs <- here::here("input", "facturas_temp", "ee_imgs")
 
   # --- Tabla del consumo de gas ---
   facturas_gas <- list.files(path = carpeta_facts, pattern = "^\\d{4}_\\d{2}_gas")
@@ -78,7 +78,7 @@ agregar_facturas <- function() {
   }
   cons_SS <- bind_rows(cons_SS, tabla_aaa)
 
-  # --- Generación de las imágenes de las facturas de energía eléctrica ---
+  # --- Generar las imágenes de las facturas de energía eléctrica ---
   facturas_ee <- list.files(path = carpeta_facts, pattern = "NIC2345873")
   de_ee <- length(facturas_ee)
   imagenes_ee <- list.files(path = carpeta_imgs, pattern = "NIC2345873")
@@ -107,15 +107,15 @@ agregar_facturas <- function() {
   )
 
   # --- Tabla del consumo de energía eléctrica ---
-  for (ee_img in no_imagina) {
-    cat("Analizando", ee_img, " : ", which(no_imagina == ee_img), "de", length(no_imagina), "\n")
+  for (ee_img in imagenes_ee) {
+    cat("Analizando", ee_img, " : ", which(imagenes_ee == ee_img), "de", de_imgee, "\n")
     fact_ee <- parse_ee(paste0(carpeta_imgs, ee_img))
     tabla_ee <- bind_rows(tabla_ee, fact_ee)
   }
   cons_SS <- bind_rows(cons_SS, tabla_ee)
   cons_SS <- cons_SS |> arrange(fecha_lim) |> unique()
 
-  saveRDS(cons_SS, "output/cons_SS.rds")
+  saveRDS(cons_SS, here::here("input", "cons_SS.rds"))
 
   return(cons_SS)
 }

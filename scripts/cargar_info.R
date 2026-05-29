@@ -1,3 +1,8 @@
+# ==============================================================================
+# Función para cargar la información de los contadores internos y los ajustes al
+# consumo para generar la lista de tablas para la preparación del reporte mensual
+# ==============================================================================
+
 cargar_info <- function() {
 
   # Cargue la información disponible:
@@ -6,12 +11,12 @@ cargar_info <- function() {
   tabla_notas <- readRDS(here::here("input", "tabla_notas.rds"))
 
   # Autorice el uso de Googlesheets:
-  googlesheets4::gs4_auth(path = here::here(".entradas", "llave-ss-hacienda.json"))
-  url_ss <- Sys.getenv("URL_TABLAS_HACIENDA")
-  
+  googlesheets4::gs4_auth(path = here::here(Sys.getenv("SECRETO_HM")), Sys.getenv("SHA256_HM"))
+  tbl_ss <- Sys.getenv("TABLAS_HM")
+
   # Baje la información de Googlesheets:
   cont_int <- googlesheets4::read_sheet(
-    ss = url_ss,
+    ss = tbl_ss,
     sheet = "lect_contadores"
   )
   names(cont_int) <- names(cont_int) |>
@@ -20,7 +25,7 @@ cargar_info <- function() {
   cont_int <- cont_int |> mutate(fecha = as.Date(fecha))
   
   ajustes_cons <- read_sheet(
-    ss = url_ss,
+    ss = tbl_ss,
     sheet = "ajustes_cons"
   )
   names(ajustes_cons) <- names(ajustes_cons) |> tolower()
