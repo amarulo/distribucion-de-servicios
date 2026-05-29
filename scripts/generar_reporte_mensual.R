@@ -8,10 +8,10 @@
 # una vez copiado presione Enter
 
 # --- INGRESE EL AÑO Y MES PARA GENERAR EL REPORTE ---
-AAAA <- 2026
-mm <- 4
+AAAA <- as.numeric(format(Sys.Date(), "%Y"))
+mm <- as.numeric(format(Sys.Date(), "%m"))
 
-
+ 
 # --- Nombre-base para el archivo de salida ---
 output_file <- paste0(
   AAAA, "_", sprintf("%02d", mm),

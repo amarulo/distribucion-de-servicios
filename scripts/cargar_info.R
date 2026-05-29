@@ -9,31 +9,8 @@ cargar_info <- function() {
   cons_SS <- readRDS(here::here("input", "cons_SS.rds"))
   habitantes_casa <- readRDS(here::here("input", "habitantes_casa.rds"))
   tabla_notas <- readRDS(here::here("input", "tabla_notas.rds"))
-
-  # Autorice el uso de Googlesheets:
-  googlesheets4::gs4_auth(path = here::here(Sys.getenv("SECRETO_HM")), Sys.getenv("SHA256_HM"))
-  tbl_ss <- Sys.getenv("TABLAS_HM")
-
-  # Baje la información de Googlesheets:
-  cont_int <- googlesheets4::read_sheet(
-    ss = tbl_ss,
-    sheet = "lect_contadores"
-  )
-  names(cont_int) <- names(cont_int) |>
-    tolower() |>
-    (\(x) { ifelse(grepl("^\\d", x), paste0("cont_", x), x) })()
-  cont_int <- cont_int |> mutate(fecha = as.Date(fecha))
-  
-  ajustes_cons <- read_sheet(
-    ss = tbl_ss,
-    sheet = "ajustes_cons"
-  )
-  names(ajustes_cons) <- names(ajustes_cons) |> tolower()
-  ajustes_cons <- ajustes_cons |> 
-    mutate(
-      fecha_ini = as.Date(fecha_ini),
-      fecha_fin = as.Date(fecha_fin),
-    )
+  cont_int <- readRDS(here::here("input", "cont_int.rds"))
+  ajustes_cons <- readRDS(here::here("input", "ajustes.rds"))
 
   # Return everything together:
   list(

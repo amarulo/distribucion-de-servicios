@@ -3,24 +3,49 @@
 # en este repositorio: input/tabla_notas.rds
 # ============================================================================== 
 
-## Tabla de notas de Googlesheets: ----
-googlesheets4::gs4_auth(path = here::here(Sys.getenv("SECRETO_HM")), Sys.getenv("SHA256_HM"))
+## Revisar conexión: ----
+if (!googlesheets4::gs4_has_token()) {
+  googlesheets4::gs4_auth(path = here::here(Sys.getenv("SECRETO_HM"), Sys.getenv("SHA256_HMT")))
+}
+
+
+## Tablas a comparar: ----
+# Tabla de notas de Googlesheets:
 tbl_ss <- Sys.getenv("TABLAS_HM")
 tabla_notas_gsh4 <- googlesheets4::read_sheet(
     ss = tbl_ss,
     sheet = "notas"
-  )
-tabla_notas_gsh4 <- tabla_notas_gsh4 |>
-  mutate(fecha = as.Date(fecha))
+  ) |>
+    mutate(fecha = as.Date(fecha))
 
-## Notas Preliminares anteriores: ----
+## Notas Preliminares anteriores:
 tabla_notas_input <- readRDS(here::here("input", "tabla_notas.rds"))
 
-if(identical(tabla_notas_gsh4, tabla_notas_input)) {
-  cat("La tabla guardada en input sigue estando vigente.")
+
+## Punto de comparación de cambios, interactivo: ----
+if (identical(tabla_notas_gsh4, tabla_notas_input)) {
+  cat("La tabla guardada en input sigue estando vigente.\n")
 } else {
-  stop("La tabla guardada en input es diferente de la de Googlesheets, revise y si es necesario guarde la nueva version.")
-  # incluir código para ver las diferencias entre las dos tablas y aceptar y guardar cambios o rechazarlos.
+  cat("\nSe detectaron diferencias:\n\n")
+  waldo::compare(tabla_notas_input, tabla_notas_gsh4)
+
+  ## Modo interactivo:
+  if (interactive()) {
+    respuesta <- readline(
+      prompt = "\n¿Aceptar cambios y actualizar tabla_notas.rds? (y/n): "
+    ) |>
+      trimws() |>
+      stringr::str_sub(1, 1) |>
+      tolower()
+    if (respuesta %in% c("y", "s")) {
+      saveRDS(tabla_notas_gsh4, here::here("input", "tabla_notas.rds"))
+      cat("\nNueva versión guardada.\n")
+    } else {
+      stop("Proceso cancelado por el usuario.")
+    }
+  } else {
+    stop("Se detectaron cambios en la tabla de notas. Revise manualmente antes de continuar.")
+  }
 }
 
 ## Salvar la tabla, REVISE la información antes de guardar

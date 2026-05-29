@@ -3,27 +3,51 @@
 # en este repositorio: input/habitantes_casa.rds
 # ============================================================================== 
 
-# Lista de integrantes por habitación tomada de googlesheets: ----
-googlesheets4::gs4_auth(path = here::here(Sys.getenv("SECRETO_HM")), Sys.getenv("SHA256_HM"))
+## Revisar conexión: ----
+if (!googlesheets4::gs4_has_token()) {
+  googlesheets4::gs4_auth(path = here::here(Sys.getenv("SECRETO_HM"), Sys.getenv("SHA256_HMT")))
+}
+
+
+## Tablas a comparar: ----
+# Lista de integrantes por habitación tomada de googlesheets:
 tbl_ss <- Sys.getenv("TABLAS_HM")
 habitantes_casa_gsh4 <- googlesheets4::read_sheet(
     ss = tbl_ss,
     sheet = "habitantes"
-  )
-habitantes_casa_gsh4 <- habitantes_casa_gsh4 |>
-  mutate(
-    entrada = as.Date(entrada),
-    salida = as.Date(salida)
-  )
+  ) |>
+    mutate(
+      entrada = as.Date(entrada),
+      salida = as.Date(salida)
+    )
 
-# Lista de integrantes por habitación salvada en input: ----
+# Lista de integrantes por habitación salvada en input:
 habitantes_casa_input <- readRDS(here::here("input", "habitantes_casa.rds"))
 
-if(identical(habitantes_casa_input, habitantes_casa_gsh4)) {
-  cat("La tabla guardada en input sigue estando vigente.")
+## Punto de comparación de cambios, interactivo: ----
+if (identical(habitantes_casa_gsh4, habitantes_casa_input)) {
+  cat("La tabla guardada en input sigue estando vigente.\n")
 } else {
-  stop("La tabla guardada en input es diferente de la de Googlesheets, revise y si es necesario actualice la version guardada a la nueva version.")
-  # incluir código para ver las diferencias entre las dos tablas y aceptar y guardar cambios o rechazarlos.
+  cat("\nSe detectaron diferencias:\n\n")
+  waldo::compare(habitantes_casa_input, habitantes_casa_gsh4)
+
+  ## Modo interactivo:
+  if (interactive()) {
+    respuesta <- readline(
+      prompt = "\n¿Aceptar cambios y actualizar habitantes_casa.rds? (y/n): "
+    ) |>
+      trimws() |>
+      stringr::str_sub(1, 1) |>
+      tolower()
+    if (respuesta %in% c("y", "s")) {
+      saveRDS(habitantes_casa_gsh4, here::here("input", "habitantes_casa.rds"))
+      cat("\nNueva versión guardada.\n")
+    } else {
+      stop("Proceso cancelado por el usuario.")
+    }
+  } else {
+    stop("Se detectaron cambios en la tabla de habitantes de la casa. Revise manualmente antes de continuar.")
+  }
 }
 
 # Antes de salvar la nueva version revise que toda la info esté correcta:

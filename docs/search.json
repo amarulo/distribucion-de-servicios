@@ -46,14 +46,14 @@
     "href": "index.html",
     "title": "Hacienda +",
     "section": "",
-    "text": "Abril 2026"
+    "text": "Mayo 2026\nAbril 2026\nMarzo 2026"
   },
   {
     "objectID": "index.html#reportes-mensuales",
     "href": "index.html#reportes-mensuales",
     "title": "Hacienda +",
     "section": "",
-    "text": "Abril 2026"
+    "text": "Mayo 2026\nAbril 2026\nMarzo 2026"
   },
   {
     "objectID": "2026_04_Dist_SS.html#Notas",
@@ -96,5 +96,89 @@
     "title": "Distribución del pago de los servicios",
     "section": "Total Servicios",
     "text": "Total Servicios\nEl total de los servicios por habitación para este mes se discrimina en la siguiente tabla:\nmay 2026\n\n\n\nHabitación\nAAA\nAir-e\nMovistar\nTotal Servicios\n\n\n\n\nApt.\n$115.100\n$105.600\n$48.000\n$268.700\n\n\nHab. 1\n$115.100\n$102.900\n$48.000\n$266.000\n\n\nHab. 2\n$39.700\n$100\n$3.200\n$43.000\n\n\nHab. 3\n$16.500\n$100\n$0\n$16.600"
+  },
+  {
+    "objectID": "2026_03_Dist_SS.html#Notas",
+    "href": "2026_03_Dist_SS.html#Notas",
+    "title": "Distribución del pago de los servicios",
+    "section": "Notas Preliminares",
+    "text": "Notas Preliminares\nEl 01 de marzo de 2026 Para el cálculo de los consumos de agua de las Habitaciones 2 y 3 se tendrán en cuenta 10 días (dado el trabajo que implicaría hacer el seguimiento, no estoy llevando cuenta de los días en que las personas se encuentran o no en la casa, es simplemente un estimado).\nEl 20 de marzo de 2026 Jorge se llevó sus cosas de la habitación, fue a pasar un tiempo a casa de su mamá.\nEl 25 de marzo de 2026 Gary entregó su habitación."
+  },
+  {
+    "objectID": "2026_03_Dist_SS.html#Gas",
+    "href": "2026_03_Dist_SS.html#Gas",
+    "title": "Distribución del pago de los servicios",
+    "section": "Gases del Caribe",
+    "text": "Gases del Caribe\nDatos de la factura del gas:\nLa factura de la casa grande (contrato No.1020307), por un valor total de $77.284 correspondiente al período FEBRERO 2026, está para pagar antes del 18 de marzo de 2026.\nNOTA: Del valor total de este mes me corresponde pagar: $33.400."
+  },
+  {
+    "objectID": "2026_03_Dist_SS.html#AAA",
+    "href": "2026_03_Dist_SS.html#AAA",
+    "title": "Distribución del pago de los servicios",
+    "section": "AAA",
+    "text": "AAA\n\nDatos de la factura\nLos siguientes son los datos tomados de la factura de este mes:\nLa factura del agua (póliza No.121497), por un valor total de $264.804, correspondiente al período: Marzo-2026, está para pagar antes del 16 de marzo de 2026.\nSegún la factura, la fecha de la lectura anterior fue el 29 de enero de 2026 y la fecha de la lectura actual el 28 de febrero de 2026 (consumo: 17 m³).\n\n\nTotal pago por habitación\n\n\n\nHabitación\nIntegrante(s)\nOcupación\nTotal AAA\n\n\n\n\nApt.\nLuis y Andrés\n37.50%\n$99.300\n\n\nHab. 1\nAndresito y Kevin\n37.50%\n$99.300\n\n\nHab. 2\nJorge\n18.75%\n$49.700\n\n\nHab. 3\nGary\n6.25%\n$16.600"
+  },
+  {
+    "objectID": "2026_03_Dist_SS.html#EE",
+    "href": "2026_03_Dist_SS.html#EE",
+    "title": "Distribución del pago de los servicios",
+    "section": "Air-e",
+    "text": "Air-e\n\nDatos de la factura:\nPara el período Mar.-26, el valor total a pagar por la factura de energía eléctrica del NIC: 2345873 es de $183.820. Este valor corresponde a un consumo de 235 Kws en 28 días desde el 19 de febrero hasta el 18 de marzo de 2026.\nLa factura tiene fecha de vencimiento para pagar hasta el 25 de marzo de 2026.\n\n\nDatos para tener en cuenta\n\nDiferencias sobre datos de consumo\nEntre los datos que reporta air-e en sus lecturas y los recolectados de la información que suministran los contadores aparecen diferencias tanto en el consumo, como en las fechas de los reportes. La diferencia en el consumo no debe ser muy alta y se debe principalmente a la sección de la casa en la cual no se recolectan los datos, por esta razón los datos de air-e van a estar mas altos que los reportados en el consumo interno.\nLa suma total de los consumos internos para este período es de 189.61 Kw.\nLa diferencia entre las fechas (u horas) en que se realizan las lecturas de los contadores internos y la del contador externo por parte de air-e, afecta este total a repartir de manera directa: mientras mayor sea la diferencia entre el tiempo de las lecturas, mayor será la diferencia en el consumo a repartir.\nLa última lectura de los contadores internos se realizó el 19 de marzo de 2026 y la lectura anterior se hizo el 19 de febrero de 2026. En cuanto a Air-e, la lectura actual la realizó el 18 de marzo de 2026 y la lectura anterior el 18 de febrero de 2026.\nLa diferencia de los consumos (columna “Diferencia”) se repartirá proporcionalmente al consumo de cada habitación. La siguiente tabla muestra estas diferencias para este mes:\n\n\n\nFactura air-e\nLectura contadores\nDiferencia\nNúmero de días factura\nNúmero de días interno\n\n\n\n\n235 Kw\n189.61 Kw\n45.39 Kw\n28 días\n28 días\n\n\n\n\n\nValor de corte\nEl valor de corte para control se estableció en 10 Kw por día. Este valor se estableció basado en el primer reporte de consumo (septiembre) después del cambio del cableado realizado en agosto de 2025. Este valor permite observar las tendencias generales en el consumo mes a mes: aumentos o disminuciones en el promedio de consumo diario.\nEste mes hemos disminuido el promedio de consumo diario en 1.607 Kw con respecto al corte.\n\n\nLectura de contadores internos\nEl area común, desde la cocina hasta la lavandería, no ha quedado cobijada bajo ningún contador por lo que la sumatoria de los valores de consumo de los contadores internos normalmente será menor al consumo total reportado por air-e, haciéndose necesaria la repartición de esta diferencia. Esta repartición se hará de manera proporcional al consumo obtenido a través de los contadores.\n\n\n\nHabitación\nContador\nLectura final\nLectura inicial\nConsumo Kw\n\n\n\n\nApt.\nNo.24178159\n679.85\n591.89\n87.96\n\n\nHab. 1\nNo.24177828\n847.93\n751.60\n96.33\n\n\nHab. 2\nNo.24178030\n181.14\n176.09\n5.05\n\n\nHab. 3\nNo.24176587\n6.86\n6.59\n0.27\n\n\n\n\n\nConsumo area común\nEste consumo será repartido de manera proporcional al consumo reportado por los contadores internos de acuerdo a la siguiente tabla (todos los valores en Kw):\n\n\n\nHabitación\nConsumo Contador\nAsignado Area Común\nConsumo Total por Hab.\n\n\n\n\nApt.\n87.96\n21.06\n109.02\n\n\nHab. 1\n96.33\n23.06\n119.39\n\n\nHab. 2\n5.05\n1.21\n6.26\n\n\nHab. 3\n0.27\n0.06\n0.33\n\n\n\n\n\n\nTotal a pagar por habitación\n\n\n\nHabitación\nIntegrante(s)\nCosto Energía\n\n\n\n\nApt.\nLuis y Andrés\n$85.300\n\n\nHab. 1\nAndresito y Kevin\n$93.400\n\n\nHab. 2\nJorge\n$4.900\n\n\nHab. 3\nGary\n$300"
+  },
+  {
+    "objectID": "2026_03_Dist_SS.html#Movis",
+    "href": "2026_03_Dist_SS.html#Movis",
+    "title": "Distribución del pago de los servicios",
+    "section": "Movistar",
+    "text": "Movistar\nLos siguientes son los datos de la factura de Movistar por concepto del internet:\nEl valor total de la factura del Internet por $94.990, con referencia de pago 60512751061, está para pagar antes del 10 de marzo de 2026.\nLa distribución del pago del internet queda de la siguiente manera:\n\n\n\nHabitación\nIntegrante(s)\nCosto Internet\n\n\n\n\nApt.\nLuis y Andrés\n$41.200\n\n\nHab. 1\nAndresito y Kevin\n$41.200\n\n\nHab. 2\nJorge\n$12.600\n\n\nHab. 3\nGary\n$0"
+  },
+  {
+    "objectID": "2026_03_Dist_SS.html#latoTotal",
+    "href": "2026_03_Dist_SS.html#latoTotal",
+    "title": "Distribución del pago de los servicios",
+    "section": "Total Servicios",
+    "text": "Total Servicios\nEl total de los servicios por habitación para este mes se discrimina en la siguiente tabla:\nmay 2026\n\n\n\nHabitación\nAAA\nAir-e\nMovistar\nTotal Servicios\n\n\n\n\nApt.\n$99.300\n$85.300\n$43.400\n$228.000\n\n\nHab. 1\n$99.300\n$93.400\n$43.400\n$236.100\n\n\nHab. 2\n$49.700\n$4.900\n$13.300\n$67.900\n\n\nHab. 3\n$16.600\n$300\n$0\n$16.900"
+  },
+  {
+    "objectID": "2026_05_Dist_SS.html#Notas",
+    "href": "2026_05_Dist_SS.html#Notas",
+    "title": "Distribución del pago de los servicios",
+    "section": "Notas Preliminares",
+    "text": "Notas Preliminares\nEl 27 de abril de 2026 Jorge trajo su computador nuevamente y está trabajando acá desde la casa.\nEl 20 de mayo de 2026 Cambié el sistema de listas a tabla, para los inquilinos utilizé como fecha de entrada el inicio de este año, para Luis dejé la fecha de nuestro matrimonio y para mi la fecha en que me mudé a esta casa."
+  },
+  {
+    "objectID": "2026_05_Dist_SS.html#Gas",
+    "href": "2026_05_Dist_SS.html#Gas",
+    "title": "Distribución del pago de los servicios",
+    "section": "Gases del Caribe",
+    "text": "Gases del Caribe\nDatos de la factura del gas:\n  Warning: 1 failed to parse.\n  Warning: 1 failed to parse.\nLa factura de la casa grande (contrato No.1020307), por un valor total de $180.528 correspondiente a los períodos NA y NA, está para pagar antes del 19 de mayo de 2026.\nNOTA: Del valor total de este mes me corresponde pagar: $35.100."
+  },
+  {
+    "objectID": "2026_05_Dist_SS.html#AAA",
+    "href": "2026_05_Dist_SS.html#AAA",
+    "title": "Distribución del pago de los servicios",
+    "section": "AAA",
+    "text": "AAA\n\nDatos de la factura\nLos siguientes son los datos tomados de la factura de este mes:\nLa factura del agua (póliza No.121497), por un valor total de $318.520, correspondiente al período: Mayo-2026, está para pagar antes del 15 de mayo de 2026.\nSegún la factura, la fecha de la lectura anterior fue el 29 de marzo de 2026 y la fecha de la lectura actual el 28 de abril de 2026 (consumo: 24 m³).\n\n\nTotal pago por habitación\n\n\n\nHabitación\nIntegrante(s)\nOcupación\nTotal AAA\n\n\n\n\nApt.\nLuis y Andrés\n49.59%\n$157.900\n\n\nHab. 1\nAndresito y Kevin\n49.59%\n$157.900\n\n\nHab. 2\nJorge\n0.83%\n$2.600"
+  },
+  {
+    "objectID": "2026_05_Dist_SS.html#EE",
+    "href": "2026_05_Dist_SS.html#EE",
+    "title": "Distribución del pago de los servicios",
+    "section": "Air-e",
+    "text": "Air-e\n\nDatos de la factura:\nLa factura del período actual todavía no está disponible.\n\n\nDatos para tener en cuenta\n\nDiferencias sobre datos de consumo\nEntre los datos que reporta air-e en sus lecturas y los recolectados de la información que suministran los contadores aparecen diferencias tanto en el consumo, como en las fechas de los reportes. La diferencia en el consumo no debe ser muy alta y se debe principalmente a la sección de la casa en la cual no se recolectan los datos, por esta razón los datos de air-e van a estar mas altos que los reportados en el consumo interno.\nLa suma total de los consumos internos para este período es de 233.09 Kw.\nLa diferencia entre las fechas (u horas) en que se realizan las lecturas de los contadores internos y la del contador externo por parte de air-e, afecta este total a repartir de manera directa: mientras mayor sea la diferencia entre el tiempo de las lecturas, mayor será la diferencia en el consumo a repartir.\nLa última lectura de los contadores internos se realizó el 19 de mayo de 2026 y la lectura anterior se hizo el 20 de abril de 2026. En cuanto a Air-e, la factura no está disponible todavía.\nLa diferencia de los consumos (columna “Diferencia”) se repartirá proporcionalmente al consumo de cada habitación. La siguiente tabla muestra estas diferencias para este mes:\nFactura no disponible todavía.\n\n\nValor de corte\nEl valor de corte para control se estableció en 10 Kw por día. Este valor se estableció basado en el primer reporte de consumo (septiembre) después del cambio del cableado realizado en agosto de 2025. Este valor permite observar las tendencias generales en el consumo mes a mes: aumentos o disminuciones en el promedio de consumo diario.\nFactura no disponible todavía.\n\n\nLectura de contadores internos\nEl area común, desde la cocina hasta la lavandería, no ha quedado cobijada bajo ningún contador por lo que la sumatoria de los valores de consumo de los contadores internos normalmente será menor al consumo total reportado por air-e, haciéndose necesaria la repartición de esta diferencia. Esta repartición se hará de manera proporcional al consumo obtenido a través de los contadores.\n  Warning in as.data.table.list(x, keep.rownames = keep.rownames, check.names =\n  check.names, : Item 1 has 3 rows but longest item has 4; recycled with\n  remainder.\n\n\n\nHabitación\nContador\nLectura final\nLectura inicial\nConsumo Kw\n\n\n\n\nApt.\nNo.24178159\n895.29\n790.55\n104.74\n\n\nHab. 1\nNo.24177828\n1073.05\n955.72\n117.33\n\n\nHab. 2\nNo.24178030\n192.24\n181.22\n11.02\n\n\nApt.\nNo.24176587\n6.95\n6.95\n0.00\n\n\n\n\n\nConsumo area común\nEste consumo será repartido de manera proporcional al consumo reportado por los contadores internos de acuerdo a la siguiente tabla (todos los valores en Kw):\nNo hay datos de la factura todavía.\n\n\n\nTotal a pagar por habitación\nFactura no disponible todavía."
+  },
+  {
+    "objectID": "2026_05_Dist_SS.html#Movis",
+    "href": "2026_05_Dist_SS.html#Movis",
+    "title": "Distribución del pago de los servicios",
+    "section": "Movistar",
+    "text": "Movistar\nLos siguientes son los datos de la factura de Movistar por concepto del internet:\nEl valor total de la factura del Internet por $94.990, con referencia de pago 60512751061, está para pagar antes del 10 de mayo de 2026.\nLa distribución del pago del internet queda de la siguiente manera:\n\n\n\nHabitación\nIntegrante(s)\nCosto Internet\n\n\n\n\nApt.\nLuis y Andrés\n$38.000\n\n\nHab. 1\nAndresito y Kevin\n$38.000\n\n\nHab. 2\nJorge\n$19.000"
+  },
+  {
+    "objectID": "2026_05_Dist_SS.html#latoTotal",
+    "href": "2026_05_Dist_SS.html#latoTotal",
+    "title": "Distribución del pago de los servicios",
+    "section": "Total Servicios",
+    "text": "Total Servicios\nEl total de los servicios por habitación para este mes se discrimina en la siguiente tabla:\nmay 2026\n\n\n\nHabitación\nAAA\nMovistar\nTotal Servicios\n\n\n\n\nApt.\n$157.900\n$37.200\n$195.100\n\n\nHab. 1\n$157.900\n$37.200\n$195.100\n\n\nHab. 2\n$2.600\n$18.600\n$21.200"
   }
 ]

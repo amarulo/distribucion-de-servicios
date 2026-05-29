@@ -6,6 +6,8 @@
  
 agregar_facturas <- function() {
 
+  cat("\nBuscando nuevas facturas.\n")
+
   # --- Confirmación de los datos de la tabla de consumo de servicios ---
   input_fls <- list.files(here::here("input"))
   if ("cons_SS.rds" %in% input_fls) {
@@ -30,7 +32,7 @@ agregar_facturas <- function() {
   # OJO: El valor era menor al inicio de 2025, hay que revisar si hace falta
   for (mes in mes_a_mes) {
     web <- list(
-      proveedor = "Movistar Colombia Telecomunicaciones S.A. E.S.P.",
+      proveedor = "Movistar",
       total_a_pagar = 94990,
       periodo = toupper(format(as.Date(mes), "%b.-%Y")),
       cargo_del_mes = 94990,
