@@ -1,6 +1,11 @@
 ## Establecer conexión con Google Drive: ----
 if (!googledrive::drive_has_token()) {
-  googledrive::drive_auth()
+  googledrive::drive_auth(
+    path = here::here(
+      Sys.getenv("SECRETO_HM"),
+      Sys.getenv("SHA256_HMT")
+    )
+  )
   cat("Conexión con Google Drive establecida.\n")
 }
 

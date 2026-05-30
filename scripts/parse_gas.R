@@ -18,7 +18,7 @@ parse_gas <- function(pdf_path) {
 
   primera_l <- str_squish(lines[1])
   # print(primera_l)
-  if (primera_l == "1020307") {
+  if (primera_l == Sys.getenv("GASID")) {
     add1 <- 0
   } else if (primera_l == "Rojo") {
     add1 <- 1
@@ -75,13 +75,13 @@ parse_gas <- function(pdf_path) {
   #       "\nINTERESES", paste(INTERESES, collapse = "; "), "\ncargo_AMP:", cargo_AMP)))
 
   factura_gas <- list(
-    proveedor = "Gases del Caribe S.A. E.S.P.",
+    proveedor = "Gases del Caribe",
     total_a_pagar = total_a_pagar,
     periodo = periodo,                # Texto en español
     cargo_del_mes = cargo_del_mes,
     saldo_anterior = saldo_anterior,
     fecha_lim = fecha_lim,
-    No_contrato = "1020307",
+    No_contrato = Sys.getenv("GASID"),
     f_lect_ant = dmy(f_lect_ant),
     lect_ant = parse_number(lect_ant),
     f_lect_act = dmy(f_lect_act),

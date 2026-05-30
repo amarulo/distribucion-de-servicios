@@ -36,13 +36,13 @@ parse_aaa <- function(pdf_path) {
   lect_act <- str_extract(lines[tabla_lect + 3], "\\d{1,2},\\d{3}")
 
   factura_aaa <- list(
-    proveedor = "Triple A de Barranquilla S.A. E.S.P.",
+    proveedor = "Triple A",
     total_a_pagar = total_a_pagar,
     periodo = periodo,                # Texto en español
     cargo_del_mes = cargo_del_mes,
     saldo_anterior = saldo_anterior,
     fecha_lim = ymd(fecha_lim),
-    No_contrato = "121497",
+    No_contrato = Sys.getenv("AAAID"),
     f_lect_ant = f_lect_ant,
     lect_ant = parse_number(lect_ant),
     f_lect_act = f_lect_act,

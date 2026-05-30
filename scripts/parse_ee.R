@@ -94,13 +94,13 @@ parse_ee <- function(pdf_path) {
   saldo_anterior <- total_a_pagar - cargo_del_mes
 
   factura_ee <- list(
-    proveedor = "Air-e S.A.S. E.S.P.",
+    proveedor = "Air-e",
     total_a_pagar = total_a_pagar,
     periodo = periodo,                # Texto en español
     cargo_del_mes = cargo_del_mes,
     saldo_anterior = saldo_anterior,
     fecha_lim = fecha_lim,
-    No_contrato = "2345873",
+    No_contrato = Sys.getenv("EEID"),
     f_lect_ant = f_lect_ant,
     lect_ant = lect_ant,
     f_lect_act = f_lect_act,

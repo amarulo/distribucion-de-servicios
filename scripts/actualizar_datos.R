@@ -16,8 +16,8 @@ source(here::here("scripts", "conectar.R"))
 
 # ==============================================================================
  
-# Analizar las facturas y agregar la información requerida a la tabla de SS:
-source(here::here("scripts", "analizar_facturas.R"))
+# Chequear los datos provenientes de nuevas facturas y agregarlos a la tabla de SS
+source(here::here("scripts", "revisa_nueva_factura.R"))
 
 # ==============================================================================
 
