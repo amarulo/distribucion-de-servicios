@@ -6,6 +6,9 @@ title: "Hacienda +"
 
 ## Reportes mensuales
 
+#### Formato actual
 - [Mayo 2026](reports/2026_05_Dist_SS.html)
 - [Abril 2026](reports/2026_04_Dist_SS.html)
-- [Marzo 2026](reports/2026_03_Dist_SS.html)
+ 
+#### Formato anterior
+- [Marzo 2026](reports/previous_reports/2026_03_Dist_SS.nb.html)

@@ -38,11 +38,13 @@ file.rename(from = current_path, to = new_path)
 # --- ACTUALICE LA PÁGINA DE ENTRADA, EL ÍNDICE ---
 
 # 1. Define paths safely from the project root
-reports_dir <- here::here("docs", "reports")
 index_qmd_path <- here::here("index.qmd")
+reports_dir  <- here::here("docs", "reports")
+previous_dir <- here::here("docs", "reports", "previous_reports")
 
-# 2. List all HTML files inside that folder
-report_files <- list.files(reports_dir, pattern = "\\.html$", full.names = FALSE)
+# 2. List all HTML files inside those folders
+report_files <- list.files(reports_dir,  pattern = "\\.html$", full.names = FALSE)
+old_reports  <- list.files(previous_dir, pattern = "\\.html$", full.names = FALSE)
 
 # 3. Base content (YAML)
 index_content <- c(
@@ -56,14 +58,10 @@ index_content <- c(
   ""
 )
 
-# 4. Dynamically add the reports
-if (length(report_files) == 0) {
-  index_content <- c(index_content, "*No se han encontrado reportes todavía.*")
-} else {
-  # Sort files in reverse order (newest month first)
-  report_files <- sort(report_files, decreasing = TRUE)
-  
-  for (file in report_files) {
+# 4. Function to write the index lines for each group
+write_indx_lines <- function(files_ls, destino) {
+  lines <- ""
+  for (file in files_ls) {
     # Extract year and month to make a clean name (e.g., "Abril 2026")
     year_part <- gsub("^(\\d{4})_.*", "\\1", file)
     month_part <- gsub("^\\d{4}_(\\d{2})_.*", "\\1", file)
@@ -79,11 +77,30 @@ if (length(report_files) == 0) {
     report_name <- paste(mes_nombre, year_part)
     
     # Create the link pointing inside the reports/ subfolder for the browser
-    # Keep "reports/" here because this is for the web browser URL (not R's file system)
-    link_line <- paste0("- [", report_name, "](reports/", file, ")")
-    index_content <- c(index_content, link_line)
+    link_line <- paste0("- [", report_name, "](", destino, "/", file, ")")
+    lines <- c(lines, link_line)
   }
+  lines[1] <- if (destino == "reports") {"#### Formato actual"} else {"#### Formato anterior"}
+  return(lines)
 }
+
+# 4A. Sort the each group of reports
+if (length(report_files) == 0 && length(old_reports) == 0) {
+  index_content <- c(index_content, "*No se han encontrado reportes todavía.*")
+} else {
+  # Sort files in reverse order (newest month first)
+  report_files <- sort(report_files, decreasing = TRUE)
+  old_reports  <- sort(old_reports,  decreasing = TRUE)
+}
+
+# 4B. Write the link lines for the reports
+# Keep the string "reports" or "reports/previous_reports" as argument destino 
+# because this is for the web browser URL (not R's file system)
+new_links <- write_indx_lines(report_files, "reports")
+old_links <- write_indx_lines(old_reports, "reports/previous_reports")
+
+index_content <- c(index_content, new_links, " ",old_links)
+
 
 # 5. Save and overwrite index.qmd safely using the absolute root path
 writeLines(index_content, index_qmd_path)
@@ -97,3 +114,4 @@ quarto::quarto_render(
 message("¡index.html actualizado!")
 
 
+  
