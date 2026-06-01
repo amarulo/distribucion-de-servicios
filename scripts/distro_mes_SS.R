@@ -14,7 +14,7 @@ preparar_mes <- function(datos = NULL, yyyy = NULL, mm = NULL) {
 
   # Si no hay año ni mes:
   if(is.null(yyyy) && is.null(mm)) {
-    f_ini_per <- floor_date(Sys.Date())
+    f_ini_per <- as.Date(floor_date(Sys.Date(), unit = "months"))
   }
 
   # Si solo hay uno de año o mes:
@@ -29,7 +29,7 @@ preparar_mes <- function(datos = NULL, yyyy = NULL, mm = NULL) {
   aaa_fm <- listablas$cons_SS |> 
     filter(
       fecha_lim >= f_ini_per & 
-      fecha_lim < ceiling_date(f_ini_per + 28) & 
+      fecha_lim < as.Date(ceiling_date(f_ini_per + 28)) & 
       str_detect(proveedor, "^Triple")
     )
   ci_fm <- listablas$cont_int |>
@@ -143,8 +143,8 @@ preparar_mes <- function(datos = NULL, yyyy = NULL, mm = NULL) {
       salida >= ini_fact_web
     ) |>
     mutate(                                              # Compute el intervalo que se sobrepone 
-      inicio_cobro = pmax(entrada, ini_fact_web),
-      fin_cobro    = pmin(salida, fin_fact_web)
+      inicio_cobro = as.Date(pmax(entrada, ini_fact_web)),
+      fin_cobro    = as.Date(pmin(salida, fin_fact_web))
     ) |>
     mutate(                                              # Compute los días incluidos
       dias_pres_web =
@@ -268,7 +268,8 @@ preparar_mes <- function(datos = NULL, yyyy = NULL, mm = NULL) {
   ### Gas ----
   if (SS$Actual["Gas"]) {
     SS$Gas <- list(
-                periodo = gas_fm$periodo,
+                periodo = f_ini_per,
+                perio_f = gas_fm$periodo,
                 total_a_pagar = gas_fm$total_a_pagar,
                 cargo_del_mes = gas_fm$cargo_del_mes,
                 saldo_anterior = gas_fm$saldo_anterior,
@@ -323,8 +324,16 @@ preparar_mes <- function(datos = NULL, yyyy = NULL, mm = NULL) {
                 contador = names(ci_fm)[str_detect(names(ci_fm), "\\d{8}$")]
     )
     SS$EE$ConsInt$consumo <- SS$EE$ConsInt$lect_fin - SS$EE$ConsInt$lect_ini
+    consumo_habs_vacias <- 0
+    if (length(Casa$Habitacion) != length(SS$EE$ConsInt$consumo)) {
+      habitaciones_activas <- tolower(gsub("\\.\\s?", "", Casa$Habitacion))
+      codigos_medidores <- sub("_.*", "", names(SS$EE$ConsInt$consumo))
+      es_activa <- codigos_medidores %in% habitaciones_activas
+      consumo_habs_vacias <- sum(SS$EE$ConsInt$consumo[!es_activa])
+      SS$EE$ConsInt$consumo <- SS$EE$ConsInt$consumo[es_activa]
+    }
     if (nrow(extra_ee) > 0) {
-      SS$EE$ConsInt$por_repartir <- extra_ee$valor
+      SS$EE$ConsInt$por_repartir <- extra_ee$valor + consumo_habs_vacias
       SS$EE$ConsInt$ee_de_mas <- SS$EE$kwh_f - extra_ee$valor - sum(SS$EE$ConsInt$consumo)
       SS$EE$ConsInt$direct_ee <- rep(0, length(SS$EE$ConsInt$consumo))
       names(SS$EE$ConsInt$direct_ee) <- names(SS$EE$ConsInt$consumo)
@@ -333,14 +342,14 @@ preparar_mes <- function(datos = NULL, yyyy = NULL, mm = NULL) {
       SS$EE$ConsInt$cons_per_hab <- (SS$EE$ConsInt$por_repartir * SS$EE$ConsInt$consumo / 
                                   sum(SS$EE$ConsInt$consumo)) + SS$EE$ConsInt$direct_ee
     } else {
-      SS$EE$ConsInt$por_repartir <- SS$EE$kwh_f - sum(SS$EE$ConsInt$consumo)
+      SS$EE$ConsInt$por_repartir <- SS$EE$kwh_f - sum(SS$EE$ConsInt$consumo) + consumo_habs_vacias
       SS$EE$ConsInt$cons_per_hab <- SS$EE$ConsInt$por_repartir * SS$EE$ConsInt$consumo / 
                                   sum(SS$EE$ConsInt$consumo)
     }
     SS$EE$total_EE <- 100 * round(SS$EE$vr_fact * (SS$EE$ConsInt$consumo + SS$EE$ConsInt$cons_per_hab) / 
                                  (100 * SS$EE$kwh_f))
   }
-
+  
   ### Web ----
   if (SS$Actual["Web"]) {
     SS$Web <- list(

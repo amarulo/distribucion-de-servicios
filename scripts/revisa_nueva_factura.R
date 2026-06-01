@@ -18,7 +18,7 @@ if (nrow(nuevos_registros) == 0) {
 } else {  
   ## Modo interactivo:
   if (interactive()) {
-      View(nuevos_registros)
+      print(nuevos_registros)
       respuesta <- readline(
         prompt = "\n¿Aceptar y agregar los nuevos registros a cons_SS.rds? (y/n): "
       ) |>
@@ -27,7 +27,9 @@ if (nrow(nuevos_registros) == 0) {
         tolower()
       if (respuesta %in% c("y", "s")) {
         cons_SS <- readRDS(here::here("input", "cons_SS.rds")) |>
-          dplyr::bind_rows(nuevos_registros)
+          dplyr::bind_rows(nuevos_registros) |>
+          unique() |>
+          arrange(fecha_lim)
         saveRDS(cons_SS, here::here("input", "cons_SS.rds"))
         cat("\nNuevos registros añadidos.\n")
       } else {

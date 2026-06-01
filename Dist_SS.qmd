@@ -84,11 +84,10 @@ if (SS$Actual["Gas"]){
                   format(SS$Gas$total_a_pagar, big.mark=".", decimal.mark=","),
                   if (SS$Gas$saldo_anterior != 0){
                     paste0(" correspondiente a los períodos ", 
-                           format(my(SS$Gas$periodo) - days(30), "%b"),
-                           " y ",
-                           format(my(SS$Gas$periodo), "%b de %Y"))
+                           toupper(format(floor_date(SS$Gas$periodo - 45), "%B")),
+                           " y ", SS$Gas$perio_f)
                   } else {
-                    paste0(" correspondiente al período ", SS$Gas$periodo)
+                    paste0(" correspondiente al período ", SS$Gas$perio_f)
                   },
                   ", está para pagar antes del ",
                   format(SS$Gas$fecha, "%d de %B de %Y"),
@@ -259,11 +258,11 @@ El area común, desde la cocina hasta la lavandería, no ha quedado cobijada baj
 
 ```{r consumo_interno}
 if (SS$Actual["CI"]) {
-  tabla_ee2 <- data.table(Habitación = Casa$Habitacion,
+  tabla_ee2 <- data.table(Habitación = gsub("_\\d{8}$", "", str_to_title(SS$EE$ConsInt$contador)),
            `Contador` = gsub("^.{3,4}_", "No.", str_to_title(SS$EE$ConsInt$contador)),
            `Lectura final` = SS$EE$ConsInt$lect_fin,
-           `Lectura inicial` = SS$EE$ConsInt$lect_ini,
-           `Consumo Kw` = SS$EE$ConsInt$consumo)
+           `Lectura inicial` = SS$EE$ConsInt$lect_ini) |>
+           mutate(`Consumo Kw` = SS$EE$ConsInt$lect_fin - SS$EE$ConsInt$lect_ini)
   filas_impares <- seq(1, nrow(tabla_ee2), by = 2)
   tabla_ee2 |>
     kbl(align = c("l", "l", "r", "r")) |> 
@@ -279,7 +278,9 @@ if (SS$Actual["CI"]) {
 
 #### Consumo area común {#ConsArCom}
 
-Este consumo será repartido de manera proporcional al consumo reportado por los contadores internos de acuerdo a la siguiente tabla (todos los valores en Kw):
+Nota: En caso que se presente algún valor de consumo en los medidores internos de las habitaciones desocupadas, este será agregado al consumo del área común.
+
+El consumo del área común será repartido de manera proporcional al consumo reportado por los contadores internos de acuerdo a la siguiente tabla (todos los valores en Kw):
 
 ```{r consAreaCom}
 if (SS$Actual["EE"]) {
@@ -364,7 +365,7 @@ tabla_web |>
 
 El total de los servicios por habitación para este mes se discrimina en la siguiente tabla:
 
-`r format(Sys.Date(), "%b %Y")`
+`r format(mes_actual$fIni_per, "%B de %Y")`
 
 ```{r latoTotal}
 tabla_fin <- data.table(Habitación = Casa$Habitacion,

@@ -2,8 +2,8 @@
 
 load_libs <- function(){
   # Vector con los nombres de las librerias a cargar:
-  librerias <- c("tidyverse", "data.table", "gargle", "googledrive", "googlesheets4", "here", "hms", 
-    "htmltools", "pdftools", "rio", "rlang", "rsconnect", "rvest", "scales", "tesseract", "waldo", "xml2")
+  librerias <- c("tidyverse", "data.table", "gargle", "googledrive", "googlesheets4", "here", "hms", "htmltools", 
+    "pdftools", "rio", "rlang", "rsconnect", "rvest", "scales", "tesseract", "waldo", "xml2")
   
   # Variable para chequear el numero de librerias cargadas:
   ctrl <- length(librerias)

@@ -84,7 +84,7 @@ parse_ee <- function(pdf_path) {
     }
   }
 
-  if (lect_act - lect_ant != consumes) {
+  if (!is.na(lect_act) && !is.na(lect_ant) && lect_act - lect_ant != consumes) {
     check <- lect_act - consumes
     if (adist(as.character(check), as.character(lect_ant)) <= 1) {
       lect_ant <- check

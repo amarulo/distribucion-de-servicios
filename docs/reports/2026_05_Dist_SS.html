@@ -4294,9 +4294,7 @@ rmarkdown::render("output/Dist_SS.Rmd", envir = globalenv())
 <section id="Gas" class="level2">
 <h2 class="anchored" data-anchor-id="Gas">Gases del Caribe</h2>
 <p>Datos de la factura del gas:</p>
-<pre><code>  Warning: 1 failed to parse.
-  Warning: 1 failed to parse.</code></pre>
-<p>La factura de la casa grande (contrato No.1020307), por un valor total de $180.528 correspondiente a los períodos NA y NA, está para pagar antes del 19 de mayo de 2026.</p>
+<p>La factura de la casa grande (contrato No.1020307), por un valor total de $180.528 correspondiente a los períodos MARZO y ABRIL 2026, está para pagar antes del 19 de mayo de 2026.</p>
 <p>NOTA: Del valor total de este mes me corresponde pagar: $35.100.</p>
 <hr>
 </section>
@@ -4347,7 +4345,8 @@ rmarkdown::render("output/Dist_SS.Rmd", envir = globalenv())
 <h2 class="anchored" data-anchor-id="EE">Air-e</h2>
 <section id="FactEE" class="level3">
 <h3 class="anchored" data-anchor-id="FactEE">Datos de la factura:</h3>
-<p>La factura del período actual todavía no está disponible.</p>
+<p>Para el período May.-26, el valor total a pagar por la factura de energía eléctrica del NIC: 2345873 es de $232.530. Este valor corresponde a un consumo de 298 Kws en 31 días desde el 19 de abril hasta el 19 de mayo de 2026.</p>
+<p>La factura tiene fecha de vencimiento para pagar hasta el 25 de mayo de 2026.</p>
 </section>
 <section id="EEnCuenta" class="level3">
 <h3 class="anchored" data-anchor-id="EEnCuenta">Datos para tener en cuenta</h3>
@@ -4356,21 +4355,37 @@ rmarkdown::render("output/Dist_SS.Rmd", envir = globalenv())
 <p>Entre los datos que reporta air-e en sus lecturas y los recolectados de la información que suministran los contadores aparecen diferencias tanto en el consumo, como en las fechas de los reportes. La diferencia en el consumo no debe ser muy alta y se debe principalmente a la sección de la casa en la cual no se recolectan los datos, por esta razón los datos de air-e van a estar mas altos que los reportados en el consumo interno.</p>
 <p>La suma total de los consumos internos para este período es de 233.09 Kw.</p>
 <p>La diferencia entre las fechas (u horas) en que se realizan las lecturas de los contadores internos y la del contador externo por parte de air-e, afecta este total a repartir de manera directa: mientras mayor sea la diferencia entre el tiempo de las lecturas, mayor será la diferencia en el consumo a repartir.</p>
-<p>La última lectura de los contadores internos se realizó el 19 de mayo de 2026 y la lectura anterior se hizo el 20 de abril de 2026. En cuanto a Air-e, la factura no está disponible todavía.</p>
+<p>La última lectura de los contadores internos se realizó el 19 de mayo de 2026 y la lectura anterior se hizo el 20 de abril de 2026. En cuanto a Air-e, la lectura actual la realizó el 19 de mayo de 2026 y la lectura anterior el 18 de abril de 2026.</p>
 <p>La diferencia de los consumos (columna “Diferencia”) se repartirá proporcionalmente al consumo de cada habitación. La siguiente tabla muestra estas diferencias para este mes:</p>
-<p>Factura no disponible todavía.</p>
+<table class="table table-hover table-condensed caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Factura air-e</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Lectura contadores</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Diferencia</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Número de días factura</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Número de días interno</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">298 Kw</td>
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">233.09 Kw</td>
+<td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">64.91 Kw</td>
+<td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">31 días</td>
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">29 días</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="ValEE" class="level4">
 <h4 class="anchored" data-anchor-id="ValEE">Valor de corte</h4>
 <p>El valor de corte para control se estableció en 10 Kw por día. Este valor se estableció basado en el primer reporte de consumo (septiembre) después del cambio del cableado realizado en agosto de 2025. Este valor permite observar las tendencias generales en el consumo mes a mes: aumentos o disminuciones en el promedio de consumo diario.</p>
-<p>Factura no disponible todavía.</p>
+<p>Este mes hemos disminuido el promedio de consumo diario en 0.387 Kw con respecto al corte.</p>
 </section>
 <section id="LectConts" class="level4">
 <h4 class="anchored" data-anchor-id="LectConts">Lectura de contadores internos</h4>
 <p>El area común, desde la cocina hasta la lavandería, no ha quedado cobijada bajo ningún contador por lo que la sumatoria de los valores de consumo de los contadores internos normalmente será menor al consumo total reportado por air-e, haciéndose necesaria la repartición de esta diferencia. Esta repartición se hará de manera proporcional al consumo obtenido a través de los contadores.</p>
-<pre><code>  Warning in as.data.table.list(x, keep.rownames = keep.rownames, check.names =
-  check.names, : Item 1 has 3 rows but longest item has 4; recycled with
-  remainder.</code></pre>
 <table class="table table-hover table-condensed caption-top">
 <thead>
 <tr class="header">
@@ -4383,28 +4398,28 @@ rmarkdown::render("output/Dist_SS.Rmd", envir = globalenv())
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">Apt.</td>
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">Apt</td>
 <td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">No.24178159</td>
 <td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">895.29</td>
 <td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">790.55</td>
 <td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">104.74</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Hab. 1</td>
+<td style="text-align: left;">Hab1</td>
 <td style="text-align: left;">No.24177828</td>
 <td style="text-align: right;">1073.05</td>
 <td style="text-align: right;">955.72</td>
 <td style="text-align: left;">117.33</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">Hab. 2</td>
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">Hab2</td>
 <td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">No.24178030</td>
 <td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">192.24</td>
 <td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">181.22</td>
 <td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">11.02</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Apt.</td>
+<td style="text-align: left;">Hab3</td>
 <td style="text-align: left;">No.24176587</td>
 <td style="text-align: right;">6.95</td>
 <td style="text-align: right;">6.95</td>
@@ -4415,13 +4430,68 @@ rmarkdown::render("output/Dist_SS.Rmd", envir = globalenv())
 </section>
 <section id="ConsArCom" class="level4">
 <h4 class="anchored" data-anchor-id="ConsArCom">Consumo area común</h4>
-<p>Este consumo será repartido de manera proporcional al consumo reportado por los contadores internos de acuerdo a la siguiente tabla (todos los valores en Kw):</p>
-<p>No hay datos de la factura todavía.</p>
+<p>Nota: En caso que se presente algún valor de consumo en los medidores internos de las habitaciones desocupadas, este será agregado al consumo del área común.</p>
+<p>El consumo del área común será repartido de manera proporcional al consumo reportado por los contadores internos de acuerdo a la siguiente tabla (todos los valores en Kw):</p>
+<table class="table table-hover table-condensed caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Habitación</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Consumo Contador</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Asignado Area Común</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Consumo Total por Hab.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">Apt.</td>
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">104.74</td>
+<td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">29.17</td>
+<td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">133.91</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hab. 1</td>
+<td style="text-align: left;">117.33</td>
+<td style="text-align: right;">32.67</td>
+<td style="text-align: right;">150.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">Hab. 2</td>
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">11.02</td>
+<td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">3.07</td>
+<td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">14.09</td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
 <section id="TotalEE" class="level3">
 <h3 class="anchored" data-anchor-id="TotalEE">Total a pagar por habitación</h3>
-<p>Factura no disponible todavía.</p>
+<table class="table table-hover table-condensed caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Habitación</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Integrante(s)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Costo Energía</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">Apt.</td>
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">Luis y Andrés</td>
+<td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">$104.500</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hab. 1</td>
+<td style="text-align: left;">Andresito y Kevin</td>
+<td style="text-align: right;">$117.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">Hab. 2</td>
+<td style="text-align: left; background-color: rgba(254, 241, 240, 255) !important;">Jorge</td>
+<td style="text-align: right; background-color: rgba(254, 241, 240, 255) !important;">$11.000</td>
+</tr>
+</tbody>
+</table>
 <hr>
 </section>
 </section>
@@ -4461,34 +4531,38 @@ rmarkdown::render("output/Dist_SS.Rmd", envir = globalenv())
 <section id="latoTotal" class="level2">
 <h2 class="anchored" data-anchor-id="latoTotal">Total Servicios</h2>
 <p>El total de los servicios por habitación para este mes se discrimina en la siguiente tabla:</p>
-<p>may 2026</p>
+<p>mayo de 2026</p>
 <table class="table table-hover table-condensed caption-top">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">Habitación</th>
 <th style="text-align: left;" data-quarto-table-cell-role="th">AAA</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Air-e</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">Movistar</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Total Servicios</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Total Servicios</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left; background-color: rgba(232, 248, 245, 255) !important;">Apt.</td>
 <td style="text-align: left; background-color: rgba(232, 248, 245, 255) !important;">$157.900</td>
+<td style="text-align: right; background-color: rgba(232, 248, 245, 255) !important;">$104.500</td>
 <td style="text-align: right; background-color: rgba(232, 248, 245, 255) !important;">$37.200</td>
-<td style="text-align: right; background-color: rgba(232, 248, 245, 255) !important;">$195.100</td>
+<td style="text-align: left; background-color: rgba(232, 248, 245, 255) !important;">$299.600</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Hab. 1</td>
 <td style="text-align: left;">$157.900</td>
+<td style="text-align: right;">$117.000</td>
 <td style="text-align: right;">$37.200</td>
-<td style="text-align: right;">$195.100</td>
+<td style="text-align: left;">$312.100</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; background-color: rgba(232, 248, 245, 255) !important;">Hab. 2</td>
 <td style="text-align: left; background-color: rgba(232, 248, 245, 255) !important;">$2.600</td>
+<td style="text-align: right; background-color: rgba(232, 248, 245, 255) !important;">$11.000</td>
 <td style="text-align: right; background-color: rgba(232, 248, 245, 255) !important;">$18.600</td>
-<td style="text-align: right; background-color: rgba(232, 248, 245, 255) !important;">$21.200</td>
+<td style="text-align: left; background-color: rgba(232, 248, 245, 255) !important;">$32.200</td>
 </tr>
 </tbody>
 </table>

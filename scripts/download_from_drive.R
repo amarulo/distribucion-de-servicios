@@ -2,12 +2,13 @@
 # FUNCIÓN: Descargar facturas de Google Drive
 # ==============================================================================
 
+
 download_from_drive <- function(folder_path, download_dir, fecha_ini) {
   cat("Bajando facturas de Google Drive:", folder_path, "\n")
   
   # Navigate to folder
   folder <- drive_find(pattern = folder_path, type = "folder", n_max = 1)
-  print(folder[[1]])
+  # print(folder[[1]])
   if (nrow(folder) == 0) {
     warning("Folder not found: ", folder_path)
     return(NULL)
@@ -15,7 +16,7 @@ download_from_drive <- function(folder_path, download_dir, fecha_ini) {
   
   # List files in folder
   files <- drive_ls(folder$id)
-     print(paste(files$drive_resource, collapse = ", "))
+  #   print(paste(files$drive_resource, collapse = ", "))
 
   if (nrow(files) == 0) {
     cat("  → No files found\n")
@@ -44,7 +45,9 @@ download_from_drive <- function(folder_path, download_dir, fecha_ini) {
     }
     
     # Download file
-    drive_download(file = file_id, path = local_path, overwrite = FALSE)
+    with_drive_quiet(
+      drive_download(file = file_id, path = local_path, overwrite = FALSE)
+    )
     cat("  ✓ Documento descargado:", file_name, "\n")
     downloaded_files <- c(downloaded_files, local_path)
   }

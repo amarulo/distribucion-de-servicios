@@ -3,14 +3,15 @@
 # si las hay, agregar la nueva información a la tabla: input/cons_SS.rds
 # ============================================================================== 
 
-# Cargue las fucnciones requeridas: ----
-# --- Revisar y descargar nuevas facturas en caso que existan ---
-source(here::here("scripts", "descargar_facturas.R"))
 
-# --- Funciones para crear la tabla de consumo de servicios ---
-  source(here::here("scripts", "parse_aaa.R"))
-  source(here::here("scripts", "parse_ee.R"))
-  source(here::here("scripts", "parse_gas.R"))
+# Cargue las funciones requeridas: ----
+source(here::here("scripts", "descargar_facturas.R"))
+source(here::here("scripts", "filtre_fact_nuevas.R"))
+source(here::here("scripts", "parse_aaa.R"))
+source(here::here("scripts", "generar_imagenes_ee.R"))
+source(here::here("scripts", "parse_ee.R"))
+source(here::here("scripts", "parse_gas.R"))
+
 
 # Función agregar_facturas ----
 agregar_facturas <- function() {
@@ -59,9 +60,11 @@ agregar_facturas <- function() {
   # --- Carpetas de archivos temporales ---
   carpeta_facts <- here::here("input", "facturas_temp")
   carpeta_imgs <- here::here("input", "facturas_temp", "ee_imgs")
+  fact_todas <- list.files(carpeta_facts, pattern = "\\.pdf$", full.names = TRUE)
+  f_para_analizar <- filtre_fact_nuevas(fact_todas, cons_SS)
 
   # --- Tabla del consumo de gas ---
-  facturas_gas <- list.files(path = carpeta_facts, pattern = "^\\d{4}_\\d{2}_gas")
+  facturas_gas <- f_para_analizar[str_detect(basename(f_para_analizar), pattern = "^\\d{4}_\\d{2}_gas")]
   de_gas <- length(facturas_gas)
 
   for (gas_pdf in facturas_gas) {
@@ -77,7 +80,7 @@ agregar_facturas <- function() {
   nuevos_registros <- bind_rows(nuevos_registros, tabla_gas)
 
   # --- Tabla del consumo de agua ---
-  facturas_aaa <- list.files(path = carpeta_facts, pattern = "^\\d{4}_\\d{2}_aaa")
+  facturas_aaa <- f_para_analizar[str_detect(basename(f_para_analizar), pattern = "^\\d{4}_\\d{2}_aaa")]
   de_agua <- length(facturas_aaa)
 
   for (aaa_pdf in facturas_aaa) {
@@ -94,6 +97,11 @@ agregar_facturas <- function() {
   
   # --- Tabla del consumo de energía eléctrica ---
   imagenes_ee <- generar_imgs_ee()
+  if (length(imagenes_ee) == 0) {
+    todas_imgs_ee <- list.files(here::here("input", "facturas_temp", "ee_imgs"),
+      pattern = "^\\d{4}_\\d{2}_", full.names = TRUE)
+    imagenes_ee <- filtre_fact_nuevas(todas_imgs_ee, cons_SS)
+  }
   de_imgee <- length(imagenes_ee)
   for (ee_img in imagenes_ee) {
     if (!file.exists(ee_img)) {
