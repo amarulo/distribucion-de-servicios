@@ -29,7 +29,7 @@ generar_imgs_ee <- function() {
   )
   faltantes <- setdiff(pdf_keys, png_keys)
   if (length(faltantes) == 0) {
-    cat("No hay nuevas facturas de energía.\n")
+    cat("No hay nuevas facturas de energía para generar imagen.\n")
     return(character())
   }
   purrr::walk(

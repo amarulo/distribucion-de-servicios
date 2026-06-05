@@ -23,12 +23,13 @@ tabla_notas_input <- readRDS(here::here("input", "tabla_notas.rds"))
 
 
 ## Punto de comparación de cambios, interactivo: ----
-if (identical(tabla_notas_gsh4, tabla_notas_input)) {
+diffs <- waldo::compare(tabla_notas_input, tabla_notas_gsh4)
+if (length(diffs) == 0) {
   cat("La tabla guardada en input sigue estando vigente.\n")
+  cat(rep("=", 30), "\n")
 } else {
   cat("\nSe detectaron diferencias:\n\n")
-  waldo::compare(tabla_notas_input, tabla_notas_gsh4)
-
+  print(diffs)
   ## Modo interactivo:
   if (interactive()) {
     respuesta <- readline(
@@ -40,6 +41,7 @@ if (identical(tabla_notas_gsh4, tabla_notas_input)) {
     if (respuesta %in% c("y", "s")) {
       saveRDS(tabla_notas_gsh4, here::here("input", "tabla_notas.rds"))
       cat("\nNueva versión guardada.\n")
+      cat(rep("=", 30), "\n")
     } else {
       stop("Proceso cancelado por el usuario.")
     }

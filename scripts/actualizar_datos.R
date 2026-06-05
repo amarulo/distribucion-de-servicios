@@ -27,7 +27,7 @@ source(here::here("scripts", "revisa_hist_habs.R"))
 # ==============================================================================
 
 # Compara la tabla de notas preliminares del repositorio y de Googlesheets
-source(here::here("scripts", "revisa_nts_evnts.R"))
+source(here::here("scripts", "revisa_cont_int.R"))
 
 # ==============================================================================
 

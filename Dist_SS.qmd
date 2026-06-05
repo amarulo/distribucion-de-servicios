@@ -35,27 +35,19 @@ knitr::opts_chunk$set(results = "asis")
 source(here::here("scripts", "cargar_librerias.R"))
 source(here::here("scripts", "cargar_info.R"))
 source(here::here("scripts", "distro_mes_SS.R"))
-datos <- cargar_info()
+listablas <- cargar_info()
 
-mes_actual <- preparar_mes(
-  datos,
+# Lista para los textos:
+SS <- distro_mes(
+  listablas,
   yyyy = params$year,
   mm = params$month
 )
 
-notas_docu <- datos$tabla_notas |> 
-  filter(fecha > mes_actual$fIni_per - 20 & 
-         fecha < ceiling_date(mes_actual$fIni_per + 28, unit = "month"))
-
-# Listas para los cálculos:
-SS <- mes_actual$SS
-Casa <- mes_actual$Casa
-if (mes_actual$fIni_per == ymd("2026-04-01")) {
-  Casa$Pers_Dia_Web <- c(60, 60, 20.8, 0)
-}
+notas_docu <- listablas$tabla_notas |> 
+  filter(fecha >= SS$fechas_per$fecha_min & 
+         fecha < ceiling_date(SS$fechas_per$fIni_per + 28, unit = "month"))
 ```
-
-<a id="Tabla"></a>
 
 <!--
 Código para producir el .html de afán (no es recomendado):
@@ -64,10 +56,11 @@ rmarkdown::render("output/Dist_SS.Rmd", envir = globalenv())
 
 ***
 
-## Notas Preliminares {#Notas}
+## Preliminares {#Notas}
 
 ```{r notasPre}
-writeLines(paste0("El ", format(notas_docu$fecha, "%d de %B de %Y"), " ", notas_docu$nota, collapse = "\n\n"))
+writeLines(paste0("Nota del ", format(notas_docu$fecha, "%e de %B de %Y"), ": ", 
+                  notas_docu$nota, collapse = "\n\n"))
 ```
 
 ***
@@ -78,25 +71,46 @@ Datos de la factura del gas:
 
 ```{r factGas}
 if (SS$Actual["Gas"]){
-  writeLines(paste0("La factura de la casa grande (contrato No.",
-                  SS$Gas$No_contrato,
-                  "), por un valor total de $",
-                  format(SS$Gas$total_a_pagar, big.mark=".", decimal.mark=","),
-                  if (SS$Gas$saldo_anterior != 0){
-                    paste0(" correspondiente a los períodos ", 
-                           toupper(format(floor_date(SS$Gas$periodo - 45), "%B")),
-                           " y ", SS$Gas$perio_f)
-                  } else {
-                    paste0(" correspondiente al período ", SS$Gas$perio_f)
-                  },
-                  ", está para pagar antes del ",
-                  format(SS$Gas$fecha, "%d de %B de %Y"),
-                  ".\n", "\n",
-           "NOTA: Del valor total de este mes me corresponde pagar: $",
-                  format(100 * round((SS$Gas$cargo_andres) / 100),
-                         big.mark=".",decimal.mark=","), ".\n"))
-} else {
-  writeLines("Factura no disponible todavía.")
+  writeLines(
+    paste0(
+            "La factura de la casa grande (contrato No.",
+            SS$Gas$No_contrato,
+            "), por un valor total de $",
+            format(SS$Gas$total_a_pagar, big.mark=".", decimal.mark=","),
+            if (SS$Gas$saldo_anterior != 0){
+                paste0(" correspondiente a los períodos ", 
+                    toupper(format(floor_date(SS$Gas$periodo - 45), "%B")),
+                    " ($",
+                    format(SS$Gas$saldo_anterior, big.mark=".", decimal.mark=","),
+                    ") y ", 
+                    SS$Gas$perio_f,
+                    " ($",
+                    format(SS$Gas$cargo_del_mes, big.mark=".", decimal.mark=","),
+                    ")"
+                )
+            } else {
+                paste0(" correspondiente al período ", SS$Gas$perio_f)
+            },
+            ", está para pagar antes del ",
+            format(SS$Gas$fecha, "%d de %B de %Y"),
+            ".\n", "\n",
+            "NOTA: Del valor total de este mes me corresponde pagar: $",
+            format(100 * round((SS$Gas$cargo_andres) / 100), big.mark=".", decimal.mark=","),
+            ".\n", "\n",
+            "La fecha de la lectura actual es ",
+            format(SS$Gas$f_lect_act, "%d de %B de %Y"),
+            " con una lectura de ",
+            format(SS$Gas$lect_act, big.mark=".", decimal.mark=","),
+            " m³ y la lectura anterior fue el ",
+            format(SS$Gas$f_lect_ant, "%d de %B de %Y"),
+            " con una lectura de ",
+            format(SS$Gas$lect_ant, big.mark=".", decimal.mark=","),
+            " m³ (Consumo: ",
+            SS$Gas$lect_act - SS$Gas$lect_ant,
+            " m³).\n"
+    ))
+  } else {
+    writeLines("Factura no disponible todavía.")
 }
 ```
 
@@ -110,18 +124,20 @@ Los siguientes son los datos tomados de la factura de este mes:
 
 ```{r factAgua}
 writeLines(if (SS$Actual["AAA"]) {
-    paste0("La factura del agua (póliza No.", SS$AAA$No_poliza,
-           "), por un valor total de $",
-           format(SS$AAA$total_pago_aaa, big.mark = ".",
-                  decimal.mark = ","),
-           ", correspondiente al período: ", SS$AAA$periodo,
-           ", está para pagar antes del ",
-           format(ymd(SS$AAA$fecha), "%d de %B de %Y"),
-           ".\n\nSegún la factura, la fecha de la lectura anterior fue el ",
-           format(SS$AAA$fecha_lect_ant, "%d de %B de %Y"),
-           " y la fecha de la lectura actual el ",
-           format(SS$AAA$fecha_lect_act, "%d de %B de %Y"),
-           " (consumo: ", SS$AAA$lect_act - SS$AAA$lect_ant, " m³)", ".\n")
+    paste0(
+        "La factura del agua (póliza No.", SS$AAA$No_poliza,
+        "), por un valor total de $",
+        format(SS$AAA$total_pago_aaa, big.mark = ".", decimal.mark = ","),
+        ", correspondiente al período: ", SS$AAA$periodo,
+        ", está para pagar antes del ",
+        format(ymd(SS$AAA$fecha), "%d de %B de %Y"),
+        ".\n\nSegún la factura, la fecha de la lectura anterior fue el ",
+        format(SS$AAA$fecha_lect_ant, "%d de %B de %Y"),
+        " (Lectura: ", format(SS$AAA$lect_act, big.mark = ".", decimal.mark = ","),
+        ") y la fecha de la lectura actual el ",
+        format(SS$AAA$fecha_lect_act, "%d de %B de %Y"),
+        " (Lectura: ", format(SS$AAA$lect_ant, big.mark = ".", decimal.mark = ","),
+        ", resultando un consumo de: ", SS$AAA$lect_act - SS$AAA$lect_ant, " m³)", ".\n")
   } else {
     "Todavía no hay factura disponible para este período."
 })
@@ -132,20 +148,22 @@ writeLines(if (SS$Actual["AAA"]) {
 
 ```{r pagoAaa}
 if (SS$Actual["AAA"]) {
-  tabla_aaa <- data.table(Habitación = Casa$Habitacion, `Integrante(s)` = Casa$Ocupantes,
-                          Ocupación = label_percent(accuracy = 0.01)(Casa$Ocupa_aaa),
-                          `Total AAA` = label_currency(prefix = "$", big.mark = ".",
-                                          decimal.mark = ",")(SS$AAA$total_AAA))
+  tabla_aaa <- data.table(
+          Habitación = SS$AAA$habitacion, 
+          `Integrante(s)` = SS$AAA$ocupantes,
+          Ocupación = label_percent(accuracy = 0.01)(SS$AAA$ocupa),
+          `Total AAA` = label_currency(prefix = "$", big.mark = ".", decimal.mark = ",")(SS$AAA$total_AAA)
+  )
   filas_impares <- seq(1, nrow(tabla_aaa), by = 2)
   tabla_aaa |>
     kbl(align = c("l", "l", "r", "r")) |> 
     kable_styling(
       bootstrap_options = c("hover", "condensed"), 
       full_width = FALSE,
-      # We use html_font to inject our custom styles safely into the table container
-      html_font = 'inherit; border: 1px solid #dcf1ff; border-radius: 8px; padding: 10px; background-color: white; display: inline-block;'
+      # Use html_font to inject our custom styles safely into the table container
+      html_font = 'inherit; border: 1px solid #cdefff; border-radius: 8px; padding: 10px; background-color: white; display: inline-block;'
     ) |>
-    row_spec(filas_impares, background = "#EBF5FB")
+    row_spec(filas_impares, background = "#cdefff")
 } else {
     cat("\nLa factura de este período no está disponible todavía.\n")
 }
@@ -189,9 +207,9 @@ Entre los datos que reporta air-e en sus lecturas y los recolectados de la infor
 ```{r consInt}
 writeLines(if (SS$Actual["CI"]) {
   paste0("La suma total de los consumos internos para este período es de ",
-         sum(SS$EE$ConsInt$consumo), if ("EE" %in% SS$Actual) {
+         sum(SS$EE$CI$consumo), if (SS$Actual["EE"]) {
                     paste0(" Kw. Quedando un consumo a repartir de ",
-                           SS$EE$kwh_f - sum(SS$EE$ConsInt$consumo),
+                           round(SS$EE$kwh_f - sum(SS$EE$CI$consumo), digits = 2),
                            " Kw respecto al consumo reportado por air-e.")
                     } else {" Kw.\n"})
   } else {"Consumo no disponible todavía."})
@@ -203,12 +221,14 @@ La diferencia entre las fechas (u horas) en que se realizan las lecturas de los 
 ```{r lectura_cont_int}
 writeLines(if (SS$Actual["CI"]) {
   paste0("La última lectura de los contadores internos se realizó el ",
-         format(SS$EE$ConsInt$fecha_lect_actual, "%d de %B de %Y"),
+         format(SS$EE$CI$fecha_lect_actual, "%d de %B de %Y"),
          " y la lectura anterior se hizo el ",
-         format(SS$EE$ConsInt$fecha_lect_anter, "%d de %B de %Y"),
+         format(SS$EE$CI$fecha_lect_anter, "%d de %B de %Y"),
          ".\nEn cuanto a Air-e, ", if (SS$Actual["EE"]) {
-           paste0("la lectura actual la realizó el ", format(SS$EE$f_lect_act, "%d de %B de %Y"),
-           " y la lectura anterior el ", format(SS$EE$f_lect_ant, "%d de %B de %Y"), ".\n")
+           paste0("la lectura actual la realizó el ", 
+           format(SS$EE$f_lect_act, "%d de %B de %Y"),
+           " y la lectura anterior el ", 
+           format(SS$EE$f_lect_ant, "%d de %B de %Y"), ".\n")
          } else {
            "la factura no está disponible todavía.\n"
          })
@@ -223,14 +243,14 @@ La diferencia de los consumos (columna "Diferencia") se repartirá proporcionalm
 if (SS$Actual["EE"]) {
   tabla_ee1 <- data.table(
     `Factura air-e` = paste(SS$EE$kwh_f,"Kw"),
-    `Lectura contadores` = paste(round(sum(SS$EE$ConsInt$lect_fin) - sum(SS$EE$ConsInt$lect_ini), digits=2),"Kw"),
-    Diferencia = paste0(abs(round(SS$EE$kwh_f - (sum(SS$EE$ConsInt$lect_fin) - sum(SS$EE$ConsInt$lect_ini)), digits = 2))," Kw"),
+    `Lectura contadores` = paste(round(sum(SS$EE$CI$lect_fin) - sum(SS$EE$CI$lect_ini), digits=2),"Kw"),
+    Diferencia = paste0(abs(round(SS$EE$kwh_f - (sum(SS$EE$CI$lect_fin) - sum(SS$EE$CI$lect_ini)), digits = 2))," Kw"),
     `Número de días factura` = paste0(SS$EE$f_lect_act - SS$EE$f_lect_ant," días"),
-    `Número de días interno` = paste0(SS$EE$ConsInt$fecha_lect_actual - SS$EE$ConsInt$fecha_lect_anter," días")
+    `Número de días interno` = paste0(SS$EE$CI$fecha_lect_actual - SS$EE$CI$fecha_lect_anter," días")
   )
   filas_impares <- seq(1, nrow(tabla_ee1), by = 2)
   tabla_ee1 |>
-    kbl(align = c("l", "l", "r", "r")) |> 
+    kbl(align = c("r", "r", "r", "r", "r")) |> 
     kable_styling(
       bootstrap_options = c("hover", "condensed"), 
       full_width = FALSE,
@@ -247,8 +267,10 @@ El valor de corte para control se estableció en 10 Kw por día. Este valor se e
 
 ```{r CambioPatronConsumo}
 if (SS$Actual["EE"]) {
-  writeLines(paste0("Este mes hemos ",if (round(10 - SS$EE$kwh_f/as.numeric(SS$EE$f_lect_act - SS$EE$f_lect_ant), digits=3) <0) {"aumentado "} else {"disminuido "},"el promedio de consumo diario en ",
-  abs(round(10 - SS$EE$kwh_f/as.numeric(SS$EE$f_lect_act - SS$EE$f_lect_ant), digits=3))," Kw con respecto al corte.\n"))
+  consEEdia <- round(10 - SS$EE$kwh_f/as.numeric(SS$EE$f_lect_act - SS$EE$f_lect_ant), digits=3)
+  writeLines(paste0("Este mes hemos ",if (consEEdia < 0) {"aumentado "} else {"disminuido "},
+                    "el promedio de consumo diario en ",
+                    abs(consEEdia)," Kw con respecto al corte.\n"))
 } else {writeLines("Factura no disponible todavía.\n")}
 ```
 
@@ -258,14 +280,17 @@ El area común, desde la cocina hasta la lavandería, no ha quedado cobijada baj
 
 ```{r consumo_interno}
 if (SS$Actual["CI"]) {
-  tabla_ee2 <- data.table(Habitación = gsub("_\\d{8}$", "", str_to_title(SS$EE$ConsInt$contador)),
-           `Contador` = gsub("^.{3,4}_", "No.", str_to_title(SS$EE$ConsInt$contador)),
-           `Lectura final` = SS$EE$ConsInt$lect_fin,
-           `Lectura inicial` = SS$EE$ConsInt$lect_ini) |>
-           mutate(`Consumo Kw` = SS$EE$ConsInt$lect_fin - SS$EE$ConsInt$lect_ini)
+  tabla_ee2 <- data.table(
+                    Habitación = gsub("_\\d{8}$", "", str_to_title(SS$EE$CI$contador))|> 
+                                      str_replace("^(\\w{3})", "\\1\\. ") |> str_trim(),
+                    `Contador` = gsub("^.{3,4}_", "No.", str_to_title(SS$EE$CI$contador)),
+                    `Lectura final` = SS$EE$CI$lect_fin,
+                    `Lectura inicial` = SS$EE$CI$lect_ini
+                  ) |>
+                      mutate(`Consumo Kw` = as.numeric(SS$EE$CI$lect_fin - SS$EE$CI$lect_ini))
   filas_impares <- seq(1, nrow(tabla_ee2), by = 2)
   tabla_ee2 |>
-    kbl(align = c("l", "l", "r", "r")) |> 
+    kbl(align = c("l", "l", "r", "r", "r")) |> 
     kable_styling(
       bootstrap_options = c("hover", "condensed"), 
       full_width = FALSE,
@@ -284,13 +309,15 @@ El consumo del área común será repartido de manera proporcional al consumo re
 
 ```{r consAreaCom}
 if (SS$Actual["EE"]) {
-  tabla_ee3 <- data.table(`Habitación` = Casa$Habitacion,
-           `Consumo Contador` = SS$EE$ConsInt$consumo,
-           `Asignado Area Común` = round(SS$EE$ConsInt$cons_per_hab,2)) |>
-  mutate(`Consumo Total por Hab.` = `Consumo Contador` + `Asignado Area Común`)
+  tabla_ee3 <- data.table(
+      `Habitación` = str_to_title(sub("_.*", "", names(SS$EE$CI$consumo))) |> 
+                            str_replace("^(\\w{3})", "\\1\\. ") |> str_trim(),
+      `Consumo Contador` = SS$EE$CI$consumo,
+      `Asignado Area Común` = round(SS$EE$CI$cons_per_hab,2)) |>
+          mutate(`Consumo Total por Hab.` = `Consumo Contador` + `Asignado Area Común`)
   filas_impares <- seq(1, nrow(tabla_ee3), by = 2)
   tabla_ee3 |>
-    kbl(align = c("l", "l", "r", "r")) |> 
+    kbl(align = c("l", "r", "r", "r")) |> 
     kable_styling(
       bootstrap_options = c("hover", "condensed"), 
       full_width = FALSE,
@@ -307,13 +334,15 @@ if (SS$Actual["EE"]) {
 
 ```{r totalHabEe}
 if (SS$Actual["EE"]) {
-  tabla_ee4 <- data.table(Habitación = Casa$Habitacion,
-           `Integrante(s)` = Casa$Ocupantes,
-           `Costo Energía` = label_currency(prefix = "$", big.mark = ".",
+  tabla_ee4 <- data.table(
+          Habitación = str_to_title(sub("_.*", "", names(SS$EE$CI$consumo))) |> 
+                            str_replace("^(\\w{3})", "\\1\\. ") |> str_trim(),
+          `Integrante(s)` = SS$Web$ocupantes,
+          `Costo Energía` = label_currency(prefix = "$", big.mark = ".",
                           decimal.mark = ",")(SS$EE$total_EE))
   filas_impares <- seq(1, nrow(tabla_ee4), by = 2)
   tabla_ee4 |>
-    kbl(align = c("l", "l", "r", "r")) |> 
+    kbl(align = c("l", "l", "r")) |> 
     kable_styling(
       bootstrap_options = c("hover", "condensed"), 
       full_width = FALSE,
@@ -342,12 +371,14 @@ writeLines(paste0("El valor total de la factura del Internet por $",
 La distribución del pago del internet queda de la siguiente manera:
 
 ```{r disrInternet}
-tabla_web <- data.table(Habitación = Casa$Habitacion,
-           `Integrante(s)` = Casa$Ocupantes,
-           `Costo Internet` = label_currency(prefix = "$", big.mark = ".", decimal.mark = ",")(100 * round((Casa$Pers_Dia_Web * SS$Web$valor_pago / (100 * sum(Casa$Pers_Dia_Web))))))
+tabla_web <- data.table(
+    Habitación = SS$Web$habitacion,
+    `Integrante(s)` = SS$Web$ocupantes,
+    `Costo Internet` = label_currency(prefix = "$", big.mark = ".", decimal.mark = ",")(SS$Web$total_Web)
+)
 filas_impares <- seq(1, nrow(tabla_web), by = 2)
 tabla_web |>
-  kbl(align = c("l", "l", "r", "r")) |>
+  kbl(align = c("l", "l", "r")) |>
   kable_styling(
     bootstrap_options = c("hover", "condensed"), 
     full_width = FALSE,
@@ -365,30 +396,29 @@ tabla_web |>
 
 El total de los servicios por habitación para este mes se discrimina en la siguiente tabla:
 
-`r format(mes_actual$fIni_per, "%B de %Y")`
+`r format(SS$fechas_per$fIni_per, "%B de %Y")`
 
 ```{r latoTotal}
-tabla_fin <- data.table(Habitación = Casa$Habitacion,
-           AAA = if (SS$Actual["AAA"]) {
-             label_currency(prefix="$",big.mark=".",decimal.mark=",")(SS$AAA$total_AAA)
-           },
-           `Air-e`= if (SS$Actual["EE"]) {
-             label_currency(prefix="$",big.mark=".",decimal.mark=",")(SS$EE$total_EE)
-           },
-           Movistar = if (SS$Actual["Web"]) {
-             label_currency(prefix="$",big.mark=".",decimal.mark=",")(SS$Web$total_Web)
-           },
-           `Total Servicios` = label_currency(prefix = "$", big.mark=".",
-                                              decimal.mark=",")((if(SS$Actual["AAA"]) {
-                                                SS$AAA$total_AAA } else { 0 }) +
-                                                  (if (SS$Actual["EE"]) {
-                                                    SS$EE$total_EE } else { 0 }) + 
-                                                  (if (SS$Actual["Web"]) {
-                                                    SS$Web$total_Web } else { 0 }))
-)
+tabla_fin <- data.table(
+    Habitación = SS$Web$habitacion,
+      AAA = if (SS$Actual["AAA"]) {
+        label_currency(prefix="$",big.mark=".",decimal.mark=",")(SS$AAA$total_AAA)
+      },
+      `Air-e`= if (SS$Actual["EE"]) {
+        label_currency(prefix="$",big.mark=".",decimal.mark=",")(SS$EE$total_EE)
+      },
+      Movistar = if (SS$Actual["Web"]) {
+        label_currency(prefix="$",big.mark=".",decimal.mark=",")(SS$Web$total_Web)
+      }) |>
+        mutate(
+          `Total Servicios` = label_currency(prefix = "$", big.mark=".",decimal.mark=",")(
+            ifelse(rep(SS$Actual["AAA"], length(SS$Web$habitacion)), SS$AAA$total_AAA, 0) +
+            ifelse(rep(SS$Actual["EE"],  length(SS$Web$habitacion)), SS$EE$total_EE,   0) +
+            ifelse(rep(SS$Actual["Web"], length(SS$Web$habitacion)), SS$Web$total_Web, 0))
+        )
 filas_impares <- seq(1, nrow(tabla_fin), by = 2)
 tabla_fin |>
-  kbl(align = c("l", "l", "r", "r")) |>
+  kbl(align = c("l", "r", "r", "r", "r")) |>
   kable_styling(
     bootstrap_options = c("hover", "condensed"), 
     full_width = FALSE,
@@ -399,27 +429,12 @@ tabla_fin |>
   row_spec(filas_impares, background = "#E8F8F5")
 ```
 
-<!--
-
-***
-
-La siguiente tabla corresponde a los valores del mes pasado:
-
-{r tablaAnter}
-# getwd()
-# tabla_anterior <- paste0(if (current_wd == "/home/mono/Documents/Dist_SS"){
-#                             "./input/Cons_ant/"
-#                           } else {
-#                             "../input/Cons_ant/"
-#                           },
-#                          lubridate::year(hoy), 
-#                          if (month(hoy)<10){"_0"} else {"_"}, 
-#                          month(hoy - 30), "_Dist_SS.png")
-# texto_alt <- paste0("La imagen ", tabla_anterior, " no carga")
-# imagen_actual <- htmltools::img(src = tabla_anterior, alt = as.character(texto_alt))
-# imagen_actual
--->
 
 
 ***
+
+###### [Regresar al índice](https://amarulo.github.io/distribucion-de-servicios/)
+
+
+
 

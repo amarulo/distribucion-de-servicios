@@ -13,7 +13,7 @@ li::before {
   content: counters(section, ".") ". ";
 }
 */
-h1,h2,h3,h6 {
+h1,h2,h3 {
   text-transform: capitalize;
 }
 h2 {
@@ -28,8 +28,9 @@ h4 {
 	padding-top: 1.5rem;
 }
 h6 {
-  padding-left: 2rem;
-  padding-top: 2rem;
+  text-transform: none !important;
+  text-align: center;
+  padding-top: 3rem;
 }
 p {
   font-size: 1.5rem;

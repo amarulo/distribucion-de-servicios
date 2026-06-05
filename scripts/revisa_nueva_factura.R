@@ -10,7 +10,7 @@ if (!googledrive::drive_has_token()) {
 
 
 ## Nuevos registros para revisar: ----
-source(here::here("scripts", "analizar_facturas.R"))
+source(here::here("scripts", "agregar_facturas.R"))
 nuevos_registros <- agregar_facturas()
 
 if (nrow(nuevos_registros) == 0) {

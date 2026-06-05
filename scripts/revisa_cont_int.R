@@ -26,12 +26,13 @@ cont_int_input <- readRDS(here::here("input", "cont_int.rds"))
 
 
 ## Punto de comparación de cambios, interactivo: ----
-if (identical(cont_int_gsh4, cont_int_input)) {
+difcontint <- waldo::compare(cont_int_input, cont_int_gsh4)
+if (length(difcontint) == 0) {
   cat("La tabla guardada en input sigue estando vigente.\n")
+  cat(rep("=", 30), "\n")
 } else {
   cat("\nSe detectaron diferencias:\n\n")
-  waldo::compare(cont_int_input, cont_int_gsh4)
-
+  print(difcontint)
   ## Modo interactivo:
   if (interactive()) {
     respuesta <- readline(

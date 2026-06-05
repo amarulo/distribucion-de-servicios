@@ -2,7 +2,7 @@
 
 filtre_fact_nuevas <- function(file_paths, existing_df) {
   
-  tibble(file_path = file_paths) %>%
+  tibble(file_path = file_paths) |>
     mutate(
       file_name = basename(file_path),
       # Extract YYYY and MM
@@ -10,23 +10,33 @@ filtre_fact_nuevas <- function(file_paths, existing_df) {
       month = as.integer(str_extract(file_name, "(?<=^\\d{4}_)\\d{2}")),
       # Identify the provider code from the filename
       code = str_extract(file_name, "(gas|aaa|NIC)")
-    ) %>%
-    filter(year >=2026) %>%
+    ) |>
+    mutate(
+      periodo_archivo = as.Date(sprintf("%04d-%02d-01", year, month)),
+      periodo_archivo = if_else(
+        code == "gas",
+        periodo_archivo %m+% lubridate::period(months = 1),
+        periodo_archivo
+      ),
+      year = lubridate::year(periodo_archivo),
+      month = lubridate::month(periodo_archivo)
+    ) |>
+    filter(year >=2026) |>
     # Map filename codes to actual database 'proveedor' names
     mutate(proveedor_clean = case_when(
       code == "gas" ~ "Gases del Caribe", # Update if different in your DB
       code == "aaa" ~ "Triple A",          # Update if different in your DB
       code == "NIC"  ~ "Air-e",
       TRUE ~ NA_character_)
-    ) %>%
+    ) |>
     # Filter out files where provider AND month/year match fecha_lim
     anti_join(
-      existing_df %>% 
+      existing_df |>
         mutate(
           year = year(fecha_lim), 
           month = month(fecha_lim)
         ),
       by = c("proveedor_clean" = "proveedor", "year", "month")
-    ) %>%
+    ) |>
     pull(file_path)
 }
