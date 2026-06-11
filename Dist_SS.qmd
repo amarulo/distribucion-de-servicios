@@ -433,7 +433,7 @@ tabla_fin |>
 
 ***
 
-###### [Regresar al índice](https://amarulo.github.io/distribucion-de-servicios/)
+###### [Índice de reportes mensuales](https://amarulo.github.io/distribucion-de-servicios/)
 
 
 

@@ -186,7 +186,7 @@
     "href": "2026_06_Dist_SS.html#Notas",
     "title": "Distribución del pago de los servicios",
     "section": "Preliminares",
-    "text": "Preliminares\nNota del 27 de abril de 2026: Jorge trajo su computador nuevamente y está trabajando acá desde la casa.\nNota del 20 de mayo de 2026: Para reportar las novedades cambié el sistema de listas en R a tablas en google-sheets: para los inquilinos utilizé como fecha de entrada el inicio de este año, para Luis dejé la fecha de nuestro matrimonio y para mi la fecha en que me mudé a esta casa. (Nota editada: 2026-06-04)\nNota del 2 de junio de 2026: Cambié el sistema de ajustes para los servicios del agua y el internet, por favor reportar vía WhatsApp cualquier novedad que quieran que sea tenida en cuenta: vacaciones, ausencias, etc. (estos cálculos no aplican para la energía eléctrica por ser esta dependiente del consumo reportado por los contadores).\nNota del 4 de junio de 2026: Si desean verificar las tablas de google-sheets por favor envíenme su correo electrónico vía WhatsApp para añadir los permisos correspondientes en dicha plataforma."
+    "text": "Preliminares\nNota del 27 de abril de 2026: Jorge trajo su computador nuevamente y está trabajando acá desde la casa.\nNota del 20 de mayo de 2026: Para reportar las novedades cambié el sistema de listas en R a tablas en google-sheets: para los inquilinos utilizé como fecha de entrada el inicio de este año, para Luis dejé la fecha de nuestro matrimonio y para mi la fecha en que me mudé a esta casa. (Nota editada: 2026-06-04)\nNota del 2 de junio de 2026: Cambié el sistema de ajustes para los servicios del agua y el internet, por favor reportar vía WhatsApp cualquier novedad que quieran que sea tenida en cuenta: vacaciones, ausencias, etc. (estos cálculos no aplican para la energía eléctrica por ser esta dependiente del consumo reportado por los contadores).\nNota del 4 de junio de 2026: Si desean tener acceso a las tablas de google-sheets por favor envíenme su correo electrónico vía WhatsApp para añadir los permisos correspondientes en dicha plataforma."
   },
   {
     "objectID": "2026_06_Dist_SS.html#Gas",
@@ -200,7 +200,7 @@
     "href": "2026_06_Dist_SS.html#AAA",
     "title": "Distribución del pago de los servicios",
     "section": "AAA",
-    "text": "AAA\n\nDatos de la factura\nLos siguientes son los datos tomados de la factura de este mes:\nTodavía no hay factura disponible para este período.\n\n\nTotal pago por habitación\nLa factura de este período no está disponible todavía."
+    "text": "AAA\n\nDatos de la factura\nLos siguientes son los datos tomados de la factura de este mes:\nLa factura del agua (póliza No.121497), por un valor total de $284.616, correspondiente al período: Junio-2026, está para pagar antes del 16 de junio de 2026.\nSegún la factura, la fecha de la lectura anterior fue el 28 de abril de 2026 (Lectura: 2.005) y la fecha de la lectura actual el 28 de mayo de 2026 (Lectura: 1.986, resultando un consumo de: 19 m³).\n\n\nTotal pago por habitación\n\n\n\nHabitación\nIntegrante(s)\nOcupación\nTotal AAA\n\n\n\n\nApt.\nLuis y Andrés\n40.00%\n$113.800\n\n\nHab. 1\nAndresito y Kevin\n40.00%\n$113.800\n\n\nHab. 2\nJorge\n20.00%\n$56.900"
   },
   {
     "objectID": "2026_06_Dist_SS.html#EE",
@@ -221,6 +221,6 @@
     "href": "2026_06_Dist_SS.html#latoTotal",
     "title": "Distribución del pago de los servicios",
     "section": "Total Servicios",
-    "text": "Total Servicios\nEl total de los servicios por habitación para este mes se discrimina en la siguiente tabla:\njunio de 2026\n\n\n\nHabitación\nMovistar\nTotal Servicios\n\n\n\n\nApt.\n$36.000\n$36.000\n\n\nHab. 1\n$36.000\n$36.000\n\n\nHab. 2\n$18.000\n$18.000\n\n\n\n\n\nRegresar al índice"
+    "text": "Total Servicios\nEl total de los servicios por habitación para este mes se discrimina en la siguiente tabla:\njunio de 2026\n\n\n\nHabitación\nAAA\nMovistar\nTotal Servicios\n\n\n\n\nApt.\n$113.800\n$36.000\n$149.800\n\n\nHab. 1\n$113.800\n$36.000\n$149.800\n\n\nHab. 2\n$56.900\n$18.000\n$74.900\n\n\n\n\n\nÍndice de reportes mensuales"
   }
 ]
