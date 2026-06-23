@@ -185,7 +185,7 @@ writeLines(if (SS$Actual["EE"]) {
                   ".\nEste valor corresponde a un consumo de ", SS$EE$kwh_f, " Kws en ",
                   SS$EE$f_lect_act - SS$EE$f_lect_ant, " días ",
                   if (SS$EE$f_lect_ant) { paste0("desde el ",
-                                            format(SS$EE$f_lect_ant+1, format = "%d de %B"),
+                                            format(SS$EE$f_lect_ant, format = "%d de %B"),
                                             " ") },
                   if (SS$EE$f_lect_act) { paste0("hasta el ",
                                              format(SS$EE$f_lect_act, format = "%d de %B de %Y"))
