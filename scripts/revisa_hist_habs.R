@@ -14,7 +14,7 @@ habitantes_casa_input <- readRDS(here::here("input", "habitantes_casa.rds"))
 ## Punto de comparación de cambios, interactivo: ----
 difhabs <-  waldo::compare(habitantes_casa_input, habitantes_casa_gsh4)
 if (length(difhabs) == 0) {
-  cat("La tabla guardada en input sigue estando vigente.\n")
+  cat("La tabla sobre los habitantes de la casa guardada en input sigue estando vigente.\n")
   cat(rep("=",30), "\n")
 } else {
   cat("\nSe detectaron diferencias:\n\n")

@@ -7,7 +7,6 @@
 ## Tablas a comparar: ----
 # Tabla de notas preliminares de Googlesheets: tabla_notas_gsh4 (bajada con bajar_tablas_gsh4.R)
 
-
 ## Notas Preliminares anteriores:
 tabla_notas_input <- readRDS(here::here("input", "tabla_notas.rds"))
 
@@ -15,7 +14,7 @@ tabla_notas_input <- readRDS(here::here("input", "tabla_notas.rds"))
 ## Punto de comparación de cambios, interactivo: ----
 diffs <- waldo::compare(tabla_notas_input, tabla_notas_gsh4)
 if (length(diffs) == 0) {
-  cat("La tabla guardada en input sigue estando vigente.\n")
+  cat("La tabla de notas preliminares guardada en input sigue estando vigente.\n")
   cat(rep("=", 30), "\n")
 } else {
   cat("\nSe detectaron diferencias:\n\n")

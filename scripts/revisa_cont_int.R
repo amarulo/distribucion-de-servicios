@@ -19,7 +19,7 @@ cont_int_input <- readRDS(here::here("input", "cont_int.rds"))
 ## Punto de comparación de cambios, interactivo: ----
 difcontint <- waldo::compare(cont_int_input, cont_int_gsh4)
 if (length(difcontint) == 0) {
-  cat("La tabla guardada en input sigue estando vigente.\n")
+  cat("La tabla de lecturas de los contadores internos guardada en input sigue estando vigente.\n")
   cat(rep("=", 30), "\n")
 } else {
   cat("\nSe detectaron diferencias:\n\n")
