@@ -3,7 +3,7 @@
 # de energía eléctrica.
 # ============================================================================== 
 
-# carpeta_imgs <- "input/facturas_temp/ee_imgs/"
+# carpeta_imgs <- "input/privado_temp/ee_imgs/"
 # imgs_ee <- list.files(path = carpeta_imgs, pattern = "NIC2345873")
 # ee_img <- paste0(carpeta_imgs, imgs_ee[4])
 # fact_ee <- parse_ee(ee_img)

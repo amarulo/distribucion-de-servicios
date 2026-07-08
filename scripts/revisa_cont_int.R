@@ -10,16 +10,7 @@ if (!googlesheets4::gs4_has_token()) {
 
 
 ## Tablas a comparar: ----
-# Tabla de notas de Googlesheets:
-tbl_ss <- Sys.getenv("TABLAS_HM")
-cont_int_gsh4 <- googlesheets4::read_sheet(
-    ss = tbl_ss,
-    sheet = "lect_contadores"
-  )
-names(cont_int_gsh4) <- names(cont_int_gsh4) |>
-  tolower() |>
-  (\(x) { ifelse(grepl("^\\d", x), paste0("cont_", x), x) })()
-cont_int_gsh4 <- cont_int_gsh4 |> mutate(fecha = as.Date(fecha))
+# Tabla de contadores internos de Googlesheets: cont_int_gsh4 (bajada con bajar_tablas_gsh4.R)
 
 ## Tabla de lectura de Contadores Internos anterior:
 cont_int_input <- readRDS(here::here("input", "cont_int.rds"))
@@ -44,6 +35,8 @@ if (length(difcontint) == 0) {
     if (respuesta %in% c("y", "s")) {
       saveRDS(cont_int_gsh4, here::here("input", "cont_int.rds"))
       cat("\nNueva versión guardada.\n")
+      rm(cont_int_gsh4)
+      cat(rep("=", 30), "\n")
     } else {
       stop("Proceso cancelado por el usuario.")
     }

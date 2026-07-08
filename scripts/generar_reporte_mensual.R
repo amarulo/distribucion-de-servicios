@@ -8,6 +8,7 @@
 # una vez copiado presione Enter
 
 # --- INGRESE EL AÑO Y MES PARA GENERAR EL REPORTE ---
+# Por defecto se utilizan el mes y año actuales
 AAAA <- as.numeric(format(Sys.Date(), "%Y"))
 mm <- as.numeric(format(Sys.Date(), "%m"))
 

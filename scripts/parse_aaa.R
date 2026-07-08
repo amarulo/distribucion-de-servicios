@@ -2,7 +2,7 @@
 # Función para analizar el formato PDF de las facturas del agua.
 # ============================================================================== 
 
-# carpeta_facts <- "input/facturas_temp/"
+# carpeta_facts <- "input/privado_temp/"
 # aaa_pdf <- paste0(carpeta_facts, facturas_aaa[1])
 # fact_aaa <- parse_aaa(aaa_pdf)
 # unlist(fact_aaa)

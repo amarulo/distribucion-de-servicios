@@ -2,8 +2,8 @@
 
 generar_imgs_ee <- function() {
 
-  carpeta_facts <- here::here("input", "facturas_temp")
-  carpeta_imgs  <- here::here("input", "facturas_temp", "ee_imgs")
+  carpeta_facts <- here::here("input", "privado_temp")
+  carpeta_imgs  <- here::here("input", "privado_temp", "ee_imgs")
 
   facturas_ee <- list.files(
   carpeta_facts,

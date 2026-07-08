@@ -3,27 +3,12 @@
 # en este repositorio: input/ajustes.rds
 # ============================================================================== 
 
-## Revisar conexión: ----
-if (!googlesheets4::gs4_has_token()) {
-  googlesheets4::gs4_auth(path = here::here(Sys.getenv("SECRETO_HM"), Sys.getenv("SHA256_HMT")))
-}
-
 
 ## Tablas a comparar: ----
-# Tabla de ajustes de consumo de Googlesheets:
-tbl_ss <- Sys.getenv("TABLAS_HM")
-ajustes_cons_gsh4 <- googlesheets4::read_sheet(
-    ss = tbl_ss,
-    sheet = "ajustes_cons"
-  )
-names(ajustes_cons_gsh4) <- names(ajustes_cons_gsh4) |> tolower()
-ajustes_cons_gsh4 <- ajustes_cons_gsh4 |> 
-    mutate(
-      fecha_ini = as.Date(fecha_ini),
-      fecha_fin = as.Date(fecha_fin),
-    )
+#  de Googlesheets: ajustes_cons_gsh4 (obtenida con bajar_tablas_gsh4.R)
 
-# Tabla de ajustes de consumo anteriores:
+
+# Tabla de ajustes de consumo actual:
 ajustes_cons_input <- readRDS(here::here("input", "ajustes.rds"))
 
 
@@ -46,6 +31,7 @@ if (length(difajus) == 0) {
     if (respuesta %in% c("y", "s")) {
       saveRDS(ajustes_cons_gsh4, here::here("input", "ajustes.rds"))
       cat("\nNueva versión guardada.\n")
+      rm(ajustes_cons_gsh4)
       cat(rep("=", 30), "\n")
     } else {
       stop("Proceso cancelado por el usuario.")

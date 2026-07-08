@@ -93,7 +93,7 @@ Thumbs.db
 # =========================
 # Temporary / generated data
 # =========================
-input/facturas_temp/
+input/privado_temp/
 
 /.quarto/
 **/*.quarto_ipynb

@@ -3,20 +3,10 @@
 # en este repositorio: input/tabla_notas.rds
 # ============================================================================== 
 
-## Revisar conexión: ----
-if (!googlesheets4::gs4_has_token()) {
-  googlesheets4::gs4_auth(path = here::here(Sys.getenv("SECRETO_HM"), Sys.getenv("SHA256_HMT")))
-}
-
 
 ## Tablas a comparar: ----
-# Tabla de notas de Googlesheets:
-tbl_ss <- Sys.getenv("TABLAS_HM")
-tabla_notas_gsh4 <- googlesheets4::read_sheet(
-    ss = tbl_ss,
-    sheet = "notas"
-  ) |>
-    mutate(fecha = as.Date(fecha))
+# Tabla de notas preliminares de Googlesheets: tabla_notas_gsh4 (bajada con bajar_tablas_gsh4.R)
+
 
 ## Notas Preliminares anteriores:
 tabla_notas_input <- readRDS(here::here("input", "tabla_notas.rds"))
@@ -41,6 +31,7 @@ if (length(diffs) == 0) {
     if (respuesta %in% c("y", "s")) {
       saveRDS(tabla_notas_gsh4, here::here("input", "tabla_notas.rds"))
       cat("\nNueva versión guardada.\n")
+      rm(tabla_notas_gsh4)
       cat(rep("=", 30), "\n")
     } else {
       stop("Proceso cancelado por el usuario.")

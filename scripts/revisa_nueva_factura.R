@@ -32,6 +32,18 @@ if (nrow(nuevos_registros) == 0) {
           arrange(fecha_lim)
         saveRDS(cons_SS, here::here("input", "cons_SS.rds"))
         cat("\nNuevos registros añadidos.\n")
+        # Limpieza del espacio de trabajo
+        listado <- c(
+          "descargar_facturas", 
+          "download_from_drive", 
+          "filtre_fact_nuevas", 
+          "generar_imgs_ee", 
+          "listado",
+          "parse_aaa", 
+          "parse_ee", 
+          "parse_gas"
+        )
+        rm(list = listado)
       } else {
         stop("Proceso cancelado por el usuario.")
       }

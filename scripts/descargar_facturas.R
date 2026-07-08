@@ -21,10 +21,10 @@ source(here::here("scripts", "download_from_drive.R"))
 
 descargar_facturas <- function(mes_a_mes){
   # Defina la carpeta de destino para descargar las facturas
-  download_dir <- here::here("input", "facturas_temp")
+  download_dir <- here::here("input", "privado_temp")
   dir.create(download_dir, recursive = TRUE, showWarnings = FALSE)
   dir.create(
-    here::here("input", "facturas_temp", "ee_imgs"),
+    here::here("input", "privado_temp", "ee_imgs"),
     recursive = TRUE,
     showWarnings = FALSE
   )

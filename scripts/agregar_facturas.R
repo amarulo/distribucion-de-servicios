@@ -22,13 +22,19 @@ agregar_facturas <- function() {
   input_fls <- list.files(here::here("input"))
   if ("cons_SS.rds" %in% input_fls) {
     cons_SS <- readRDS(here::here("input", "cons_SS.rds"))
-    fecha_ini <- floor_date(max(cons_SS$fecha_lim) - 28, unit = "month")
+    fecha_ini <- floor_date(max(cons_SS$fecha_lim), unit = "month")
   } else {
     cons_SS <- tibble::tibble()
     fecha_ini <- as.Date("2025-01-01")
   }
   fecha_fin <- ceiling_date(Sys.Date(), unit = "month")
+  if (fecha_fin - fecha_ini <= 59) {
+    fecha_ini <- floor_date(fecha_ini - 2, unit = "month")
+  }
   mes_a_mes <- str_remove(as.character(seq.Date(fecha_ini, fecha_fin, by = "month")), "-\\d{2}$")
+  if (length(mes_a_mes) != 3) {
+    cat("Hay un error en el vector de fechas de descarga 'mes_a_mes', revise en: agregar_facturas.R")
+  }
 
   # --- Descargue nuevas facturas si existen ---
   descargar_facturas(mes_a_mes)
@@ -39,10 +45,10 @@ agregar_facturas <- function() {
   # --- Generar la tabla con la información de la factura del internet ---
   # OJO: El valor era menor al inicio de 2025, hay que revisar si hace falta
   nuevos_registros <- tibble(
-      proveedor = "Movistar",
-      total_a_pagar = 94990,
-      periodo = toupper(format(ymd(paste0(mes_a_mes[2], "-01")), "%b.-%Y")),
-      cargo_del_mes = 94990,
+      proveedor = pago_web_gsh4$proveedor[which.max(pago_web_gsh4$fecha)],
+      total_a_pagar = pago_web_gsh4$valor_internet[which.max(pago_web_gsh4$fecha)],
+      periodo = toupper(format(ymd(paste0(mes_a_mes[1], "-01")), "%b.-%Y")),
+      cargo_del_mes = pago_web_gsh4$valor_internet[which.max(pago_web_gsh4$fecha)],
       saldo_anterior = 0,
       fecha_lim = floor_date(ymd(paste0(mes_a_mes[2], "-01")), unit = "month") + 9,
       No_contrato = Sys.getenv("WEBID"),
@@ -54,8 +60,8 @@ agregar_facturas <- function() {
   )
 
   # --- Carpetas de archivos temporales ---
-  carpeta_facts <- here::here("input", "facturas_temp")
-  carpeta_imgs <- here::here("input", "facturas_temp", "ee_imgs")
+  carpeta_facts <- here::here("input", "privado_temp")
+  carpeta_imgs <- here::here("input", "privado_temp", "ee_imgs")
   fact_todas <- list.files(carpeta_facts, pattern = "\\.pdf$", full.names = TRUE)
   f_para_analizar <- filtre_fact_nuevas(fact_todas, cons_SS)
 
@@ -117,13 +123,6 @@ agregar_facturas <- function() {
 
   return(nuevos_registros)
 }
-
-
-# para_imaginar <- ifelse(!(paste0(tools::file_path_sans_ext(facturas_ee), "_1.png") %in% imagenes_ee), 
-  #                         facturas_ee, NA_character_)
-  # para_imaginar <- para_imaginar[!is.na(para_imaginar)]
-  # de_imaginar <- length(para_imaginar)
- # para_imaginar),
 
 
 

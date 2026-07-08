@@ -15,6 +15,11 @@ source(here::here("scripts", "cargar_librerias.R"))
 source(here::here("scripts", "conectar.R"))
 
 # ==============================================================================
+
+# Bajar las tablas actualizadas de google sheets:
+source(here::here("scripts", "bajar_tablas_gsh4.R"))
+
+# ==============================================================================
  
 # Chequear los datos provenientes de nuevas facturas y agregarlos a la tabla de SS
 source(here::here("scripts", "revisa_nueva_factura.R"))
