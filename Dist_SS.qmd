@@ -46,7 +46,8 @@ SS <- distro_mes(
 
 notas_docu <- listablas$tabla_notas |> 
   filter(fecha >= SS$fechas_per$fecha_min & 
-         fecha < ceiling_date(SS$fechas_per$fIni_per + 28, unit = "month"))
+         fecha < ceiling_date(SS$fechas_per$fIni_per + 28, unit = "month")) |>
+  arrange(desc(fecha))
 ```
 
 <!--
@@ -56,11 +57,13 @@ rmarkdown::render("output/Dist_SS.Rmd", envir = globalenv())
 
 ***
 
-## Preliminares {#Notas}
+## Notas preliminares {#Notas}
+
+En cada documento mensual se publican las notas del mes corriente y del anterior (dos últimos meses):
 
 ```{r notasPre}
-writeLines(paste0("Nota del ", format(notas_docu$fecha, "%e de %B de %Y"), ": ", 
-                  notas_docu$nota, collapse = "\n\n"))
+writeLines(paste0("⊚  ", notas_docu$nota, "  \n(Nota publicada el ", format(notas_docu$fecha, "%e de %B de %Y"), ")", 
+                   collapse = "\n\n"))
 ```
 
 ***

@@ -13,6 +13,13 @@ if (!googledrive::drive_has_token()) {
 source(here::here("scripts", "agregar_facturas.R"))
 nuevos_registros <- agregar_facturas()
 
+# Remove any Internet records that already exist in cons_SS for the same period/date
+nuevos_registros <- nuevos_registros %>%
+  anti_join(
+    cons_SS %>% filter(proveedor == "Movistar"),
+    by = c("proveedor", "fecha_lim")
+  )
+
 if (nrow(nuevos_registros) == 0) {
   cat("No se detectaron nuevas facturas.\n")
 } else {  
