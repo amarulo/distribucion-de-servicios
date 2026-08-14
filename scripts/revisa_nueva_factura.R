@@ -12,7 +12,9 @@ if (!googledrive::drive_has_token()) {
 ## Nuevos registros para revisar: ----
 source(here::here("scripts", "agregar_facturas.R"))
 nuevos_registros <- agregar_facturas()
-
+cat("\nDespués de agregar_facturas():\n")
+cat("cons_SS exists:", exists("cons_SS"), "\n")
+if (exists("cons_SS")) cat("cons_SS rows:", nrow(cons_SS), "\n")
 # Remove any Internet records that already exist in cons_SS for the same period/date
 nuevos_registros <- nuevos_registros %>%
   anti_join(

@@ -21,6 +21,11 @@ source(here::here("scripts", "bajar_tablas_gsh4.R"))
 
 # ==============================================================================
  
+# Cargar la tabla del consumo histórico de SS
+source(here::here("scripts", "carga_cons_SS.R"))
+
+# ==============================================================================
+ 
 # Chequear los datos provenientes de nuevas facturas y agregarlos a la tabla de SS
 source(here::here("scripts", "revisa_nueva_factura.R"))
 

@@ -18,15 +18,8 @@ agregar_facturas <- function() {
 
   cat("\nBuscando nuevas facturas para agregar.\n")
 
-  # --- Confirmación de los datos de la tabla de consumo de servicios ---
-  input_fls <- list.files(here::here("input"))
-  if ("cons_SS.rds" %in% input_fls) {
-    cons_SS <- readRDS(here::here("input", "cons_SS.rds"))
-    fecha_ini <- floor_date(max(cons_SS$fecha_lim), unit = "month")
-  } else {
-    cons_SS <- tibble::tibble()
-    fecha_ini <- as.Date("2025-01-01")
-  }
+  # --- Definición del rango de fechas a consultar ---
+  fecha_ini <- floor_date(max(cons_SS$fecha_lim), unit = "month")
   fecha_fin <- ceiling_date(Sys.Date(), unit = "month")
   if (fecha_fin - fecha_ini <= 59) {
     fecha_ini <- floor_date(fecha_ini - 2, unit = "month")
