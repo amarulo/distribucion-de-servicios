@@ -31,10 +31,12 @@ knitr::opts_chunk$set(comment = " ")
 knitr::opts_chunk$set(results = "asis")
 ```
 
+
 ```{r cargar_listas, include=FALSE}
 source(here::here("scripts", "cargar_librerias.R"))
 source(here::here("scripts", "cargar_info.R"))
 source(here::here("scripts", "distro_mes_SS.R"))
+
 listablas <- cargar_info()
 
 # Lista para los textos:
@@ -59,11 +61,13 @@ rmarkdown::render("output/Dist_SS.Rmd", envir = globalenv())
 
 ## Notas preliminares {#Notas}
 
-En cada documento mensual se publican las notas del mes corriente y del anterior (dos últimos meses):
-
 ```{r notasPre}
-writeLines(paste0("⊚  ", notas_docu$nota, "  \n(Nota publicada el ", format(notas_docu$fecha, "%e de %B de %Y"), ")", 
-                   collapse = "\n\n"))
+if (nrow(notas_docu) > 0) {
+  writeLines(paste0(
+    "En cada documento mensual se publican las notas del mes corriente y del anterior (dos últimos meses):\n\n", "⊚  ", notas_docu$nota, 
+    "  \n(Nota publicada el ", format(notas_docu$fecha, "%e de %B de %Y"), ")", 
+    collapse = "\n\n"))
+} else {writeLines("No hay notas preliminares para este mes.")}
 ```
 
 ***

@@ -151,8 +151,8 @@ distro_mes <- function(datos = NULL, yyyy = NULL, mm = NULL) {
   ## Contadores Internos (CI):
   ci_fm <- listablas$cont_int |>
     filter(
-      fecha >= floor_date(f_ini_per - 28) & 
-      fecha < ceiling_date(f_ini_per + 28)
+      fecha >= floor_date(f_ini_per - 28, "month") & 
+      fecha < ceiling_date(f_ini_per + 28, "month")
     )
   Actual["CI"] <- nrow(ci_fm) > 0
   ### CI (contadores internos) ----

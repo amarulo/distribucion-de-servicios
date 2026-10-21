@@ -18,7 +18,7 @@ parse_gas <- function(pdf_path) {
 
   primera_l <- str_squish(lines[1])
   # print(primera_l)
-  if (primera_l == Sys.getenv("GASID")) {
+  if (primera_l == Sys.getenv("GASID") | primera_l == "1/2") {
     add1 <- 0
   } else if (primera_l == "Rojo") {
     add1 <- 1

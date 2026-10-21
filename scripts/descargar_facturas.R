@@ -29,11 +29,6 @@ descargar_facturas <- function(mes_a_mes){
     showWarnings = FALSE
   )
 
-  current_date <- Sys.Date()
-  cat("Modo: DESCARGA MENSUAL (", format(ymd(paste0(mes_a_mes[2], "-01")), "%B %Y"), ")\n")
-  cat("Rango de fechas: desde ", format(ymd(paste0(mes_a_mes[2], "-01")), "%Y-%m-%d"), " hasta ", 
-    format(current_date, "%Y-%m-%d"), "\n\n")
-
   # ==============================================================================
   # EXECUTE: Download from All Sources
   # ==============================================================================
@@ -42,38 +37,46 @@ descargar_facturas <- function(mes_a_mes){
 
   # 1. Movistar
   cat("\n--- Facturas de Movistar ---\n")
-  fact_web <- download_from_drive(
-    folder_path = Sys.getenv("DRIVE_HM_WEB"),
-    download_dir = download_dir,
-    periodo = mes_a_mes[2]
-  )
+  fact_web <- unlist(lapply(mes_a_mes$web, function(periodo) {
+    download_from_drive(
+      folder_path = Sys.getenv("DRIVE_HM_WEB"),
+      download_dir = download_dir,
+      periodo = periodo
+    )
+  }), use.names = FALSE)
   all_downloaded <- c(all_downloaded, fact_web)
 
   # 2. Gas
   cat("\n--- Gases del Caribe ---\n")
-  fact_gas <- download_from_drive(
-    folder_path = Sys.getenv("DRIVE_HM_GAS"),
-    download_dir = download_dir,
-    periodo = mes_a_mes[1]
-  )
+  fact_gas <- unlist(lapply(mes_a_mes$gas, function(periodo) {
+    download_from_drive(
+      folder_path = Sys.getenv("DRIVE_HM_GAS"),
+      download_dir = download_dir,
+      periodo = periodo
+    )
+  }), use.names = FALSE)
   all_downloaded <- c(all_downloaded, fact_gas)
 
   # 3. AAA
   cat("\n--- Triple A ---\n")
-  fact_aaa <- download_from_drive(
-    folder_path = Sys.getenv("DRIVE_HM_AAA"),
-    download_dir = download_dir,
-    periodo = mes_a_mes[2]
-  )
+  fact_aaa <- unlist(lapply(mes_a_mes$aaa, function(periodo) {
+    download_from_drive(
+      folder_path = Sys.getenv("DRIVE_HM_AAA"),
+      download_dir = download_dir,
+      periodo = periodo
+    )
+  }), use.names = FALSE)
   all_downloaded <- c(all_downloaded, fact_aaa)
 
   # 4. EE
   cat("\n--- Air-e ---\n")
-  fact_ee <- download_from_drive(
-    folder_path = Sys.getenv("DRIVE_HM_EE"),
-    download_dir = download_dir,
-    periodo = mes_a_mes[2]
-  )
+  fact_ee <- unlist(lapply(mes_a_mes$ee, function(periodo) {
+    download_from_drive(
+      folder_path = Sys.getenv("DRIVE_HM_EE"),
+      download_dir = download_dir,
+      periodo = periodo
+    )
+  }), use.names = FALSE)
   all_downloaded <- c(all_downloaded, fact_ee)
 
   # ==============================================================================

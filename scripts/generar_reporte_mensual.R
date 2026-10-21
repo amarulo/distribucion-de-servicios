@@ -9,10 +9,21 @@
 
 # --- INGRESE EL AÑO Y MES PARA GENERAR EL REPORTE ---
 # Por defecto se utilizan el mes y año actuales
-AAAA <- as.numeric(format(Sys.Date(), "%Y"))
-mm <- as.numeric(format(Sys.Date(), "%m"))
+AAAA_para_reporte <- NULL
+if (is.null(AAAA_para_reporte)) {
+  AAAA <- as.numeric(format(Sys.Date(), "%Y"))
+} else {
+  AAAA <- AAAA_para_reporte
+}
 
- 
+mm_para_reporte <- NULL
+if (is.null(mm_para_reporte)) {
+  mm <- as.numeric(format(Sys.Date(), "%m"))
+} else{
+  mm <- mm_para_reporte
+}
+
+
 # --- Nombre-base para el archivo de salida ---
 output_file <- paste0(
   AAAA, "_", sprintf("%02d", mm),

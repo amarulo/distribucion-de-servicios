@@ -28,15 +28,15 @@ download_from_drive <- function(folder_path, download_dir, periodo) {
   files_filtered <- files |>
     mutate(mime_type = purrr::map_chr(drive_resource, "mimeType")) |>
     filter(mime_type == "application/pdf") |>
-    filter(stringr::str_detect(name, paste0("^", gsub("-", "_", periodo))))
+    filter(stringr::str_detect(name, paste0("^", periodo)))
 
   if (nrow(files_filtered) == 0){
-    cat("  → No hay documentos recientes para descargar.\n")
+    cat("  → No hay documentos recientes para ", periodo, "\n", sep = "")
     return(NULL)
   }
 
   # Baje los documentos
-  downloaded_files <- c()
+  downloaded_files <- character(0)
   for (i in seq_len(nrow(files_filtered))) {
     file_name <- files_filtered$name[i]
     file_id <- files_filtered$id[i]
